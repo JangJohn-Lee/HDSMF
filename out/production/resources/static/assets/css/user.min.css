@@ -1,0 +1,145 @@
+
+/*# sourceMappingURL=user.min.css.map */
+
+#asidenav.active {
+    height: 100%;
+}
+
+#asidenav.activeWidth {
+    width: 100%;
+}
+
+
+
+/* 네비게이션 배경 제거 border-bottom 투명하게 */
+.navbar-top {
+    font-size: .8rem;
+    font-weight: 600;
+    padding: 0;
+    background: var(--phoenix-navbar-top-bg-color);
+    min-height: var(--phoenix-navbar-top-height);
+    color: var(--phoenix-nav-link-color);
+    padding: 0 1.5rem 0 0;
+    border-bottom: 1px solid transparent;
+    /* border-bottom: 1px solid red; */
+}
+
+@media (min-width: 992px) {
+    .navbar-vertical.navbar-expand-lg~.navbar-top {
+        padding-right: 2.5rem;
+        width: 0%;
+        overflow: hidden;
+    }
+}
+
+/* 사이드바 position, padding 추가, 높이 100vh*/
+.navbar-vertical {
+    position: fixed;
+    display: inline-block;
+    z-index: 1020;
+    top: 0;
+    padding: var(--phoenix-navbar-top-height) 0 0 0;
+    width: 100vw;
+    /* 푸른색 */
+    /* background: var(--phoenix-primary-100); */     
+    background: var(--phoenix-navbar-vertical-bg-color);
+}
+
+@media (min-width: 992px) {
+        html:not(.navbar-vertical-collapsed) .navbar-vertical.navbar-expand-lg {
+        height: calc(100vh);
+        padding: 1rem 0 0 0;
+    }
+}
+
+.navbar-vertical .navbar-vertical-content {
+    /* padding: 1rem 0; */
+    padding: 0rem 0;
+}
+
+
+
+.flex-row {
+    margin-bottom: 0.5rem;
+    -webkit-box-orient: horizontal !important;
+    -webkit-box-direction: normal !important;
+    -ms-flex-direction: row !important;
+    flex-direction: row !important;
+}
+
+/* 로고 크기 */
+.navbar .navbar-logo {
+    height: 4rem;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    padding: 1rem 1.7rem;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+}
+
+/* 로고 글씨 */
+.logo-text {
+    font-size: 1.63625rem;
+    color: var(--phoenix-logo-text);
+    line-height: 1.2;
+    font-weight: 600;
+    letter-spacing: -0.04em;
+    margin-bottom: 0;
+}
+
+
+
+/* content 영역 */
+.content {
+    min-height: 100vh;
+    padding: calc(var(--phoenix-navbar-top-height) + 2rem) 1.5rem 6.375rem 1.5rem;
+    padding-bottom: 6rem;
+}
+
+
+@media (min-width: 992px) {
+    .navbar-vertical.navbar-expand-lg~.navbar-top~.content {
+        padding-top: 3.7rem;
+        padding-left: 2.5rem;
+        padding-right: 2.5rem;
+        margin-left: 15.875rem;
+    }
+}
+
+
+/* 스크롤바의 전체 너비 설정 */
+::-webkit-scrollbar {
+    width: 7px;  /* 스크롤바의 너비 */
+    height: 5px;  /* 수평 스크롤바의 높이 */
+}
+
+/* 스크롤바의 트랙 (바탕) 설정 */
+::-webkit-scrollbar-track {
+    background-color: transparent;
+}
+
+/* 스크롤바의 핸들 (드래그하는 부분) 설정 */
+::-webkit-scrollbar-thumb {
+    background-color: rgba(0, 0, 0, 0.5); /* 반투명한 검은색 */
+    border-radius: 10px;  /* 둥근 모서리 */
+}
+
+/* 스크롤바 핸들 마우스 오버시 색 변경 */
+::-webkit-scrollbar-thumb:hover {
+    background-color: rgba(0, 0, 0, 0.8); /* 마우스 오버시 더 진한 투명한 검은색 */
+}
+
+/* 스크롤이 발생하는 요소에 대한 스크롤바 보이기/숨기기 처리 */
+.scrollable-element {
+    scrollbar-width: thin;  /* Firefox를 위한 설정 */
+    scrollbar-color: rgba(0, 0, 0, 0.5) transparent;  /* Firefox를 위한 설정 */
+
+    overflow-y: auto;  /* 수직 스크롤바를 항상 보이게 설정 */
+}
+
+.scrollable-element:hover {
+    /* 마우스가 올라갈 때만 스크롤바 보이기 */
+    overflow-y: auto;  /* 마우스 오버시 스크롤바 보이게 설정 */
+}

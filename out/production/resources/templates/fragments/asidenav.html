@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<!-- 사이드바 -->
+<nav th:fragment="asidenav" id="asidenav" class="navbar navbar-vertical navbar-expand-lg user-select-none">
+    <div class="collapse navbar-collapse justify-content-between">
+        <ul class="navbar-nav navbar-nav-icons flex-row">
+            <li class="nav-item">
+                <div class="theme-control-toggle fa-icon-wait px-2" style="opacity: 1;">
+                    <input class="form-check-input ms-0 theme-control-toggle-input" type="checkbox"
+                           data-theme-control="phoenixTheme" value="dark" id="themeControlToggle" />
+                    <label class="mb-0 theme-control-toggle-label theme-control-toggle-light" for="themeControlToggle"
+                           data-bs-toggle="tooltip" data-bs-placement="left" title="다크모드"><span class="icon"
+                                                                                                        data-feather="moon"></span></label>
+                    <label class="mb-0 theme-control-toggle-label theme-control-toggle-dark" for="themeControlToggle"
+                           data-bs-toggle="tooltip" data-bs-placement="left" title="일반모드"><span class="icon"
+                                                                                                        data-feather="sun"></span></label>
+                </div>
+            </li>
+        </ul>
+        <div class="navbar-logo">
+            <button class="btn navbar-toggler navbar-toggler-humburger-icon hover-bg-transparent" type="button"
+                    data-bs-toggle="collapse" data-bs-target="#navbarVerticalCollapse"
+                    aria-controls="navbarVerticalCollapse" aria-expanded="false" aria-label="Toggle Navigation"><span
+                    class="navbar-toggle-icon"><span class="toggle-line"></span></span></button>
+            <a class="navbar-brand me-1" href="/hdsmf">
+                <div class="d-flex align-items-center">
+                    <div class="d-flex align-items-center"><img src="/assets/img/icons/logo.png" alt="phoenix" width="100%" />
+                    </div>
+                </div>
+            </a>
+        </div>
+    </div>
+    <script>
+        var navbarStyle = window.config.config.phoenixNavbarStyle;
+        if (navbarStyle && navbarStyle !== 'transparent') {
+            document.querySelector('body').classList.add(`navbar-${navbarStyle}`);
+        }
+    </script>
+    <div class="collapse navbar-collapse" id="navbarVerticalCollapse">
+        <!-- scrollbar removed-->
+        <div class="navbar-vertical-content">
+            <ul class="navbar-nav flex-column" id="navbarVerticalNav">
+
+                <!-- 모니터링 -->
+                <li class="nav-item">
+                    <!-- label-->
+                    <p class="navbar-vertical-label">모니터링
+                    </p>
+                    <hr class="navbar-vertical-line" />
+                    <!-- parent pages-->
+                    <div class="nav-item-wrapper"><a class="nav-link label-1" href="/hdsmf/totaldashboard" role="button"
+                                                     data-bs-toggle="" aria-expanded="false">
+                        <div class="d-flex align-items-center"><span class="nav-link-icon"><span
+                                data-feather="pie-chart"></span></span><span class="nav-link-text-wrapper"><span
+                                class="nav-link-text">종합 현황</span></span>
+                        </div>
+                    </a>
+                    </div>
+                    <div class="nav-item-wrapper"><a class="nav-link label-1" href="/hdsmf/totaldetaildashboard"
+                                                     role="button" data-bs-toggle="" aria-expanded="false">
+                        <div class="d-flex align-items-center"><span class="nav-link-icon"><span
+                                data-feather="pie-chart"></span></span><span class="nav-link-text-wrapper"><span
+                                class="nav-link-text">상세 현황</span></span>
+                        </div>
+                    </a>
+                    </div>
+                </li>
+
+                <!-- 현황파악 -->
+                <li class="nav-item">
+                    <!-- label-->
+                    <p class="navbar-vertical-label">조회 & 출력
+                    </p>
+                    <hr class="navbar-vertical-line" />
+                    <!-- parent pages-->
+                    <div class="nav-item-wrapper">
+                        <a class="nav-link label-1" href="/hdsmf/easysearch" role="button" data-bs-toggle=""
+                           aria-expanded="false">
+                            <div class="d-flex align-items-center">
+                                <span class="nav-link-icon">
+                                    <span data-feather="book"></span>
+                                </span>
+                                <span class="nav-link-text-wrapper">
+                                    <span class="nav-link-text">통합 창고 조회</span>
+                                </span>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="nav-item-wrapper"><a class="nav-link label-1" href="/hdsmf/racksearch" role="button"
+                                                     data-bs-toggle="" aria-expanded="false">
+                        <div class="d-flex align-items-center"><span class="nav-link-icon"><span
+                                data-feather="book"></span></span><span class="nav-link-text-wrapper"><span
+                                class="nav-link-text">부품별 상세 조회</span></span>
+                        </div>
+                    </a>
+                    </div>
+                    <div class="nav-item-wrapper"><a class="nav-link label-1" href="/hdsmf/rackdetailsearch"
+                                                     role="button" data-bs-toggle="" aria-expanded="false">
+                        <div class="d-flex align-items-center"><span class="nav-link-icon"><span
+                                data-feather="book"></span></span><span class="nav-link-text-wrapper"><span
+                                class="nav-link-text">Rack별 상세 조회</span></span>
+                        </div>
+                    </a>
+                    </div>
+                </li>
+
+                <!-- 입출고관리 -->
+                <li class="nav-item">
+                    <!-- label-->
+                    <p class="navbar-vertical-label">입출고관리
+                    </p>
+                    <hr class="navbar-vertical-line" />
+                    <!-- parent pages-->
+                    <div class="nav-item-wrapper"><a class="nav-link label-1" href="/hdsmf/inbound" role="button"
+                                                     data-bs-toggle="" aria-expanded="false">
+                        <div class="d-flex align-items-center"><span class="nav-link-icon"><span
+                                data-feather="download"></span></span><span class="nav-link-text-wrapper"><span
+                                class="nav-link-text">입고관리</span></span>
+                        </div>
+                    </a>
+                    </div>
+                    <div class="nav-item-wrapper"><a class="nav-link label-1" href="/hdsmf/outbound" role="button"
+                                                     data-bs-toggle="" aria-expanded="false">
+                        <div class="d-flex align-items-center"><span class="nav-link-icon"><span
+                                data-feather="upload"></span></span><span class="nav-link-text-wrapper"><span
+                                class="nav-link-text">출고관리</span></span>
+                        </div>
+                    </a>
+                    </div>
+                </li>
+
+                <!-- 기본정보 -->
+                <li class="nav-item">
+                    <!-- label-->
+                    <p class="navbar-vertical-label">기본정보
+                    </p>
+                    <hr class="navbar-vertical-line" />
+                    <!-- parent pages-->
+                    <div class="nav-item-wrapper"><a class="nav-link label-1" href="/hdsmf/rackinfo" role="button"
+                                                     data-bs-toggle="" aria-expanded="false">
+                        <div class="d-flex align-items-center"><span class="nav-link-icon"><span
+                                data-feather="settings"></span></span><span class="nav-link-text-wrapper"><span
+                                class="nav-link-text">Rack 정보 관리</span></span>
+                        </div>
+                    </a>
+                    </div>
+                    <div class="nav-item-wrapper"><a class="nav-link label-1" href="/hdsmf/components" role="button"
+                                                     data-bs-toggle="" aria-expanded="false">
+                        <div class="d-flex align-items-center"><span class="nav-link-icon"><span
+                                data-feather="settings"></span></span><span class="nav-link-text-wrapper"><span
+                                class="nav-link-text">부품 정보 관리</span></span>
+                        </div>
+                    </a>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="navbar-vertical-footer">
+        <button
+                class="btn navbar-vertical-toggle border-0 fw-semi-bold w-100 white-space-nowrap d-flex align-items-center"><span
+                class="uil uil-left-arrow-to-left fs-0"></span><span class="uil uil-arrow-from-right fs-0"></span><span
+                class="navbar-vertical-footer-text ms-2">접기</span></button>
+    </div>
+
+    <script>
+
+        // 스타일을 적용할 함수
+        function applyStyles() {
+          const htmlElement = document.querySelector('html');
+          const navbar = document.querySelector('.navbar-vertical.navbar-expand-lg');
+          const asidenav = document.querySelector('#asidenav');
+          const browserWidth = window.innerWidth;
+
+          if (browserWidth >= 992) {
+            asidenav.classList.add('active');
+            asidenav.classList.remove('activeWidth');
+          } else {
+            asidenav.classList.add('activeWidth');
+            asidenav.classList.remove('active'); // 높이값 없애기
+          }
+          console.log(`브라우저 너비: ${browserWidth}px`);
+        }
+
+
+
+        // 페이지 로드 후에 스타일 적용
+        window.addEventListener('load', applyStyles);
+
+        // 창 크기 조정 후에 스타일 적용
+        window.addEventListener('resize', applyStyles);
+
+    </script>
+</nav>
+
+</html>

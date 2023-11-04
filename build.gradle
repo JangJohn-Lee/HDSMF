@@ -1,0 +1,47 @@
+plugins {
+	id 'java'
+	id 'org.springframework.boot' version '2.7.14'
+	id 'io.spring.dependency-management' version '1.0.15.RELEASE'
+}
+
+group = 'com.hdsmf'
+version = '0.0.1-SNAPSHOT'
+
+java {
+	sourceCompatibility = '11'
+}
+
+//configurations {
+//	compileOnly {
+//		extendsFrom annotationProcessor
+//	}
+//}
+
+repositories {
+	mavenCentral()
+}
+
+dependencies {
+	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+	implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
+	implementation 'nz.net.ultraq.thymeleaf:thymeleaf-layout-dialect'
+	implementation 'org.springframework.boot:spring-boot-starter-web'
+	compileOnly 'org.projectlombok:lombok'
+	developmentOnly 'org.springframework.boot:spring-boot-devtools'
+	runtimeOnly 'com.h2database:h2'
+	runtimeOnly 'com.mysql:mysql-connector-j'
+	annotationProcessor 'org.projectlombok:lombok'
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	implementation group: 'org.apache.poi', name: 'poi', version: '3.17'
+	implementation group: 'org.apache.poi', name: 'poi-ooxml', version: '3.17'
+	implementation group: 'org.apache.poi', name: 'poi-ooxml-schemas', version: '3.17'
+
+	// 객체의 프로퍼티를 다른 객체의 프로퍼티로 맵핑해주는 유틸리티
+	implementation 'org.modelmapper:modelmapper:3.1.0'
+	// 유효성 검사 기능에 대한 Spring Boot Starter 의존성. Hibernate Validator 라이브러리를 프로젝트에 포함시켜 Bean 검증, 메서드 매개변수 검증 등을 수행할 수 있게 합니다.
+	implementation 'org.springframework.boot:spring-boot-starter-validation'
+}
+
+tasks.named('test') {
+	useJUnitPlatform()
+}

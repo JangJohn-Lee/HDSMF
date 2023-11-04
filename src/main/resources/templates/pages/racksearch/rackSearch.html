@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/layoutRackSearch}">
+<head>
+    <!--엑셀 기능-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.3/xlsx.full.min.js"></script>
+</head>
+<!-- 사용자 CSS 추가 -->
+<th:block layout:fragment="css">
+    <style>
+
+    </style>
+</th:block>
+<div layout:fragment="content" class="content">
+    <h2 class="mb-2 lh-sm" data-anchor="data-anchor">부품별 상세 조회</h2>
+    <p class="text-700 lead mb-2">적재된 품목을 조회 및 출력하는 페이지 입니다.</p>
+    <div class="mt-4">
+        <div class="row g-4">
+            <div class="col-12 col-xl-10 order-1 order-xl-0">
+                <div class="mb-9">
+                    <div class="card shadow-none border border-300 my-4" data-component-card="data-component-card">
+                        <div class="card-header px-4 py-3 border-bottom border-300 bg-soft">
+                            <div class="row g-3 justify-content-between align-items-center">
+                                <div class="col-12 col-md">
+                                    <h4 class="text-900 mb-0" data-anchor="data-anchor">검색</h4>
+                                </div>
+                                <div class="col col-md-auto">
+                                    <nav class="nav nav-underline justify-content-end doc-tab-nav align-items-center"
+                                         role="tablist">
+                                        <label class="btn btn-link px-2 text-900 excel-file-export-btn" type="button"
+                                               for="totalDownBtn">
+                                            <span class="fa fa-file-export me-1"></span>엑셀 다운로드
+                                        </label>
+                                        <input type="button" id="totalDownBtn" onclick="downloadExcelFile()"
+                                               style="display: none;">
+
+
+                                        <label class="btn btn-link px-2 text-900 excel-form-file-btn" type="button"
+                                               for="excelDownBtn">
+                                            <span class="fas fa-copy me-1"></span>양식 다운로드
+                                        </label>
+                                        <input type="button" id="excelDownBtn" onclick="downloadExcel()"
+                                               style="display: none;">
+                                    </nav>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="card-body p-0">
+                            <div class="collapse code-collapse" id="docs-code">
+
+                            </div>
+                            <div class="p-3 code-to-copy">
+                                <form class="row g-3 needs-validation" novalidate id="search_form" action="racksearch"
+                                      method="post">
+                                    <div class="border border-100 rounded-2 px-3 bg-primary-100 col-12">
+                                        <div class="row d-flex justify-content-between align-items-top mt-2 mb-3 pt-2 px-3">
+                                            <div class="row d-flex justify-content-between align-items-top col-12 col-sm-11 p-0 m-0">
+                                                <div class="col-12 col-sm-4 p-0 mb-2 pe-0 pe-sm-2">
+                                                    <!-- Input text 요소 -->
+                                                    <div class="form-floating">
+                                                        <input type="text" class="form-control" name="rackNo" id="rackNum"
+                                                               style="height: 50px;" placeholder="rack 번호"
+                                                               autocomplete="off">
+                                                        <div class="invalid-feedback">rack 번호는 필수입니다</div>
+                                                        <label class="fs--1 text-700" for="rackNum">rack 번호</label>
+                                                    </div>
+                                                </div>
+
+                                                <!-- Input text 요소 -->
+                                                <div class="col-12 col-sm-4 p-0 mb-2 pe-0 pe-sm-2">
+                                                    <!-- Input text 요소 -->
+                                                    <div class="form-floating">
+                                                        <input type="text" class="form-control" name="componentNo"
+                                                               id="componentNum" style="height: 50px;" placeholder="품번"
+                                                               autocomplete="off" required>
+                                                        <div class="invalid-feedback">품번 입력은 필수입니다</div>
+                                                        <label class="fs--1 text-700" for="componentNum">품번</label>
+                                                    </div>
+                                                </div>
+
+                                                <!-- Input text 요소 -->
+                                                <div class="col-12 col-sm-4 p-0 mb-2 pe-0 pe-sm-2">
+                                                    <!-- Input text 요소 -->
+                                                    <div class="form-floating">
+                                                        <input type="text" class="form-control" name="searchName"
+                                                               id="searchText" style="height: 50px;"
+                                                               placeholder="검색어(공정상태, 부품명)"
+                                                               autocomplete="off">
+                                                        <div class="invalid-feedback">검색어 입력은 필수입니다</div>
+                                                        <label class="fs--1 text-700" for="searchText">검색어(공정상태,
+                                                            부품명)</label>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-12 col-sm-1 p-0">
+                                                <!-- Button 요소 -->
+                                                <button class="mb-0 btn btn-lg btn-primary" style="width: 100%;"
+                                                        onclick="check()">검색
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card shadow-none border border-300 mb-3">
+                        <div class="card-body p-0">
+                            <div class="text-900 mb-0" data-anchor="data-anchor" style="height: 0; overflow: hidden;">테이블</div>
+                            <div class="p-4 code-to-copy">
+                                <div class="d-flex align-items-center justify-content-end mb-3">
+                                    <div class="d-flex justify-content-center align-items-center">
+                                        <button class="btn btn-phoenix-success ms-2 btn-sm d-flex align-items-center"
+                                                type="button" data-bs-toggle="modal"
+                                                data-bs-target="#importExcelFileModal">
+                                            <span class="far fa-file-alt" data-fa-transform="shrink-3 down-2"></span>
+                                            <span class="ms-2 pt-1">엑셀등록</span>
+                                        </button>
+                                    </div>
+                                </div>
+
+                                <!-- 테이블 정렬 -->
+                                <div id="tableExample"
+                                     data-list='{"valueNames":["countNum","rackId","componentNo","product","componentAmount","componentState","inboundDate"],"page":5,"pagination":true}'>
+                                    <div class="table-responsive mx-n1 px-1">
+                                        <table id="table_info"
+                                               class="table table-sm border-top border-200 fs--1 mb-0 table-hover">
+                                            <thead class="bg-primary-100">
+                                            <tr>
+                                                <th class="sort align-middle" style="width: 30px; max-width: 50px;">
+                                                    <!-- 체크박스 선택 -->
+                                                    <div class="form-check mb-0 fs-0 d-flex justify-content-center">
+                                                        <input class="form-check-input" id="bulk-select-example"
+                                                               type="checkbox"
+                                                               data-bulk-select='{"body":"bulk-select-body","actions":"bulk-select-actions","replacedElement":"bulk-select-replace-element"}'/>
+                                                    </div>
+                                                </th>
+                                                <th class="sort align-middle text-center px-2" style="width: 50px;"
+                                                    data-sort="countNum">번호
+                                                </th>
+                                                <th class="sort align-middle text-center px-2" style="width: 130px;"
+                                                    data-sort="rackId">위치
+                                                </th>
+                                                <th class="sort align-middle text-center px-2" style="width: 130px;"
+                                                    data-sort="componentNo">품번
+                                                </th>
+                                                <th class="sort align-middle text-center px-2" style="width: 130px;"
+                                                    data-sort="product">부품명
+                                                </th>
+                                                <th class="sort align-middle text-center px-2" style="width: 100px;"
+                                                    data-sort="componentAmount">수량
+                                                </th>
+                                                <th class="sort align-middle text-center px-2" style="width: 120px;"
+                                                    data-sort="componentState">상태
+                                                </th>
+                                                <th class="sort align-middle text-center px-2" style="width: 160px;"
+                                                    data-sort="inboundDate">일자
+                                                </th>
+                                            </tr>
+                                            </thead>
+
+                                            <tbody class="list" id="bulk-select-body">
+                                            <tr th:each="item, index :${list}">
+                                                <td class="fs--1 p-0 align-middle text-center py-2">
+                                                    <div class="form-check mb-0 fs-0 d-flex justify-content-center">
+                                                        <input class="form-check-input" type="checkbox"
+                                                               data-bulk-select-row="{&quot;plantNo&quot;:2000,&quot;componentNo&quot;:&quot;14513585&quot;,&quot;categoryName&quot;:&quot;FLANGE&quot;,&quot;modelData&quot;:&quot;EW180C&quot;,&quot;product&quot;:&quot;BUCKET&quot;,&quot;sNo&quot;:&quot;1146-01270-1N&quot;,&quot;sWeight&quot;:11.5,&quot;fWeight&quot;:12.3,&quot;componentState&quot;:&quot;완제품&quot;,&quot;note&quot;:&quot;&quot;}"/>
+                                                    </div>
+                                                </td>
+                                                <td th:text="${index.count}"
+                                                    class="align-middle text-center px-3 countNum"></td>
+                                                <td th:text="${item.rackId}"
+                                                    class="align-middle text-center px-3 rackId"></td>
+                                                <td th:text="${item.componentNo}"
+                                                    class="align-middle text-center px-3 componentNo"></td>
+                                                <td th:text="${item.product}"
+                                                    class="align-middle text-center px-3 product"></td>
+                                                <td th:text="${item.componentAmount}"
+                                                    class="align-middle text-center px-3 componentAmount"></td>
+                                                <div th:switch="${item.componentState}"
+                                                     class="align-middle text-center px-3 componentState">
+                                                    <td class="text-center align-middle" th:case="''">0</td> <!--기업 데이터 새로 들어오면 삭제-->
+                                                    <td class="text-center align-middle" th:case="0">완제품</td><!--기업 데이터 새로 들어오면 삭제-->
+                                                    <td class="text-center align-middle" th:case="1">소재</td>
+                                                    <td class="text-center align-middle" th:case="2">CNC 1차</td>
+                                                    <td class="text-center align-middle" th:case="3">CNC 2차</td>
+                                                    <td class="text-center align-middle" th:case="4">MCT 1차</td>
+                                                    <td class="text-center align-middle" th:case="*">null</td>
+                                                </div>
+                                                <td th:text="${#temporals.format(item.inboundDate, 'yyyy-MM-dd a hh:mm ')}"
+                                                    class="align-middle text-center px-3 inboundDate"></td>
+                                            </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <div class="d-flex flex-between-center pt-3 mb-3">
+                                        <div class="pagination d-none"></div>
+                                        <p class="mb-0 fs--1">
+                                            <span class="d-none d-sm-inline-block"
+                                                  data-list-info="data-list-info"></span>
+                                            <span class="d-none d-sm-inline-block"> &mdash; </span>
+                                            <a class="fw-semi" href="#!" data-list-view="*">
+                                                전체 보기
+                                                <span class="fas fa-angle-right ms-1" data-fa-transform="down-1"></span>
+                                            </a><a class="fw-semi d-none" href="#!" data-list-view="less">
+                                            나눠 보기
+                                            <span class="fas fa-angle-right ms-1" data-fa-transform="down-1"></span>
+                                        </a>
+                                        </p>
+                                        <div class="d-flex">
+
+                                            <button class="btn btn-sm btn-primary" type="button"
+                                                    data-list-pagination="prev"><span>Previous</span></button>
+
+                                            <button class="btn btn-sm btn-primary px-4 ms-2" type="button"
+                                                    data-list-pagination="next"><span>Next</span></button>
+                                        </div>
+                                    </div>
+                                    <div id="sysdate" style="text-align: right; width: 100%; height:15px; font-size: 13px;"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 페이지 네비게이션 바 -->
+            <div class="col-12 col-xl-2">
+                <div class="position-sticky mt-xl-4" style="top: 80px;">
+                    <div class="mb-6">
+<!--                        <h5 class="lh-1">On this page </h5>-->
+                        <div class="d-flex justify-content-end">
+                            <button id="goToHomeButton" class="btn p-0" type="button" data-bs-toggle="tooltip"
+                                    data-bs-placement="top"
+                                    title="메인">
+                                <span class="fas fa-home" style="width: 17px;height: 17px;"></span>
+                            </button>
+                            <button id="reloadButton" class="btn p-0 mx-3" type="button" data-bs-toggle="tooltip"
+                                    data-bs-placement="top" title="새로고침">
+                                <span class="fas fa-undo" style="width: 16px;height: 16px;"></span>
+                            </button>
+                            <button id="rackPrintTabBtn" class="btn p-0" type="button" data-bs-toggle="tooltip"
+                                    data-bs-placement="top" title="화면출력">
+                                <span class="fas fa-print" style="width: 16px;height: 16px;"></span>
+                            </button>
+                        </div>
+                        <hr class="text-300"/>
+                        <ul class="nav nav-vertical flex-column doc-nav" data-doc-nav="data-doc-nav">
+                            <li class="nav-item"><a class="nav-link" href="#">부품별 상세 조회</a>
+                            </li>
+                            <li class="nav-item"><a class="nav-link" href="#검색">검색</a>
+                            </li>
+                            <li class="nav-item"><a class="nav-link" href="#테이블">테이블</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 다운로드 되었습니다 toast -->
+    <div class="position-fixed bottom-0 end-0 p-3" style="z-index: 5">
+        <div class="toast align-items-center text-white bg-dark border-0 light" id="excel-file-export-toast"
+             role="alert" aria-live="assertive" aria-atomic="true">
+            <div class="d-flex">
+                <div class="toast-body p-3 d-flex align-items-center">
+                    <span class="fas fa-check-circle text-success fs-3 me-3"></span>
+                    <p class="mb-0 flex-1">파일 다운로드 시작</p>
+                </div>
+                <button class="btn-close btn-close-white me-2 m-auto" type="button" data-bs-dismiss="toast"
+                        aria-label="Close"></button>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- 모달창  -->
+    <!-- 엑셀 일괄 등록 -->
+    <div class="modal fade" id="importExcelFileModal" tabindex="-1" aria-labelledby="importExcelFileModalLabel"
+         aria-hidden="true">
+        <button type="button" class="btn-close btn-close-white position-fixed top-0 end-0 p-5 fs-3"
+                data-bs-dismiss="modal" aria-label="Close"></button>
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content px-3 py-2 border rounded-4">
+                <div class="modal-header">
+                    <h5 class="modal-title fs-2" id="importExcelFileModalLabel">엑셀등록</h5>
+                </div>
+                <div class="modal-body">
+                    <p><strong>STEP 1 : </strong>
+                        <label class="btn btn-outline-primary mx-3 px-6 px-sm-6" type="button" for="excelDownBtn">양식
+                            다운로드</label> 을 다운로드 한다.
+                    </p>
+                    <div class="d-flex align-items-center justify-content-center mt-3">
+                        <p class="pt-3" style="width: 110px;"><strong>STEP 2 :</strong></p>
+                        <input class="form-control mx-3" style="width: 100%;" id="upfile" type="file"/>
+                        <p class="pt-3" style="width: 120px;">을 한다.</p>
+                    </div>
+                    <p class="selectFileNotice ps-11" style="color: red; display: none;">파일을 선택해주세요</p>
+
+                    <p class="mt-3"><strong>STEP 3 : </strong> <input
+                            class="stockRegSearchbarDateContentBtn btn btn-primary mx-3 px-6 px-sm-6" type="button"
+                            value="파일 업로드" id="uploadBtn" onclick="uploadFile()"> 를 누른다.</p>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-primary modalDismissBtn" type="button" data-bs-dismiss="modal" style="width: 100px;">취소
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</html>

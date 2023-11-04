@@ -1,0 +1,1032 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="HDM Warehouse system 페이지입니다.">
+
+    <!-- ===============================================-->
+    <!--    Document Title-->
+    <!-- ===============================================-->
+    <title>현대정밀 자재창고 관리 시스템 - Rack 정보 관리</title>
+
+
+    <!-- ===============================================-->
+    <!--    Favicons-->
+    <!-- ===============================================-->
+    <script src="/assets/js/config.js"></script>
+
+
+    <!-- ===============================================-->
+    <!--    Stylesheets-->
+    <!-- ===============================================-->
+    <link href="/vendors/choices/choices.min.css" rel="stylesheet">
+    <link href="/vendors/dhtmlx-gantt/dhtmlxgantt.css" rel="stylesheet">
+    <link href="/vendors/flatpickr/flatpickr.min.css" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+    <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;400;600;700;800;900&amp;display=swap" rel="stylesheet">
+    <link href="/vendors/simplebar/simplebar.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.8/css/line.css">
+    <link href="/assets/css/theme-rtl.min.css" type="text/css" rel="stylesheet" id="style-rtl">
+    <link href="/assets/css/theme.min.css" type="text/css" rel="stylesheet" id="style-default">
+    <link href="/assets/css/user-rtl.min.css" type="text/css" rel="stylesheet" id="user-style-rtl">
+    <link href="/assets/css/user.min.css" type="text/css" rel="stylesheet" id="user-style-default">
+    <script>
+      var phoenixIsRTL = window.config.config.phoenixIsRTL;
+      if (phoenixIsRTL) {
+        var linkDefault = document.getElementById('style-default');
+        var userLinkDefault = document.getElementById('user-style-default');
+        linkDefault.setAttribute('disabled', true);
+        userLinkDefault.setAttribute('disabled', true);
+        document.querySelector('html').setAttribute('dir', 'rtl');
+      } else {
+        var linkRTL = document.getElementById('style-rtl');
+        var userLinkRTL = document.getElementById('user-style-rtl');
+        linkRTL.setAttribute('disabled', true);
+        userLinkRTL.setAttribute('disabled', true);
+      }
+    </script>
+
+    <style>
+         .colorPalette {
+            transition: transform 0.3s;
+         }
+
+         .colorPalette:hover {
+           transform: scale(1.5);
+           border: 0px solid #ffffff;
+           cursor: pointer;
+        }
+
+        #message {
+           display: none;
+           color: green;
+           margin-top: 10px;
+        }
+
+        .clickColorBox {
+          display: block;
+          width: 70px;
+          background-color: #0032B4;
+          border-radius: 5px;
+        }
+
+        #hrdWarehouserackeditSystemtableFormBox table {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            min-width: 50px;
+            max-width: 400px;
+            height: 100%;
+            border-collapse: collapse;
+            /* border: 2px solid aqua; */
+            table-layout: fixed;
+         }
+
+        .tableBox {
+
+        }
+
+
+        .clickColorNotice {
+          font-size: 2px;
+          text-align: right;
+          display: block;
+          border-radius: 5px;
+        }
+
+        .percent-graph {
+            width: calc(100% - 75px) ;
+        }
+
+        .percent-graph span {
+            width: 100%;
+            display: block;
+            margin-right: 0px;
+            background-color: #dddddd;
+        }
+
+        #rackStatusPanelChartsBox .countP {
+            min-width: 100px;
+            padding-top: 3px;
+            text-align: center;
+        }
+
+        .rack1 td, .rack2 td,.rack3 td, .rack4 td, .rack5 td,.rack7 td,.rack8 td, .rack9 td {
+            border: 0.5px solid rgb(255 255 255);
+            width: calc(100% / 4);
+            height: calc(100% / 18);
+            text-align: center;
+            overflow: hidden;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+            position: relative;
+        }
+
+        .rack6 td {
+            border: 0.5px solid rgb(255 255 255);
+            width: calc(100% / 4);
+            height: calc(100% / 16);
+            text-align: center;
+            overflow: hidden;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+            position: relative;
+        }
+
+        .rack10 td {
+            border: 0.5px solid rgb(255 255 255);
+            width: calc(100% / 3);
+            height: calc(100% / 14);
+            text-align: center;
+            overflow: hidden;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+            position: relative;
+        }
+
+        .rackCell {
+            position: absolute;
+            top: 0;
+            left: 0;
+            margin: 0;
+            padding: 0;
+            font-size: 1px;
+            opacity: 1;
+            color: transparent;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            display: block;
+            /* cursor: pointer; */
+            z-index: 850;
+        }
+
+        .rackCell.active {
+            border: 3px solid rgb(255, 0, 0);
+        }
+
+        .rackCell:hover {
+            background-color: rgba(0, 0, 0, 0.2);
+            border: 3px solid rgb(255 0 0);
+        }
+
+        .locationCoordinates {
+            position: absolute;
+            top: 0;
+            left: 0;
+            font-size: 5px;
+            opacity: 1;
+            color: #ffffff;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            display: flex; /* 변경된 부분 */
+            align-items: center; /* 추가된 부분 */
+            justify-content: center; /* 추가된 부분 */
+            box-sizing: border-box;
+            z-index: 800;
+        }
+
+        .locationCoordinates.active {
+            border: 0px solid rgb(255, 0, 0);
+            background-color: rgba(0, 0, 0, 0.4);
+        }
+
+
+        #rackStatusPanelTab {
+            height: 84vh;
+        }
+
+        .rackInfoPanel01, .rackInfoPanel02, .rackInfoPanel03, .rackInfoPanel04, .rackInfoPanel05,
+        .rackInfoPanel06, .rackInfoPanel07, .rackInfoPanel08, .rackInfoPanel09, .rackInfoPanel010 {
+            width: 100%;
+        }
+
+        .rackInfoPanel01 .inventoryUseRateRackPercent, .rackInfoPanel02 .inventoryUseRateRackPercent,
+        .rackInfoPanel03 .inventoryUseRateRackPercent, .rackInfoPanel04 .inventoryUseRateRackPercent,
+        .rackInfoPanel05 .inventoryUseRateRackPercent, .rackInfoPanel06 .inventoryUseRateRackPercent,
+        .rackInfoPanel07 .inventoryUseRateRackPercent, .rackInfoPanel08 .inventoryUseRateRackPercent,
+        .rackInfoPanel09 .inventoryUseRateRackPercent, .rackInfoPanel010 .inventoryUseRateRackPercent {
+            min-width: 50px;
+            max-width: 400px;
+            overflow: hidden;
+        }
+
+        .rackInfoPanel01 .inventoryUseRateRackPercent p, .rackInfoPanel02 .inventoryUseRateRackPercent p,
+        .rackInfoPanel03 .inventoryUseRateRackPercent p, .rackInfoPanel04 .inventoryUseRateRackPercent p,
+        .rackInfoPanel05 .inventoryUseRateRackPercent p, .rackInfoPanel06 .inventoryUseRateRackPercent p,
+        .rackInfoPanel07 .inventoryUseRateRackPercent p, .rackInfoPanel08 .inventoryUseRateRackPercent p,
+        .rackInfoPanel09 .inventoryUseRateRackPercent p, .rackInfoPanel010 .inventoryUseRateRackPercent p {
+            height: 30px;
+        }
+
+        #inventoryUseRateRackPercentBox01, #inventoryUseRateRackPercentBox02,
+        #inventoryUseRateRackPercentBox03, #inventoryUseRateRackPercentBox04,
+        #inventoryUseRateRackPercentBox05, #inventoryUseRateRackPercentBox06,
+        #inventoryUseRateRackPercentBox07, #inventoryUseRateRackPercentBox08,
+        #inventoryUseRateRackPercentBox09, #inventoryUseRateRackPercentBox010 {
+            position: absolute;
+            top: -33px;
+            left: 0px;
+        }
+
+
+        .inventoryUseRateRackPercentBox {
+            width: 100%;
+            z-index: 8000;
+        }
+
+        .hrdWarehouserackeditSystemtableFormBox01 .inventoryUseRateRackPercentBox .countP{
+            min-width: 75px;
+            text-align: center;
+        }
+
+        .hrdWarehouserackeditSystemtableFormBox02 .inventoryUseRateRackPercentBox .countP{
+            min-width: 75px;
+            text-align: center;
+        }
+
+        .percent-Count {
+            color: #ffffff;
+        }
+
+        .inventoryUseRateRackPercent p .percent-Count {
+            text-align: center;
+            color: #ffffff;
+            display: block;
+        }
+
+        #fontSizeControllBtnBox {
+            position: fixed;
+            bottom: 50px;
+            right: 50px;
+        }
+
+        @media (max-width: 672px) {
+            .rackInfoPanel .inventoryUseRateRackPercent .percent-graph {
+                margin-right: 0 !important;
+                width: 0 !important;
+                overflow: hidden !important;
+            }
+
+            .rackInfoPanel .inventoryUseRateRackPercent .countP {
+                padding-left: 0 !important;
+                padding-right: 0 !important;
+                width: 100%;
+                min-width: 50px;
+            }
+        }
+
+
+
+    </style>
+</head>
+
+<body>
+
+<main class="main user-select-none" id="top">
+    <th:block th:replace="fragments/asidenav::asidenav"></th:block>
+    <th:block th:replace="fragments/topnav::topnav"></th:block>
+
+    <th:block layout:fragment="content"></th:block>
+
+</main>
+
+<th:block th:replace="fragments/fontSizeControllBtnBox::fontSizeControllBtnBox"></th:block>
+
+<th:block layout:fragment="script"></th:block>
+
+<!-- 다크모드 -->
+<script>
+  var navbarTopStyle = window.config.config.phoenixNavbarTopStyle;
+  var navbarTop = document.querySelector('.navbar-top');
+  if (navbarTopStyle === 'darker') {
+    navbarTop.classList.add('navbar-darker');
+  }
+
+  var navbarVerticalStyle = window.config.config.phoenixNavbarVerticalStyle;
+  var navbarVertical = document.querySelector('.navbar-vertical');
+  if (navbarVertical && navbarVerticalStyle === 'darker') {
+    navbarVertical.classList.add('navbar-darker');
+  }
+</script>
+
+<!-- ===============================================-->
+<!--    JavaScripts-->
+<!-- ===============================================-->
+<script src="/vendors/popper/popper.min.js"></script>
+<script src="/vendors/bootstrap/bootstrap.min.js"></script>
+<script src="/vendors/anchorjs/anchor.min.js"></script>
+<script src="/vendors/is/is.min.js"></script>
+<script src="/vendors/fontawesome/all.min.js"></script>
+<script src="/vendors/lodash/lodash.min.js"></script>
+<script src="https://polyfill.io/v3/polyfill.min.js?features=window.scroll"></script>
+<script src="/vendors/list.js/list.min.js"></script>
+<script src="/vendors/feather-icons/feather.min.js"></script>
+<script src="/vendors/dayjs/dayjs.min.js"></script>
+<script src="/vendors/prism/prism.js"></script>
+<script src="/assets/js/phoenix.js"></script>
+<script src="/vendors/list.js/list.min.js"></script>
+
+
+<!-- 컬러 파렛트 색상 뽑아내기 -->
+<script>
+    let messageTimeout;
+
+    const colorPalettes = document.querySelectorAll(".colorPalette");
+    const clickColorBox = document.querySelector(".clickColorBox");
+    const clickColorNotice = document.querySelector(".clickColorNotice");
+    const message = document.getElementById("message");
+
+    colorPalettes.forEach(color => {
+    color.addEventListener("mouseenter", () => {
+      const bgColor = getComputedStyle(color).backgroundColor;
+      const rgbValues = extractRGBValues(bgColor);
+      document.getElementById("colorInfo").innerHTML = `<strong>R:</strong> ${rgbValues[0]} <strong>G:</strong> ${rgbValues[1]} <strong>B:</strong> ${rgbValues[2]} <strong>Hex:</strong> ${rgbToHex(rgbValues)}`;
+    });
+
+    color.addEventListener("click", () => {
+      const bgColor = getComputedStyle(color).backgroundColor;
+      const hexColor = rgbToHex(extractRGBValues(bgColor));
+      clearTimeout(messageTimeout); // Clear any existing timeout
+      copyToClipboard(hexColor);
+      showCopyMessage(hexColor);
+    });
+    });
+
+    function extractRGBValues(color) {
+    return color.match(/\d+/g) || [0, 0, 0];
+    }
+
+    function rgbToHex(rgbValues) {
+    const hexValues = rgbValues.map(value => {
+      const hex = parseInt(value).toString(16);
+      return hex.length === 1 ? `0${hex}` : hex;
+    });
+    return `#${hexValues.join("")}`;
+    }
+
+    function copyToClipboard(text) {
+    navigator.clipboard.writeText(text)
+      .then(() => {
+      })
+      .catch(error => {
+        console.error("Failed to copy text:", error);
+      });
+    }
+
+    function showCopyMessage(hexColor) {
+    clickColorBox.style.backgroundColor = hexColor;
+    clickColorNotice.textContent = `${hexColor}`;
+    clickColorBox.style.display = "block";
+    clickColorNotice.style.display = "block";
+    message.textContent = `Hex: ${hexColor} 색상이 클립보드에 복사되었습니다.`;
+    message.style.display = "block";
+    messageTimeout = setTimeout(() => {
+      message.style.display = "none";
+    }, 2000);
+    }
+
+    function copyToClipboard(text) {
+    navigator.clipboard.writeText(text)
+      .then(() => {
+      })
+      .catch(error => {
+        console.error("Failed to copy text:", error);
+      });
+    }
+</script>
+
+
+<!-- 제목 부분 공통 버튼 -->
+<script>
+    // 메인 페이지로 버튼
+    document.addEventListener('DOMContentLoaded', function () {
+        const goToHomeButton = document.getElementById('goToHomeButton');
+
+        goToHomeButton.addEventListener('click', goToHome);
+
+        function goToHome() {
+            window.location.href = '/hdsmf/totaldetaildashboard'; // 지정한 경로로 이동
+        }
+    });
+
+
+
+    // 새로고침 버튼
+    const reloadButton = document.getElementById('reloadButton');
+
+    reloadButton.addEventListener('click', reloadPage);
+
+    function reloadPage() {
+        location.reload();
+    }
+
+    // 출력 버튼
+
+
+</script>
+
+
+
+
+<script>
+        let rackStatusPanelTabTableBG = true;
+        let rackCategoryPanelTabBG = true;
+
+
+        let rackCells = document.querySelectorAll('.rackCell');
+
+        function transformRackId(rackId) {
+            const parts = rackId.split("-");
+            if (parts.length !== 3) {
+                throw new Error("Invalid rackId format");
+            }
+
+            const xx = parts[0].substring(1);
+            const y = parts[1];
+            const z = parts[2];
+
+            let zz;
+            if (z.length === 2) {
+                zz = z;
+            } else {
+                zz = '0' + z;
+            }
+
+            return `R${xx.padStart(2, '0')}F${zz.toString().padStart(2, '0')}N${y.padStart(2, '0')}`;
+        }
+
+        //  RGBA 형식으로 변환
+        function hexToRgba(hex, alpha) {
+            // hex에서 R, G, B 값을 추출
+            const [r, g, b] = [1, 3, 5].map(offset => parseInt(hex.slice(offset, offset + 2), 16));
+            return `rgba(${r}, ${g}, ${b}, ${alpha})`;
+        }
+
+
+        function drawTableBG() {
+            const rackCellsLayout01 = document.querySelectorAll('#hrdWarehouserackeditSystemtableFormBox .rackTableLayout01 td');
+            const rackCellsLayout02 = document.querySelectorAll('#hrdWarehouserackeditSystemtableFormBox .rackTableLayout02 td');
+
+            applyStatusBackground(rackCellsLayout01);
+            applyCategoryBackground(rackCellsLayout02);
+
+        }
+
+        function applyCategoryBackground(rackCells) {
+            // rack정보랑 category 정보랑 매칭해서 배경색 넣음
+            rackDetailInfoListJson.forEach(rackDetail => {
+                const rackId = transformRackId(rackDetail.rackId);
+                const matchingRackCell = Array.from(rackCells).find(r => r.innerText === rackId);
+
+                if (matchingRackCell) {
+                    const matchingCategory = categoryListJson.find(c => c.categoryNo === rackDetail.categoryNo);
+                    if (matchingCategory) {
+                        const rgbaColor = hexToRgba(matchingCategory.categoryColor, 0.7);
+                        matchingRackCell.style.backgroundColor = rgbaColor;
+                    }
+                }
+            });
+        }
+
+        function applyStatusBackground(rackCells) {
+
+            // rack 정보와 iOBound 정보를 매칭하여 배경색을 설정
+            rackDetailInfoListJson.forEach(rackDetail => {
+                const rackId = transformRackId(rackDetail.rackId);
+                const matchingRackCell = Array.from(rackCells).find(r => r.innerText === rackId);
+
+                if (matchingRackCell) {
+                    const matchingRackDetail = iOBoundListJson.find(i => i.rackDetailNo === rackDetail.rackDetailNo);
+                    if (matchingRackDetail) {
+                        const rgbaColor = `rgba(255, 0, 0, 0.0)`;
+                        matchingRackCell.style.backgroundColor = rgbaColor;
+                        const matchingIndex = iOBoundListJson.indexOf(matchingRackDetail);
+                        const locationCoordinatesElement = matchingRackCell.querySelector('.locationCoordinates');
+                        if (locationCoordinatesElement) {
+                            locationCoordinatesElement.innerText = (matchingIndex + 1).toString();
+                            locationCoordinatesElement.style.border = '0px solid rgb(0, 255, 0)';
+                            locationCoordinatesElement.style.backgroundColor = 'rgba(0, 0, 0, 0.4)';
+                            locationCoordinatesElement.style.textShadow = '1px 1px 1px #555555';
+                            locationCoordinatesElement.closest("td").querySelector('.rackCell').style.cursor = 'pointer';
+                        }
+                    } else {
+                        matchingRackCell.style.backgroundColor = `rgba(0, 0, 255, 0.0)`;
+                    }
+                } else {
+                    console.warn(`rackId: ${rackId}에 대한 매칭 셀이 없습니다.`);
+                }
+            });
+        }
+
+        drawTableBG();
+
+    </script>
+
+
+
+<!-- RackInfo 리스트-->
+<script>
+    // 1단계: rackInfoListJson에 있는 rackNo들의 목록 생성
+    const rackInfoRackNos = rackInfoListJson.map(item => item.rackNo);
+
+    // 2단계: iOBoundListJson에 있는 rackDetailNo들의 목록 생성
+    const iOBoundRackDetailNos = iOBoundListJson.map(item => item.rackDetailNo);
+
+    // 3단계: rackDetailInfoListJson을 순회하면서 일치하는 rackDetailNo가 있으면 카운트 증가
+    const categoryDetailNoCounts = rackDetailInfoListJson.reduce(function (acc, item) {
+        // 해당 항목의 rackDetailNo가 iOBoundRackDetailNos에 있을 경우만 카운트
+        if (iOBoundRackDetailNos.includes(item.rackDetailNo)) {
+            if (!acc[item.categoryNo]) {
+                acc[item.categoryNo] = 0;
+            }
+            acc[item.categoryNo]++;
+        }
+        return acc;
+    }, {});
+
+    // 4단계: rackDetailInfoListJson을 순회하면서 일치하는 rackDetailNo가 있으면 rackDetailNo 카운트 증가
+    const rackInfoDetailNoCounts = rackDetailInfoListJson.reduce(function (acc, item) {
+        // 해당 항목의 rackDetailNo가 iOBoundRackDetailNos에 있을 경우만 카운트
+        if (iOBoundRackDetailNos.includes(item.rackDetailNo)) {
+            if (!acc[item.rackNo]) {
+                acc[item.rackNo] = 0;
+            }
+            acc[item.rackNo]++;
+        }
+        return acc;
+    }, {});
+
+</script>
+
+<!-- IO 리스트-->
+<script>
+    // Rack별 공간 갯수 객체 배열로
+    const rackInfoCounts = rackDetailInfoListJson.reduce(function (acc, item) {
+        if (!acc[item.rackNo]) {
+            acc[item.rackNo] = 0;
+        }
+        acc[item.rackNo]++;
+        return acc;
+    }, {});
+</script>
+
+
+<!-- 분류별 그래프  -->
+<script>
+    // 카테고리별 갯수 객체 배열로
+    const categoryCounts = rackDetailInfoListJson.reduce(function (acc, item) {
+        if (!acc[item.categoryNo]) {
+            acc[item.categoryNo] = 0;
+        }
+        acc[item.categoryNo]++;
+        return acc;
+    }, {});
+
+
+    // 우선, categoryListJson에서 categoryNo를 key로 하는 객체를 만듭니다.
+    let categoryMap = categoryListJson.reduce((acc, category) => {
+        acc[category.categoryNo] = category.categoryName;
+        return acc;
+    }, {});
+
+
+    // 이제 원하는 2차원 배열을 만듭니다.
+    const resultArrayCategories = [];
+    const resultArrayCategoriesColors = [];
+
+    resultArrayCategories.push(['카테고리 이름', '용량']);
+
+    if (Object.keys(categoryMap).length > 0) {
+        for (let key in categoryMap) {
+            if (categoryMap[key]) {
+                const count = categoryCounts[key] || 0;  // 해당 카테고리의 count 값이 있으면 가져오고, 없으면 0을 할당합니다.
+
+                if (count > 0) {
+                    resultArrayCategories.push([categoryMap[key], count]);
+                } else {
+                    resultArrayCategories.push(['카테고리 이름', 0]);
+                }
+
+                // 해당 categoryNo를 가진 항목을 categoryListJson에서 찾아서 categoryColor를 가져옵니다.
+                const matchedCategory = categoryListJson.find(category => category.categoryNo == key);
+                if (matchedCategory && matchedCategory.categoryColor) {
+                    resultArrayCategoriesColors.push(matchedCategory.categoryColor);
+                } else {
+                    resultArrayCategoriesColors.push('#dddddd'); // 해당 카테고리의 색상이 없는 경우 기본 색상 값을 넣을 수 있습니다.
+                }
+            }
+        }
+    } else {
+        resultArrayCategories.push(['카테고리를 생성하세요', 100]);
+        resultArrayCategoriesColors.push('#dddddd');
+    }
+
+
+</script>
+
+
+
+
+<script>
+    // 새로운 패널 추가 함수
+    function processCategories(jsonList, rackCategoryPanelTabId) {
+
+        const createGraphPanel = (dataObject, count01, count02) => {
+            let panel = document.createElement('div'); // 기본 panel 객체 생성
+            let titleDiv;
+
+            if (dataObject.hasOwnProperty('rackNo')) {
+                panel.className = `rackInfoPanel rackInfoPanel0${dataObject.rackNo} col-2 p-0`;
+
+                panel.id = `rack0${dataObject.rackNo}RackInfoPanel`;
+
+                titleDiv = document.createElement('div');
+                titleDiv.className = 'rackInfoPanelTitle d-none justify-content-between mb-2';
+                const h3 = document.createElement('h3');
+                h3.className = 'fs--1';
+                h3.textContent = `Rack0${dataObject.rackNo} 현황`;
+                titleDiv.appendChild(h3);
+
+                const button = document.createElement('button');
+                button.className = 'rackDetailInfoButton btn btn-phoenix-secondary btn-sm fs--2 rounded-0 py-1 px-5';
+                button.textContent = '상세보기';
+                button.onclick = function () {
+                    window.location.href = '/hdsmf/rackdetailsearch';
+                };
+
+                titleDiv.appendChild(button);
+
+
+            } else if (dataObject.hasOwnProperty('categoryNo')) {
+                panel.className = 'categoryPanel';
+                panel.id = `rack0${dataObject.categoryNo}CategoryPanel`;
+
+                titleDiv = document.createElement('div');
+                titleDiv.className = 'rackCategoryPanelTitle d-flex justify-content-between mb-2';
+                titleDiv.style.height = '35px';
+
+                titleDivBox = document.createElement('div');
+                const colorSpan = document.createElement('span');
+                colorSpan.style.backgroundColor = `${dataObject.categoryColor}`;
+                colorSpan.style.padding = '5px 10px';
+                colorSpan.style.borderRadius = '0 0 20px 0';
+
+                titleDivBox.appendChild(colorSpan);
+
+                const h3 = document.createElement('h3');
+                h3.className = 'fs--1 ps-2';
+                h3.textContent = `${dataObject.categoryName} 현황`;
+                // h3.style.textShadow = '1px 1px 2px #ffffff';
+                // h3.style = '-webkit-text-stroke: 0.1px #cccccc';
+                h3.style.paddingBottom = '5px';
+
+
+                titleDivBox.appendChild(h3);
+
+                titleDiv.appendChild(titleDivBox);
+
+                const button = document.createElement('button');
+                button.style.height = '30px';
+                button.className = 'rackDetailInfoButton btn btn-phoenix-secondary btn-sm fs--2 rounded-0 py-1 px-5';
+                button.textContent = '상세보기';
+                button.onclick = function () {
+                    window.location.href = '/hdsmf/racksearch';
+                };
+
+                titleDiv.appendChild(button);
+
+            } else {
+                // 예외처리: dataObject가 예상한 형태가 아닐 경우
+                console.error("Unexpected dataObject format:", dataObject);
+                return null; // null 반환
+            }
+
+            // 아이템 갯수 표시
+            const inventoryRateDiv = document.createElement('div');
+            inventoryRateDiv.className = 'inventoryUseRateRackPercent d-flex justify-content-between';
+
+            const spanContainer = document.createElement('p');
+            spanContainer.className = 'd-flex justify-content-between me-2';
+            spanContainer.classList.add('percent-graph');
+
+            if (count01 > 0) {
+                for (let i = 0; i < count02; i++) {
+                    const span = document.createElement('span');
+                    // .active 클래스 추가
+                    span.classList.add('active');
+                    spanContainer.appendChild(span);
+                }
+
+                for (let i = 0; i < count01 - count02; i++) {
+                    const span = document.createElement('span');
+                    spanContainer.appendChild(span);
+                }
+            } else {
+                const span = document.createElement('span');
+                spanContainer.appendChild(span);
+            }
+
+            inventoryRateDiv.appendChild(spanContainer);
+
+
+            const countP = document.createElement('p');
+            countP.className = 'px-2 py-1 bg-secondary countP';
+
+            const countSpan = document.createElement('span');
+            countSpan.className = 'percent-Count text-center countSpan';
+            countSpan.textContent = `${count02} / ${count01}`;
+            countP.appendChild(countSpan);
+
+
+            inventoryRateDiv.appendChild(countP);
+
+            panel.appendChild(titleDiv);
+            panel.appendChild(inventoryRateDiv);
+
+            return panel;
+        };
+
+        // 기존 패널 삭제
+        // while (rackCategoryPanelTabId.firstChild) {
+        //    rackCategoryPanelTabId.removeChild(rackCategoryPanelTabId.firstChild);
+        //}
+
+
+        if (jsonList === rackInfoListJson) {
+            jsonList.forEach((rackInfo) => {
+                const matchingRackInfoCounts = rackInfoCounts[rackInfo.rackNo] || 0;
+                const matchingRackInfoDetailNoCounts = rackInfoDetailNoCounts[rackInfo.rackNo] || 0;
+                const newPanel = createGraphPanel(rackInfo, matchingRackInfoCounts, matchingRackInfoDetailNoCounts);
+
+                // newPanel이 null이 아니라면 추가
+                if (newPanel) {
+
+                    let rackNoAsString = String(rackInfo.rackNo);
+
+                    let inventoryUseRateRackPercentBox = "inventoryUseRateRackPercentBox0" + rackNoAsString;
+                    document.getElementById(inventoryUseRateRackPercentBox).appendChild(newPanel);
+                }
+            });
+        } else if (jsonList === categoryListJson) {
+            jsonList.forEach((category) => {
+                const matchingCategoryCount = categoryCounts[category.categoryNo] || 0;
+                const matchingCategoryDetailNoCounts = categoryDetailNoCounts[category.categoryNo] || 0;
+                const newPanel = createGraphPanel(category, matchingCategoryCount, matchingCategoryDetailNoCounts);
+                rackCategoryPanelTabId.appendChild(newPanel);
+            });
+        }
+    }
+
+    // 현황 막대 그래프 HTML을 동적으로 생성
+    const rackStatusTab = document.getElementById('inventoryUseRateRackPercentBox06');
+    processCategories(rackInfoListJson, rackStatusTab);
+
+    const rackCategoryTab = document.getElementById('rackCategoryPanelTab');
+    processCategories(categoryListJson, rackCategoryTab);
+</script>
+
+
+
+
+
+<!-- 수정 버튼 말고 다른 탭키 누르면 radio 버튼 해제 -->
+<script>
+        const resetRadioButtons = () => {
+            const inputRadios = document.querySelectorAll("td input[type='radio']");
+            inputRadios.forEach((input) => {
+                input.checked = false;
+                if (input.closest('tr')) {
+                    input.closest('tr').style.backgroundColor = '';
+                }
+            });
+        };
+    </script>
+
+
+
+
+<!-- Rack 적재 갯수 파악하고 Rack별 그래프 그리기 -->
+<script>
+        // .active 클래스를 추가할 span의 갯수를 담은 배열
+        //const percentCounts = [20, 10, 72, 70, 30, 30, 40, 60, 4, 42];
+
+        // 전체 .active 갯수의 합계를 계산합니다.
+        // const percentCountsSum = percentCounts.reduce((a, b) => a + b, 0);
+
+        const percentCountsSum = iOBoundListJson.length;
+        const percentCountsRackSum = rackDetailInfoListJson.length;
+
+        // 모든 .percent-graph 요소를 선택합니다.
+        const percentGraphs = document.querySelectorAll('.percent-graph');
+        // 모든 .percent-Count 요소를 선택합니다.
+        const percentCountsElements = document.querySelectorAll('.percent-Count');
+
+        // 각 .percent-graph 요소에 대하여 작업을 수행합니다.
+        percentGraphs.forEach((graph, index) => {
+            // 현재 .percent-graph 요소 내의 모든 span 요소를 선택합니다.
+            const spans = graph.querySelectorAll('span');
+            const totalSpans = spans.length;
+
+            // span에 .active 클래스를 추가합니다.
+            // 주어진 배열의 각 원소 값만큼 혹은 가능한 한 많이 .active 클래스를 추가합니다.
+            //for (let i = 0; i < percentCounts[index] && i < totalSpans; i++) {
+            //     spans[i].classList.add('active');
+            // }
+
+            // .active 클래스가 붙은 span의 수와 전체 span의 수를 각각의 .percent-Count 요소에 표시합니다.
+            // percentCountsElements[index].textContent = `${percentCounts[index]} / ${totalSpans}`;
+        });
+
+
+        // .percent-graph에 대해 색상 변경 작업을 수행
+        percentGraphs.forEach((graph) => {
+            const spans = graph.querySelectorAll('span');
+            const activeSpans = graph.querySelectorAll('span.active');
+            const totalSpans = spans.length;
+            const activeSpansCount = activeSpans.length;
+            const activePercentage = (activeSpansCount / totalSpans) * 100;
+
+            // activeSpans 비율에 따라 색상 변경
+            // activePercentage 값에 따라 배경색을 변경
+            if (activePercentage <= 30) {
+                activeSpans.forEach(span => span.style.backgroundColor = 'green');
+            } else if (activePercentage <= 60) {
+                activeSpans.forEach(span => span.style.backgroundColor = 'yellow');
+            } else if (activePercentage <= 90) {
+                activeSpans.forEach(span => span.style.backgroundColor = 'orange');
+            } else {
+                activeSpans.forEach(span => span.style.backgroundColor = 'red');
+            }
+        });
+    </script>
+
+
+
+<!-- rgb를 rgba로 변경 -->
+<script>
+        function convertRgbToRgba(rgb, alpha) {
+            return rgb.replace(')', ', ' + alpha + ')').replace('rgb', 'rgba');
+        }
+    </script>
+
+
+
+
+
+<!-- rackCells 색상입히기 및 검색 셀 정보 파싱 -->
+<script type="text/javascript">
+
+        // 선택한 셀의 rackDetailInfo 저장 배열
+        let racks = [];
+
+        document.addEventListener('DOMContentLoaded', function () {
+            const knowRackCellProductNameH1s = document.querySelectorAll('.knowRackCellProductNameH1');
+            const knowRackCellLocationSpans = document.querySelectorAll('.knowRackCellLocationSpan');
+            const knowRackCellComponentIdSpans = document.querySelectorAll('.knowRackCellComponentIdSpan');
+            const knowRackCellComponentfWeightSpans = document.querySelectorAll('.knowRackCellComponentfWeightSpan');
+            const knowRackCellComponentStatusSpans = document.querySelectorAll('.knowRackCellComponentStatusSpan');
+            const knowRackCellCompanySpans = document.querySelectorAll('.knowRackCellCompanySpan');
+            const knowRackCellSteelMakerSpans = document.querySelectorAll('.knowRackCellSteelMakerSpan');
+            const knowRackCellProductNoSpans = document.querySelectorAll('.knowRackCellProductNoSpan');
+            const knowRackCellProductNameSpans = document.querySelectorAll('.knowRackCellProductNameSpan');
+            const knowRackCellComponentAmountSpans = document.querySelectorAll('.knowRackCellComponentAmountSpan');
+            const knowRackCellComponentsWeightSpans = document.querySelectorAll('.knowRackCellComponentsWeightSpan');
+            const knowRackCellPartPlantNoSpans = document.querySelectorAll('.knowRackCellPartPlantNoSpan');
+            const knowRackCellTotalWeightSpans = document.querySelectorAll('.knowRackCellTotalWeightSpan');
+            const knowRackCellInboundDateSpans = document.querySelectorAll('.knowRackCellInboundDateSpan');
+            const knowRackCellInboundNoSpans = document.querySelectorAll('.knowRackCellInboundNoSpan');
+
+
+
+            rackCells.forEach(rackCell => {
+                rackCell.addEventListener('click', function () {
+                  const rackId = rackCell.textContent.trim();
+
+                  document.querySelectorAll('.rackCell').forEach(cell => {
+                      cell.closest("td").querySelector('.locationCoordinates').classList.remove('active');
+                      cell.classList.remove('active');
+                  });
+
+                  // R06F04N15 형식의 문자열에서 정보 추출
+                  const [rack, row, column] = rackId.match(/R(\d+)F(\d+)N(\d+)/).slice(1);
+
+                  const jsonData = {
+                      rackId: 'R' + rack + '-' + column + '-' + parseInt(row),
+                  };
+
+
+                  const matchedDetail = rackDetailInfoListJson.find(detail => detail.rackId === jsonData.rackId);
+
+                  // 클릭된 요소에 스타일 적용
+                  if (matchedDetail) {
+
+                      resetRadioButtons();
+
+                      // 더블로 보기 체크 or 안 돼있어도 IO 테이블 노출하기
+                      const checkbox = document.querySelector('.twoScrollingScreens');
+
+
+                      // 같은 innerText를 가진 .rackCell 요소 스타일 변경
+                      const matchingRackCells = document.querySelectorAll('.rackCell');
+                      matchingRackCells.forEach(cell => {
+                          if (cell.innerText.trim() === rackCell.innerText.trim()) {
+                              cell.closest("td").querySelector('.locationCoordinates').classList.add('active');
+                              cell.classList.add('active');
+                          }
+                      });
+                  }
+                });
+            });
+        });
+    </script>
+
+
+
+<!-- 렉 컨트롤 테이블 체크박스 요소 선택 -->
+<script th:src="@{/rackedit/js/shinSelectCheck.js}" type="text/javascript"></script>
+
+
+
+
+<!-- 위치 및 상세 정보 출력 -->
+<script>
+    // 출력 버튼
+    const rackPrintTabBtn = document.getElementById('rackPrintTabBtn');
+
+    rackPrintTabBtn.addEventListener('click', function () {
+        let listView = document.getElementById("hrdWarehouserackeditSystemtableFormPrintBox");
+        let printContent = listView.outerHTML;
+
+        // 팝업 창을 열고 내용과 스타일을 설정한 후 인쇄합니다.
+        let printWindow = window.open('', '_blank', 'width=1920,height=1080');
+        printWindow.document.open();
+        printWindow.document.write('<html><head><title>인쇄</title>');
+
+        // 현재 페이지의 모든 스타일시트를 팝업에 추가
+        let styles = document.querySelectorAll('link[rel="stylesheet"], style');
+        for (let style of styles) {
+            printWindow.document.write(style.outerHTML);
+        }
+
+        printWindow.document.write('</head><body>');
+        printWindow.document.write(printContent);
+        printWindow.document.write('</body></html>');
+        printWindow.document.close();
+
+
+
+
+        // 팝업 창이 완전히 로드된 후 인쇄
+        printWindow.onload = function() {
+            let commonBtnBox = printWindow.document.getElementById("commonBtnBox");
+            commonBtnBox.style.opacity = "0";
+
+            printWindow.document.body.style.backgroundColor = "#FFFFFF";
+
+            printWindow.print();
+
+        }
+    });
+</script>
+
+<!-- 폰트 사이즈 조절 리모컨 -->
+<script>
+    // 화면 확대/축소 레벨 배열 및 현재 인덱스를 설정
+    const zoomLevels = [0.9, 1, 1.1, 1.2, 1.3];
+    let currentZoomIndex = zoomLevels.indexOf(1);  // '1'의 인덱스를 기본값으로 설정
+
+    function adjustZoom() {
+        // 화면 확대/축소 적용 및 로컬 스토리지 저장
+        document.body.style.zoom = `${zoomLevels[currentZoomIndex]}`;
+        localStorage.setItem('userZoomLevel', zoomLevels[currentZoomIndex]);
+
+        // 인덱스 업데이트
+        currentZoomIndex++;
+        if (currentZoomIndex >= zoomLevels.length) {
+            currentZoomIndex = 0;  // 배열의 시작으로 되돌아갑니다.
+        }
+    }
+
+    document.getElementById('btn-adjust-font').addEventListener('click', adjustZoom);
+
+    window.addEventListener('DOMContentLoaded', function () {
+        let storedZoomLevel = localStorage.getItem('userZoomLevel');
+        if (storedZoomLevel) {
+            document.body.style.zoom = `${storedZoomLevel}`;
+            // 현재 저장된 확대/축소 레벨의 인덱스를 로컬 스토리지에서 불러옵니다.
+            currentZoomIndex = zoomLevels.indexOf(parseFloat(storedZoomLevel));
+        }
+    });
+</script>
+
+</body>
+
+
+</html>

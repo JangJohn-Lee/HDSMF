@@ -1,0 +1,251 @@
+<div id="rackDetailSearchContent">
+    <div id="rackDetailSearchContentSearcher" class="no-select">
+        <div class="rackNo card-body float align-left" id="rackNo">
+            <h1 style="align-self: end; padding:0; margin: 0;">
+                <span th:text="${RackNo}"></span>Rack
+            </h1>
+            <span class="categoryName fs--1 fs-sm-2" th:text="${CategoryName}"></span>
+        </div>
+
+
+        <div class="rack-sm-view">
+            <div class="rack-sm-view-top float-right">
+                <button onclick="sendRequest(6, 'button6')" id="button6">6</button>
+                <button onclick="sendRequest(7, 'button7')" id="button7">7</button>
+                <button onclick="sendRequest(8, 'button8')" class="space" id="button8">8</button>
+                <button onclick="sendRequest(9, 'button9')" id="button9">9</button>
+
+                <button onclick="sendRequest(10, 'button10')" id="button10" class="px-1">10</button>
+            </div>
+            <div class="rack-sm-view-bottom float-right">
+                <button onclick="sendRequest(1, 'button1')" class="space" id="button1">1</button>
+                <button onclick="sendRequest(2, 'button2')" id="button2">2</button>
+                <button onclick="sendRequest(3, 'button3')" class="space" id="button3">3</button>
+                <button onclick="sendRequest(4, 'button4')" id="button4">4</button>
+                <button onclick="sendRequest(5, 'button5')" id="button5">5</button>
+            </div>
+        </div>
+    </div>
+
+    <div style="display: flex; justify-content: space-between;">
+        <div style="width: 100%; min-width:200px; display:flex; justify-content: space-between;">
+        <span th:each="i : ${#numbers.sequence(1, RackDetailSearchDtos.size())}"
+              th:class="'rack-detail'"
+              th:style="'background-color: ' + (${i - 1} &lt; ${NonNullInboundDateCount} ? ${barColor} : '#c1c1c1')
+      + '; width: 100%; height: 50%; display: inline-block; margin-bottom:7px;'">&nbsp;</span>
+
+        </div>
+        <div style="width: 70px; min-width: 70px; text-align: center;">
+            <span style="padding-left: 4px;" th:text="${NonNullInboundDateCount}"></span> / <span
+                th:text="${RackDetailSearchDtos.size()}"></span>
+        </div>
+    </div>
+
+    <div id="rackDetailSearchContentMapAndList">
+        <div id="rackDetailSearchContentMap">
+            <table class="table table-bordered">
+                <tbody>
+                <tr th:each="rowNum : ${#numbers.sequence(RackRow, 1, -1)}">
+                    <td th:each="colNum : ${#numbers.sequence(1, RackCol)}">
+                        <div class="infoBox" th:each="dto,count : ${RackDetailSearchDtos}"
+                             th:if="${dto.rowNo == colNum && dto.columnNo == rowNum}"
+                             th:style="'position: relative; width: 100%; text-align: center;' + (${dto.inboundDate == null} ? 'background-color: #f4f4f4;' : 'background-color: ' + ${dto.categoryColor})"
+                             onclick="toggleInfoDetail(event)" th:attr="data-rackId=${dto.rackId}">
+                            <span th:text="${dto.rackId}"></span>
+                            <p th:if="${dto.inboundDate !=null}" th:text="${count.index+1}"
+                               style="color: black; font-weight: bold"></p>
+                            <div id="infoDetail">
+                                <div th:if="${dto.componentNo != null}">
+                                    <h3 class="infoDetailContentTitle" th:text="${dto.rackId}">
+                                    </h3>
+                                    <div class="infoDetailContent">
+                                        <div class="left-box">
+                                            <div class="left-box-unit">
+                                                <h4>Part No.</h4>
+                                                <p th:text="${dto.componentNo}"></p>
+                                            </div>
+                                            <div class="left-box-unit">
+                                                <h4>부품명</h4>
+                                                <p th:text="${dto.product}"></p>
+                                            </div>
+                                            <div class="left-box-unit">
+                                                <h4>모델명</h4>
+                                                <p th:text="${dto.model}"></p>
+                                            </div>
+                                        </div>
+
+                                        <div class="right-box">
+                                            <div class="right-box-unit">
+                                                <h4>입고일자</h4>
+                                                <p th:text="${#temporals.format(dto.inboundDate, 'yyyy-MM-dd')}"></p>
+                                            </div>
+
+                                            <div class="right-box-unit">
+                                                <h4>수량</h4>
+                                                <p><span th:text="${dto.componentAmount}"></span> <span
+                                                        style="font-weight: bold">ea</span></p>
+                                            </div>
+
+                                            <div class="right-box-unit">
+                                                <h4>가공상태</h4>
+                                                <p th:if="${dto.componentState == '0'}">완제품</p>
+                                                <p th:if="${dto.componentState == '1'}">소재</p>
+                                                <p th:if="${dto.componentState == '2'}">CNC 1차</p>
+                                                <p th:if="${dto.componentState == '3'}">CNC 2차</p>
+                                                <p th:if="${dto.componentState == '4'}">MCT 1차</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div id="emptyPlace" th:unless="${dto.componentNo != null}"
+                                     style="display: flex; align-items: center; justify-content: center; height: 100%; width: 100%;">
+                                    <div id="ableDiv">
+                                        <img id="inputAble" src="../rackdetailsearch/images/able.svg" alt="적재 가능">
+                                        <h3 id="ableToUse">적재 가능</h3>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <div id="rackDetailSearchContentList">
+            <div class="rackDetailSearchContentListBox">
+                <table class="table table‑hover" style="overflow-y: auto;">
+                    <thead>
+                    <tr>
+                        <th scope="col">No</th>
+                        <th scope="col">위치</th>
+                        <th scope="col">품번</th>
+                        <th scope="col">모델명</th>
+                        <th scope="col" style="min-width: 50px;">수량</th>
+                        <th scope="col">상태</th>
+                        <th scope="col">입고일자</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="dto,count : ${RackDetailSearchDtos}"
+                        th:if="${dto.inboundDate != null}" th:attr="data-rackId=${dto.rackId}"
+                        style="text-align: center;"
+                        onclick="toggleInfoDetail(event)">
+                        <td th:if="${dto.inboundDate !=null}" th:text="${count.index+1}"></td>
+                        <!--                        <td th:text="${dto.rackDetailNo}" style="padding:10px 0;"></td>-->
+                        <td th:text="${dto.rackId}"></td>
+                        <td th:text="${dto.componentNo}"></td>
+                        <td th:text="${dto.model}"></td>
+                        <td th:text="${dto.componentAmount}"></td>
+                        <td>
+                            <span th:if="${dto.componentState == '0'}">완제품</span>
+                            <span th:if="${dto.componentState == '1'}">소재</span>
+                            <span th:if="${dto.componentState == '2'}">CNC 1차</span>
+                            <span th:if="${dto.componentState == '3'}">CNC 2차</span>
+                            <span th:if="${dto.componentState == '4'}">MCT 1차</span>
+                        </td>
+                        <td th:text="${#temporals.format(dto.inboundDate, 'yyyy-MM-dd')}"></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div id="up-to-date"></div>
+    </div>
+</div>
+
+<!-- 위치를 못벗어나게 및 클릭한 녀석 표시 js -->
+<script>
+
+    function toggleInfoDetail(event) {
+        let allInfoBoxes = document.querySelectorAll(".infoBox");
+        let allDetails = document.querySelectorAll("#infoDetail");
+        let clickedBox = event.currentTarget;
+        let container = document.querySelector("#containerContentBox");
+
+        // 모든 'infoDetail' 숨기기
+        allDetails.forEach(detail => {
+            detail.style.display = "none";
+            detail.closest(".infoBox").classList.remove("active");
+        });
+
+        // 클릭한 infoBox에만 active 클래스 추가
+        clickedBox.classList.add("active");
+
+        // 클릭한 'tr' 요소에서 data-rackId 속성 값을 가져오기
+        let rackId = clickedBox.getAttribute("data-rackId");
+
+        // 해당 data-rackId 값을 가진 '.infoBox' 요소 찾기
+        let correspondingInfoBox = document.querySelector(".infoBox[data-rackId='" + rackId + "']");
+
+        if (correspondingInfoBox) {
+            let clickedDetail = correspondingInfoBox.querySelector("#infoDetail");
+            clickedDetail.style.display = "block";
+            adjustPosition(clickedDetail);
+        }
+        event.stopPropagation();
+    }
+
+    // rackDetailSearchContentList의 tbody의 tr을 클릭했을 때 이벤트 핸들러 추가
+    document.querySelectorAll("#rackDetailSearchContentList tbody tr").forEach(tr => {
+        tr.addEventListener('click', function () {
+            // 해당 tr의 data-rackId 속성 값 가져오기
+            let rackId = tr.getAttribute("data-rackId");
+
+            // rackDetailSearchContentMap의 해당 '.infoBox' 요소를 찾기
+            let correspondingInfoBox = document.querySelector(".infoBox[data-rackId='" + rackId + "']");
+
+            // 해당 '.infoBox' 요소가 있다면 클릭 이벤트를 발생시키기
+            if (correspondingInfoBox) {
+                toggleInfoDetail({currentTarget: correspondingInfoBox});
+            }
+        });
+    });
+
+
+    function adjustPosition(detailElem) {
+        let containerRect = document.querySelector("#containerContentBox").getBoundingClientRect();
+        let detailRect = detailElem.getBoundingClientRect();
+
+        let currentTop = parseInt(detailElem.style.top) || 0;
+        let currentLeft = parseInt(detailElem.style.left) || 0;
+
+        // 아래쪽 경계를 벗어나는지 확인
+        if (detailRect.bottom > containerRect.bottom) {
+            detailElem.style.top = (currentTop - (detailRect.bottom - containerRect.bottom)) + "px";
+        }
+
+        // 위쪽 경계를 벗어나는지 확인
+        let offset = detailRect.top - containerRect.top;
+        if (offset < -20) {
+            detailElem.style.top = (currentTop + (containerRect.top - detailRect.top) - 70) + "px";
+        } else if (offset < -50) {
+            detailElem.style.top = (currentTop + (containerRect.top - detailRect.top) - 20) + "px";
+        }
+
+        // 오른쪽 경계를 벗어나는지 확인
+        let rightOffset = detailRect.right - containerRect.right;
+        if (rightOffset > 200) {
+            detailElem.style.left = (currentLeft - rightOffset - 20) + "px";
+        } else if (rightOffset > 90) {
+            detailElem.style.left = (currentLeft - rightOffset - 110) + "px";
+        } else if (rightOffset > 40) {
+            detailElem.style.left = (currentLeft - rightOffset - 190) + "px";
+        }
+
+        // 왼쪽 경계를 벗어나는지 확인
+        if (detailRect.left < containerRect.left) {
+            detailElem.style.left = (currentLeft + (containerRect.left - detailRect.left)) + "px";
+        }
+    }
+
+
+    // 바깥쪽을 클릭할 때 'infoDetail'을 숨기는 기능
+    document.querySelector("#releaseArea").addEventListener('click', function () {
+        let allDetails = document.querySelectorAll("#infoDetail");
+        allDetails.forEach(detail => {
+            detail.style.display = "none";
+            detail.closest(".infoBox").classList.remove("active");
+        });
+    });
+
+</script>

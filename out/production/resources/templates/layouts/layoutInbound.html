@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="HDM Warehouse system 페이지입니다.">
+
+    <!-- ===============================================-->
+    <!--    Document Title-->
+    <!-- ===============================================-->
+    <title>현대정밀 자재창고 관리 시스템 - 입고 관리</title>
+
+
+    <!-- ===============================================-->
+    <!--    Favicons-->
+    <!-- ===============================================-->
+    <script src="/assets/js/config.js"></script>
+
+
+    <!-- ===============================================-->
+    <!--    Stylesheets-->
+    <!-- ===============================================-->
+    <link href="/vendors/choices/choices.min.css" rel="stylesheet">
+    <link href="/vendors/dhtmlx-gantt/dhtmlxgantt.css" rel="stylesheet">
+    <link href="/vendors/flatpickr/flatpickr.min.css" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+    <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;400;600;700;800;900&amp;display=swap" rel="stylesheet">
+    <link href="/vendors/simplebar/simplebar.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.8/css/line.css">
+    <link href="/assets/css/theme-rtl.min.css" type="text/css" rel="stylesheet" id="style-rtl">
+    <link href="/assets/css/theme.min.css" type="text/css" rel="stylesheet" id="style-default">
+    <link href="/assets/css/user-rtl.min.css" type="text/css" rel="stylesheet" id="user-style-rtl">
+    <link href="/assets/css/user.min.css" type="text/css" rel="stylesheet" id="user-style-default">
+    <script>
+      var phoenixIsRTL = window.config.config.phoenixIsRTL;
+      if (phoenixIsRTL) {
+        var linkDefault = document.getElementById('style-default');
+        var userLinkDefault = document.getElementById('user-style-default');
+        linkDefault.setAttribute('disabled', true);
+        userLinkDefault.setAttribute('disabled', true);
+        document.querySelector('html').setAttribute('dir', 'rtl');
+      } else {
+        var linkRTL = document.getElementById('style-rtl');
+        var userLinkRTL = document.getElementById('user-style-rtl');
+        linkRTL.setAttribute('disabled', true);
+        userLinkRTL.setAttribute('disabled', true);
+      }
+    </script>
+
+    <style>
+        #keypad02 {
+            margin: 0 auto;
+            width: 420px;
+            height: 560px;
+            position: fixed;
+            top: calc(50vh - 127px);
+            left : 50%;
+            z-index: 8000;
+            box-shadow: 5px 5px 10px rgba(0,0,0,0.5);
+            background: white;
+            padding: 5px;
+            border-radius: 5px;
+            display: none;
+        }
+
+        #keypad02 button {
+            margin: 1%;
+            width: 31%;
+            height: 23%;
+            background: #eee;
+            border: 2px solid black;
+            border-radius: 10px;
+            font-size: 3em;
+        }
+
+        #keypad02 button.delete,
+        #keypad02 button.submit {
+            background: black;
+            color: white;
+        }
+
+        #keypad02 button:hover {
+            background-color: #dddddd;
+            color: #000000;
+        }
+
+        #keypad02 button.delete:hover,
+        #keypad02 button.submit:hover {
+            background-color: #555555;
+            color: #000000;
+        }
+
+        #textSearchList {
+            position: absolute;
+            top: 150px;
+            left: 25px;
+            display: block;
+            width: 28%;
+            max-height: 200px;
+            border-radius: 10px;
+            text-align: center;
+            font-size: 24px;
+            cursor: pointer;
+            padding: 10px;
+            background-color: #dddddd;
+            box-shadow: 1px 1px 5px #dddddd;
+            overflow-y: auto;
+            z-index: 50;
+        }
+
+        #textSearchList .textSearchListUnit {
+            border-bottom: 0.5px solid #dddddd;
+        }
+
+        #textSearchList .textSearchListUnit:hover {
+            background-color: #dddddd;
+        }
+
+        #fontSizeControllBtnBox {
+            position: fixed;
+            bottom: 50px;
+            right: 50px;
+            z-index: 9000;
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+<main class="main user-select-none" id="top">
+    <th:block th:replace="fragments/asidenav::asidenav"></th:block>
+    <th:block th:replace="fragments/topnav::topnav"></th:block>
+
+    <th:block layout:fragment="content"></th:block>
+
+</main>
+
+<th:block th:replace="fragments/fontSizeControllBtnBox::fontSizeControllBtnBox"></th:block>
+
+<th:block layout:fragment="script"></th:block>
+
+<!-- 다크모드 -->
+<script>
+  var navbarTopStyle = window.config.config.phoenixNavbarTopStyle;
+  var navbarTop = document.querySelector('.navbar-top');
+  if (navbarTopStyle === 'darker') {
+    navbarTop.classList.add('navbar-darker');
+  }
+
+  var navbarVerticalStyle = window.config.config.phoenixNavbarVerticalStyle;
+  var navbarVertical = document.querySelector('.navbar-vertical');
+  if (navbarVertical && navbarVerticalStyle === 'darker') {
+    navbarVertical.classList.add('navbar-darker');
+  }
+</script>
+
+
+<!-- 제목 부분 공통 버튼 -->
+<script>
+    // 메인 페이지로 버튼
+    document.addEventListener('DOMContentLoaded', function () {
+        const goToHomeButton = document.getElementById('goToHomeButton');
+
+        goToHomeButton.addEventListener('click', goToHome);
+
+        function goToHome() {
+            window.location.href = '/hdsmf/totaldetaildashboard'; // 지정한 경로로 이동
+        }
+    });
+
+    // 새로고침 버튼
+    const reloadButton = document.getElementById('reloadButton');
+
+    reloadButton.addEventListener('click', reloadPage);
+
+    function reloadPage() {
+        location.reload();
+    }
+
+    // 출력 버튼
+</script>
+
+
+
+<!-- ===============================================-->
+<!--    JavaScripts-->
+<!-- ===============================================-->
+<script src="/vendors/popper/popper.min.js"></script>
+<script src="/vendors/bootstrap/bootstrap.min.js"></script>
+<script src="/vendors/anchorjs/anchor.min.js"></script>
+<script src="/vendors/is/is.min.js"></script>
+<script src="/vendors/fontawesome/all.min.js"></script>
+<script src="/vendors/lodash/lodash.min.js"></script>
+<script src="https://polyfill.io/v3/polyfill.min.js?features=window.scroll"></script>
+<script src="/vendors/feather-icons/feather.min.js"></script>
+<script src="/vendors/dayjs/dayjs.min.js"></script>
+<script src="/vendors/prism/prism.js"></script>
+<script src="/assets/js/phoenix.js"></script>
+
+
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.14.3/xlsx.full.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/1.3.8/FileSaver.min.js"></script>
+
+<!--ㅅㄱ-->
+<!--<script type="text/javascript" src="https://code.jquery.com/jquery-1.11.0.min.js"></script>-->
+<script type="text/javascript">
+    $(document).ready(function () {
+        const TestNote01 = document.getElementById('inBoundText');
+        const TestNote02 = document.getElementById('inBoundNum');
+        const keypad = document.getElementById("keypad02");
+
+        const keypadOptions01 = {
+            inputField: TestNote01,
+            submitButtonText: '입력',
+            deleteButtonText: '←',
+            submitButtonClass: 'submit',
+            deleteButtonClass: 'delete'
+        };
+
+        const keypadOptions02 = {
+            inputField: TestNote02,
+            submitButtonText: '입력',
+            deleteButtonText: '←',
+            submitButtonClass: 'submit',
+            deleteButtonClass: 'delete'
+        };
+
+        // 숫자 키패드 생성
+        TestNote01.addEventListener('click', function () {
+
+            keypad.style.display = "block";
+            $('#keypad02').keypad(keypadOptions01);
+            // 클릭 이벤트 한 번만 실행되도록 제거
+        });
+
+        TestNote02.addEventListener('click', function () {
+            keypad.style.display = "block";
+            $('#keypad02').keypad(keypadOptions02);
+            // 클릭 이벤트 한 번만 실행되도록 제거
+        });
+
+
+        // 숫자 키보드 생성
+
+
+        const keypad1 = document.getElementById("inboundListTable"); //전체 div 영역
+        const keypad02 = document.getElementById("keypad02");
+
+        const selectOption = document.getElementById('processOption');
+        const deleteButton = document.getElementById('deleteButton');
+        const selectAllCheckBox = document.getElementById('selectAllCheckBox');
+
+        //select box 클릭시 keypad 없어지게
+        selectOption.onclick = function() {
+            keypad02.style.display = "none";
+        }
+
+
+        window.onclick = function (event) {
+            if (event.target === keypad1) { //영역 아무곳이나 클릭해도
+                keypad02.style.display = "none"; //keypad 없어지게끔
+            }
+        }
+    });
+</script>
+
+
+<!-- ===============================================-->
+<!--    입고 관리 js   -->
+<!-- ===============================================-->
+<script src="/inbound/js/inbound.js"></script>
+
+
+<!-- 위치 및 상세 정보 출력 -->
+<script>
+    // 출력 버튼
+    const rackPrintTabBtn = document.getElementById('rackPrintTabBtn');
+
+    rackPrintTabBtn.addEventListener('click', function () {
+        let listView = document.getElementById("tableExample");
+        let printContent = listView.outerHTML;
+
+        // 팝업 창을 열고 내용과 스타일을 설정한 후 인쇄합니다.
+        let printWindow = window.open('', '_blank', 'width=1920,height=1080');
+        printWindow.document.open();
+        printWindow.document.write('<html><head><title>인쇄</title>');
+
+        // 현재 페이지의 모든 스타일시트를 팝업에 추가
+        let styles = document.querySelectorAll('link[rel="stylesheet"], style');
+        for (let style of styles) {
+            printWindow.document.write(style.outerHTML);
+        }
+
+        printWindow.document.write('</head><body>');
+        printWindow.document.write(printContent);
+        printWindow.document.write('</body></html>');
+        printWindow.document.close();
+
+
+
+
+        // 팝업 창이 완전히 로드된 후 인쇄
+        printWindow.onload = function() {
+            printWindow.document.body.style.backgroundColor = "#FFFFFF";
+
+            printWindow.print();
+            printWindow.close();
+        }
+    });
+</script>
+
+
+<!-- 폰트 사이즈 조절 리모컨 -->
+<script>
+    // 화면 확대/축소 레벨 배열 및 현재 인덱스를 설정
+    const zoomLevels = [0.9, 1, 1.1, 1.2, 1.3];
+    let currentZoomIndex = zoomLevels.indexOf(1);  // '1'의 인덱스를 기본값으로 설정
+
+    function adjustZoom() {
+        // 화면 확대/축소 적용 및 로컬 스토리지 저장
+        document.body.style.zoom = `${zoomLevels[currentZoomIndex]}`;
+        localStorage.setItem('userZoomLevel', zoomLevels[currentZoomIndex]);
+
+        // 인덱스 업데이트
+        currentZoomIndex++;
+        if (currentZoomIndex >= zoomLevels.length) {
+            currentZoomIndex = 0;  // 배열의 시작으로 되돌아갑니다.
+        }
+    }
+
+    document.getElementById('btn-adjust-font').addEventListener('click', adjustZoom);
+
+    window.addEventListener('DOMContentLoaded', function () {
+        let storedZoomLevel = localStorage.getItem('userZoomLevel');
+        if (storedZoomLevel) {
+            document.body.style.zoom = `${storedZoomLevel}`;
+            // 현재 저장된 확대/축소 레벨의 인덱스를 로컬 스토리지에서 불러옵니다.
+            currentZoomIndex = zoomLevels.indexOf(parseFloat(storedZoomLevel));
+        }
+    });
+</script>
+
+
+
+
+
+</body>
+</html>
+
+

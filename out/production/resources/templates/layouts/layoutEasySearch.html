@@ -1,0 +1,1564 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="HDM Warehouse system 페이지입니다.">
+
+    <!-- ===============================================-->
+    <!--    Document Title-->
+    <!-- ===============================================-->
+    <title>현대정밀 자재창고 관리 시스템 - 통합 창고 조회</title>
+
+
+    <!-- ===============================================-->
+    <!--    Favicons-->
+    <!-- ===============================================-->
+    <script src="/assets/js/config.js"></script>
+
+
+    <!-- ===============================================-->
+    <!--    Stylesheets-->
+    <!-- ===============================================-->
+    <link href="/vendors/choices/choices.min.css" rel="stylesheet">
+    <link href="/vendors/dhtmlx-gantt/dhtmlxgantt.css" rel="stylesheet">
+    <link href="/vendors/flatpickr/flatpickr.min.css" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+    <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;400;600;700;800;900&amp;display=swap" rel="stylesheet">
+    <link href="/vendors/simplebar/simplebar.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.8/css/line.css">
+    <link href="/assets/css/theme-rtl.min.css" type="text/css" rel="stylesheet" id="style-rtl">
+    <link href="/assets/css/theme.min.css" type="text/css" rel="stylesheet" id="style-default">
+    <link href="/assets/css/user-rtl.min.css" type="text/css" rel="stylesheet" id="user-style-rtl">
+    <link href="/assets/css/user.min.css" type="text/css" rel="stylesheet" id="user-style-default">
+    <script>
+      var phoenixIsRTL = window.config.config.phoenixIsRTL;
+      if (phoenixIsRTL) {
+        var linkDefault = document.getElementById('style-default');
+        var userLinkDefault = document.getElementById('user-style-default');
+        linkDefault.setAttribute('disabled', true);
+        userLinkDefault.setAttribute('disabled', true);
+        document.querySelector('html').setAttribute('dir', 'rtl');
+      } else {
+        var linkRTL = document.getElementById('style-rtl');
+        var userLinkRTL = document.getElementById('user-style-rtl');
+        linkRTL.setAttribute('disabled', true);
+        userLinkRTL.setAttribute('disabled', true);
+      }
+    </script>
+
+    <style>
+        #hrdWarehouserackeditSystemtableFormBox table {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            min-width: 50px;
+            max-width: 400px;
+            height: 100%;
+            border-collapse: collapse;
+            /* border: 2px solid aqua; */
+            table-layout: fixed;
+         }
+
+
+        .clickColorNotice {
+          font-size: 2px;
+          text-align: right;
+          display: block;
+          border-radius: 5px;
+        }
+
+        .percent-graph {
+            width: calc(100% - 100px) ;
+        }
+
+        .percent-graph span {
+            width: 100%;
+            display: block;
+            margin-right: 1px;
+            background-color: #dddddd;
+        }
+
+        .countP {
+            width: 100px;
+            text-align: center;
+        }
+
+        .rack1 td, .rack2 td,.rack3 td, .rack4 td, .rack5 td,.rack7 td,.rack8 td, .rack9 td {
+            border: 0.5px solid rgb(255 255 255);
+            width: calc(100% / 4);
+            height: calc(100% / 18);
+            text-align: center;
+            overflow: hidden;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+            position: relative;
+        }
+
+        .rack6 td {
+            border: 0.5px solid rgb(255 255 255);
+            width: calc(100% / 4);
+            height: calc(100% / 16);
+            text-align: center;
+            overflow: hidden;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+            position: relative;
+        }
+
+        .rack10 td {
+            border: 0.5px solid rgb(255 255 255);
+            width: calc(100% / 3);
+            height: calc(100% / 14);
+            text-align: center;
+            overflow: hidden;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+            position: relative;
+        }
+
+        .rackCell {
+            position: absolute;
+            top: 0;
+            left: 0;
+            margin: 0;
+            padding: 0;
+            font-size: 1px;
+
+            opacity: 1;
+            color: transparent;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            display: block;
+            /* cursor: pointer; */
+            z-index: 850;
+        }
+
+        .rackCell.active {
+            border: 3px solid rgb(255, 0, 0);
+        }
+
+        .rackCell:hover {
+            background-color: rgba(0, 0, 0, 0.2);
+            border: 3px solid rgb(255 0 0);
+        }
+
+        .locationCoordinates {
+            position: absolute;
+            top: 0;
+            left: 0;
+            font-size: 5px;
+            opacity: 1;
+            color: #ffffff;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            display: flex; /* 변경된 부분 */
+            align-items: center; /* 추가된 부분 */
+            justify-content: center; /* 추가된 부분 */
+            box-sizing: border-box;
+            z-index: 800;
+        }
+
+        .locationCoordinates.active {
+            border: 0px solid rgb(255, 0, 0);
+            background-color: rgba(0, 0, 0, 0.4);
+        }
+
+        #lacationMiniMap {
+            position:absolute;
+            top:20px;
+            right:0;
+            width:250px;
+            height:280px;
+            border:0px solid #cccccc;
+            padding: 4px;
+            z-index:8000;
+        }
+
+        #fontSizeControllBtnBox {
+            position: fixed;
+            bottom: 50px;
+            right: 50px;
+        }
+    </style>
+</head>
+
+<body>
+
+<main class="main user-select-none" id="top">
+    <th:block th:replace="fragments/asidenav::asidenav"></th:block>
+    <th:block th:replace="fragments/topnav::topnav"></th:block>
+
+    <th:block layout:fragment="content"></th:block>
+
+</main>
+
+<th:block th:replace="fragments/fontSizeControllBtnBox::fontSizeControllBtnBox"></th:block>
+
+<th:block layout:fragment="script"></th:block>
+
+<!-- 다크모드 -->
+<script>
+  var navbarTopStyle = window.config.config.phoenixNavbarTopStyle;
+  var navbarTop = document.querySelector('.navbar-top');
+  if (navbarTopStyle === 'darker') {
+    navbarTop.classList.add('navbar-darker');
+  }
+
+  var navbarVerticalStyle = window.config.config.phoenixNavbarVerticalStyle;
+  var navbarVertical = document.querySelector('.navbar-vertical');
+  if (navbarVertical && navbarVerticalStyle === 'darker') {
+    navbarVertical.classList.add('navbar-darker');
+  }
+</script>
+
+
+
+
+<!-- 검색기능 list.js와 phoenix.js보다 위에 위치해야 한다 -->
+<script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const searchField = document.getElementById('searchField');
+            const searchTable = document.getElementById('searchTable');
+
+
+        let tableExample = document.querySelector("#tableExample");
+        let dataList = JSON.parse(tableExample.getAttribute("data-list"));
+
+
+        let tbody = document.getElementById("bulk-select-body");
+        let rows = Array.from(tbody.querySelectorAll("tr"));
+        let rowData = rows.map(row => {
+            return {
+                countNum: row.querySelector(".countNum").textContent,
+                componentNo: row.querySelector(".componentNo").textContent,
+                //componentAmount: row.querySelector(".componentAmount").textContent,
+                rackId: row.querySelector(".rackId").textContent,
+                category: row.querySelector(".category").textContent
+            }
+        });
+
+
+            // 검색 기능
+            searchField.addEventListener('input', function () {
+                const keyword = searchField.value.trim().toLowerCase();
+                const filteredData = iOBoundListJson.filter((item, index) =>
+                    item.componentNo.includes(keyword) ||
+                    item.componentAmount.toString().includes(keyword) ||
+                    item.rackDetailNo.toString().includes(keyword) ||
+                    item.categoryNo.toString().includes(keyword) ||
+                    getRackIdByDetailNo(item.rackDetailNo).includes(keyword) ||
+                    getCategoryNameByNo(item.categoryNo).toLowerCase().includes(keyword) ||
+                    getRackIdByDetailNo(item.rackDetailNo).toLowerCase().includes(keyword) ||
+                    (index + 1).toString().includes(keyword)  // 인덱스 + 1을 기반으로 한 검색 조건 추가
+                );
+
+                renderTable(searchTable, filteredData);
+            });
+
+
+            // 테이블 렌더링 함수
+            function renderTable(table, data) {
+                const tbody = table.querySelector('tbody');
+                tbody.innerHTML = '';
+
+                data.forEach((item, index) => {
+                    const row = document.createElement('tr');
+
+                    const matchedIndex = iOBoundListJson.indexOf(item); // iOBoundListJson에서 일치하는 인덱스 찾기
+
+                    const columns = [
+                        { value: matchedIndex + 1, className: 'align-middle px-3 fs--1 countNum' },
+                        { value: item.componentNo, className: 'align-middle px-3 fs--1 componentNo' },
+                        // { value: item.componentAmount, className: 'align-middle px-3 fs--1 componentAmount' },
+                        { value: getRackIdByDetailNo(item.rackDetailNo), className: 'align-middle px-3 fs--1 rackId' },
+                        { value: getCategoryNameByNo(item.categoryNo), className: 'align-middle px-3 fs--1 category' }
+                    ];
+
+                    columns.forEach(column => {
+                        const cell = document.createElement('td');
+
+                        if (column.value.element) {
+                            cell.appendChild(column.value.element);
+                        } else {
+                            cell.textContent = column.value.toString();
+                        }
+
+                        cell.className = column.className;
+                        row.appendChild(cell);
+                    });
+
+                    tbody.appendChild(row);
+                });
+
+
+                // 테이블 내의 <tr> 요소 클릭 이벤트 처리
+                const knowRackCellProductNameH1s = document.querySelectorAll('.knowRackCellProductNameH1');
+                const knowRackCellLocationSpans = document.querySelectorAll('.knowRackCellLocationSpan');
+                const knowRackCellComponentIdSpans = document.querySelectorAll('.knowRackCellComponentIdSpan');
+                const knowRackCellComponentfWeightSpans = document.querySelectorAll('.knowRackCellComponentfWeightSpan');
+                const knowRackCellComponentStatusSpans = document.querySelectorAll('.knowRackCellComponentStatusSpan');
+                const knowRackCellCompanySpans = document.querySelectorAll('.knowRackCellCompanySpan');
+                const knowRackCellSteelMakerSpans = document.querySelectorAll('.knowRackCellSteelMakerSpan');
+                const knowRackCellProductNoSpans = document.querySelectorAll('.knowRackCellProductNoSpan');
+                const knowRackCellProductNameSpans = document.querySelectorAll('.knowRackCellProductNameSpan');
+                const knowRackCellComponentAmountSpans = document.querySelectorAll('.knowRackCellComponentAmountSpan');
+                const knowRackCellComponentsWeightSpans = document.querySelectorAll('.knowRackCellComponentsWeightSpan');
+                const knowRackCellPartPlantNoSpans = document.querySelectorAll('.knowRackCellPartPlantNoSpan');
+                const knowRackCellTotalWeightSpans = document.querySelectorAll('.knowRackCellTotalWeightSpan');
+                const knowRackCellInboundDateSpans = document.querySelectorAll('.knowRackCellInboundDateSpan');
+                const knowRackCellInboundNoSpans = document.querySelectorAll('.knowRackCellInboundNoSpan');
+
+
+
+                // 테이블 내의 <tr> 요소에 클릭 이벤트 추가
+                const tableRows = searchTable.querySelectorAll('tr');
+                tableRows.forEach(row => {
+                    row.addEventListener('click', function() {
+                        const tdCells = this.querySelectorAll('td');
+                        if (tdCells[0]) {
+                            const clickedIndex = tdCells[0].innerText;
+
+                            // 기존 스타일 초기화
+                            document.querySelectorAll('.rackCell').forEach(cell => {
+                                cell.classList.remove('active');
+                            });
+
+                            document.querySelectorAll('.locationCoordinates').forEach(cell => {
+                                cell.classList.remove('active');
+                            });
+
+                        // 검색 리스트에서 클릭한 녀석이 위치한 곳을 찾아서 색인 해준다
+                        const locationCoordinatesElements = document.querySelectorAll('.locationCoordinates');
+
+                        locationCoordinatesElements.forEach(element => {
+                            if (element.innerText === clickedIndex.toString()) {
+                                const siblingSpan = element.parentElement.querySelector('.rackCell');
+
+                                const rackId = siblingSpan.textContent.trim();
+
+                                // R06F04N15 형식의 문자열에서 정보 추출
+                                const [rack, row, column] = rackId.match(/R(\d+)F(\d+)N(\d+)/).slice(1);
+
+                                const jsonData = {
+                                    rackId: 'R' + rack + '-' + column + '-' + parseInt(row),
+                                };
+
+                                const matchedDetail = rackDetailInfoListJson.find(detail => detail.rackId === jsonData.rackId);
+
+                                // 클릭된 요소에 스타일 적용
+                                if (matchedDetail) {
+
+                                    // 더블로 보기 체크 or 안 돼있어도 IO 테이블 노출하기
+                                    const checkbox = document.querySelector('.twoScrollingScreens');
+                                }
+
+                                // 미니맵 위치 표시
+                                let lacationMiniMapCells = document.querySelectorAll('.lacationMiniMapCell');
+
+                                // .lacationMiniMapCell의 상위 td 요소의 배경색을 초기화합니다.
+                                lacationMiniMapCells.forEach(cell => {
+                                    let parentTd = cell.closest('td');
+                                    if (parentTd) {
+                                        parentTd.style.backgroundColor = ''; // 초기 배경색으로 설정
+                                    }
+                                });
+
+                                lacationMiniMapCells.forEach(cell => {
+                                    if (cell.innerText === jsonData.rackId) {
+                                        // 이 cell의 가장 가까운 상위 td 요소를 찾습니다.
+                                        let closestTd = cell.closest('td');
+                                        if (closestTd) {
+                                            // 배경색을 파란색으로 변경합니다.
+                                            closestTd.style.backgroundColor = 'blue';
+                                        }
+                                    }
+                                });
+
+
+                                if (matchedDetail) {
+                                    const matchedIOBoundRackDetailNo = iOBoundListJson.find(detail => detail.rackDetailNo === matchedDetail.rackDetailNo);
+
+                                    if (matchedIOBoundRackDetailNo) {
+                                        const matchedComponentsComponentNo = componentsListJson.find(detail => detail.componentNo === matchedIOBoundRackDetailNo.componentNo);
+
+                                        if (matchedComponentsComponentNo) {
+
+                                            // 부품명 제목
+                                            knowRackCellProductNameH1s[0].textContent = matchedComponentsComponentNo.product || '';
+                                            knowRackCellProductNameH1s[1].textContent = matchedComponentsComponentNo.product || '';
+
+                                            knowRackCellProductNameH1s[0].style = 'color: #44d344;';
+                                            knowRackCellProductNameH1s[1].style = 'color: #44d344;';
+
+                                            // 파레트 위치 정보
+                                            knowRackCellLocationSpans[0].textContent = jsonData.rackId;
+                                            knowRackCellLocationSpans[1].textContent = jsonData.rackId;
+
+                                            // 소재번호
+                                            knowRackCellComponentIdSpans[0].textContent = matchedComponentsComponentNo.sno || '';
+                                            knowRackCellComponentIdSpans[1].textContent = matchedComponentsComponentNo.sno || '';
+
+                                            // 소재무게
+                                            knowRackCellComponentfWeightSpans[0].textContent = matchedComponentsComponentNo.fweight + 'kg' || '';
+                                            knowRackCellComponentfWeightSpans[1].textContent = matchedComponentsComponentNo.fweight + 'kg' || '';
+
+                                            // 공정번호
+                                            switch(matchedComponentsComponentNo.componentState) {
+                                                case '0' :
+                                                    knowRackCellComponentStatusSpans[0].textContent = '완제품';
+                                                    knowRackCellComponentStatusSpans[1].textContent = '완제품';
+                                                    break;
+                                                case '1' :
+                                                    knowRackCellComponentStatusSpans[0].textContent = '소재';
+                                                    knowRackCellComponentStatusSpans[1].textContent = '소재';
+                                                    break;
+                                                case '2' :
+                                                    knowRackCellComponentStatusSpans[0].textContent = 'CNC 1차';
+                                                    knowRackCellComponentStatusSpans[1].textContent = 'CNC 1차';
+                                                    break;
+                                                case '3' :
+                                                    knowRackCellComponentStatusSpans[0].textContent = 'CNC 2차';
+                                                    knowRackCellComponentStatusSpans[1].textContent = 'CNC 2차';
+                                                    break;
+                                                case '4' :
+                                                    knowRackCellComponentStatusSpans[0].textContent = 'MCT 1차';
+                                                    knowRackCellComponentStatusSpans[1].textContent = 'MCT 1차';
+                                                    break;
+                                                default:
+                                                    knowRackCellComponentStatusSpans[0].textContent = '';
+                                                    knowRackCellComponentStatusSpans[1].textContent = '';
+                                            }
+
+                                            // 부품번호
+                                            if (matchedIOBoundRackDetailNo.componentNo) {
+                                                // '-' 기호를 기준으로 문자열을 분할하여 배열로 저장
+                                                const productNoParts = matchedIOBoundRackDetailNo.componentNo.split('-');
+
+                                                // '-' 기호 이전의 내용을 선택
+                                                knowRackCellProductNoSpans[0].textContent = productNoParts[0] || '';
+                                                knowRackCellProductNoSpans[1].textContent = productNoParts[0] || '';
+                                            } else {
+                                                knowRackCellProductNoSpans[0].textContent = '';
+                                                knowRackCellProductNoSpans[1].textContent = '';
+                                            }
+
+                                            // 부품명
+                                            knowRackCellProductNameSpans[0].textContent = matchedComponentsComponentNo.model || '';
+                                            knowRackCellProductNameSpans[1].textContent = matchedComponentsComponentNo.model || '';
+
+                                            // 수량
+                                            knowRackCellComponentAmountSpans[0].textContent = matchedIOBoundRackDetailNo.componentAmount + 'EA' || '';
+                                            knowRackCellComponentAmountSpans[1].textContent = matchedIOBoundRackDetailNo.componentAmount + 'EA' || '';
+
+                                            // 무게
+                                            knowRackCellComponentsWeightSpans[0].textContent = matchedComponentsComponentNo.sweight + 'kg' || '';
+                                            knowRackCellComponentsWeightSpans[1].textContent = matchedComponentsComponentNo.sweight + 'kg' || '';
+
+                                            // Plant 번호
+                                            knowRackCellPartPlantNoSpans[0].textContent = matchedComponentsComponentNo.plantNo || '';
+                                            knowRackCellPartPlantNoSpans[1].textContent = matchedComponentsComponentNo.plantNo || '';
+
+                                            // 총무게
+                                            knowRackCellTotalWeightSpans[0].textContent = matchedIOBoundRackDetailNo.totalWeight + 'kg' || '';
+                                            knowRackCellTotalWeightSpans[1].textContent = matchedIOBoundRackDetailNo.totalWeight + 'kg' || '';
+
+
+                                            // 입고일
+                                            const inboundDate = new Date(matchedIOBoundRackDetailNo.inboundDate);
+
+                                            // 날짜와 시간을 원하는 형식으로 변환 (예: yyyy-mm-dd HH:MM:SS)
+                                            const formattedInboundDateS = `${inboundDate.getFullYear()}-${(inboundDate.getMonth() + 1).toString().padStart(2, '0')}-${inboundDate.getDate().toString().padStart(2, '0')}`;
+                                            const formattedInboundDateB = `${inboundDate.getFullYear()}-${(inboundDate.getMonth() + 1).toString().padStart(2, '0')}-${inboundDate.getDate().toString().padStart(2, '0')} T${inboundDate.getHours().toString().padStart(2, '0')}:${inboundDate.getMinutes().toString().padStart(2, '0')}:${inboundDate.getSeconds().toString().padStart(2, '0')}`;
+
+                                            knowRackCellInboundDateSpans[0].textContent = formattedInboundDateS || '';
+                                            knowRackCellInboundDateSpans[1].textContent = formattedInboundDateB || '';
+
+                                        } else {
+                                            console.log('componentNo에 해당하는 정보를 찾을 수 없습니다.');
+
+                                            // 부품명 제목
+                                            knowRackCellProductNameH1s[0].textContent = '사용가능';
+                                            knowRackCellProductNameH1s[1].textContent = '사용가능';
+
+                                            knowRackCellProductNameH1s[0].style = 'color: blue;';
+                                            knowRackCellProductNameH1s[1].style = 'color: blue;';
+
+                                            // 파레트 위치 정보
+                                            knowRackCellLocationSpans[0].textContent = jsonData.rackId;
+                                            knowRackCellLocationSpans[1].textContent = jsonData.rackId;
+
+                                            // 소재번호
+                                            knowRackCellComponentIdSpans[0].textContent = '';
+                                            knowRackCellComponentIdSpans[1].textContent = '';
+
+                                            // 소재무게
+                                            knowRackCellComponentfWeightSpans[0].textContent = '';
+                                            knowRackCellComponentfWeightSpans[1].textContent = '';
+
+                                            // 공정번호
+                                            knowRackCellComponentStatusSpans[0].textContent = '';
+                                            knowRackCellComponentStatusSpans[1].textContent = '';
+
+                                            // 부품번호
+
+                                            knowRackCellProductNoSpans[0].textContent = '';
+                                            knowRackCellProductNoSpans[1].textContent = '';
+
+
+                                            // 부품명
+                                            knowRackCellProductNameSpans[0].textContent = '';
+                                            knowRackCellProductNameSpans[1].textContent = '';
+
+                                            // 수량
+                                            knowRackCellComponentAmountSpans[0].textContent = '';
+                                            knowRackCellComponentAmountSpans[1].textContent = '';
+
+                                            // 무게
+                                            knowRackCellComponentsWeightSpans[0].textContent = '';
+                                            knowRackCellComponentsWeightSpans[1].textContent = '';
+
+                                            // Plant 번호
+                                            knowRackCellPartPlantNoSpans[0].textContent = '';
+                                            knowRackCellPartPlantNoSpans[1].textContent = '';
+
+                                            // 총무게
+                                            knowRackCellTotalWeightSpans[0].textContent = '';
+                                            knowRackCellTotalWeightSpans[1].textContent = '';
+
+
+                                            // 입고일
+                                            knowRackCellInboundDateSpans[0].textContent = '';
+                                            knowRackCellInboundDateSpans[1].textContent = '';
+                                        }
+                                    } else {
+                                        console.log('rackDetailNo에 해당하는 정보를 찾을 수 없습니다.');
+
+                                        // 부품명 제목
+                                        knowRackCellProductNameH1s[0].textContent = '사용가능';
+                                        knowRackCellProductNameH1s[1].textContent = '사용가능';
+
+                                        knowRackCellProductNameH1s[0].style = 'color: blue;';
+                                        knowRackCellProductNameH1s[1].style = 'color: blue;';
+
+                                        // 파레트 위치 정보
+                                        knowRackCellLocationSpans[0].textContent = jsonData.rackId;
+                                        knowRackCellLocationSpans[1].textContent = jsonData.rackId;
+
+                                        // 소재번호
+                                        knowRackCellComponentIdSpans[0].textContent = '';
+                                        knowRackCellComponentIdSpans[1].textContent = '';
+
+                                        // 소재무게
+                                        knowRackCellComponentfWeightSpans[0].textContent = '';
+                                        knowRackCellComponentfWeightSpans[1].textContent = '';
+
+                                        // 공정번호
+                                        knowRackCellComponentStatusSpans[0].textContent = '';
+                                        knowRackCellComponentStatusSpans[1].textContent = '';
+
+
+                                        // 부품번호
+                                        knowRackCellProductNoSpans[0].textContent = '';
+                                        knowRackCellProductNoSpans[1].textContent = '';
+
+
+                                        // 부품명
+                                        knowRackCellProductNameSpans[0].textContent = '';
+                                        knowRackCellProductNameSpans[1].textContent = '';
+
+                                        // 수량
+                                        knowRackCellComponentAmountSpans[0].textContent = '';
+                                        knowRackCellComponentAmountSpans[1].textContent = '';
+
+                                        // 무게
+                                        knowRackCellComponentsWeightSpans[0].textContent = '';
+                                        knowRackCellComponentsWeightSpans[1].textContent = '';
+
+                                        // Plant 번호
+                                        knowRackCellPartPlantNoSpans[0].textContent = '';
+                                        knowRackCellPartPlantNoSpans[1].textContent = '';
+
+                                        // 총무게
+                                        knowRackCellTotalWeightSpans[0].textContent = '';
+                                        knowRackCellTotalWeightSpans[1].textContent = '';
+
+                                        // 입고일
+                                        knowRackCellInboundDateSpans[0].textContent = '';
+                                        knowRackCellInboundDateSpans[1].textContent = '';
+                                    }
+                                } else {
+                                    console.log('rackId에 해당하는 정보를 찾을 수 없습니다.');
+
+                                    // 부품명 제목
+                                    knowRackCellProductNameH1s[0].textContent = '사용가능';
+                                    knowRackCellProductNameH1s[1].textContent = '사용가능';
+
+                                    knowRackCellProductNameH1s[0].style = 'color: blue;';
+                                    knowRackCellProductNameH1s[1].style = 'color: blue;';
+
+                                    // 파레트 위치 정보
+                                    knowRackCellLocationSpans[0].textContent = jsonData.rackId;
+                                    knowRackCellLocationSpans[1].textContent = jsonData.rackId;
+
+                                    // 소재번호
+                                    knowRackCellComponentIdSpans[0].textContent = '';
+                                    knowRackCellComponentIdSpans[1].textContent = '';
+
+                                    // 소재무게
+                                    knowRackCellComponentfWeightSpans[0].textContent = '';
+                                    knowRackCellComponentfWeightSpans[1].textContent = '';
+
+                                    // 공정번호
+                                    knowRackCellComponentStatusSpans[0].textContent = '';
+                                    knowRackCellComponentStatusSpans[1].textContent = '';
+
+                                    // 부품번호
+
+                                    knowRackCellProductNoSpans[0].textContent = '';
+                                    knowRackCellProductNoSpans[1].textContent = '';
+
+
+                                    // 부품명
+                                    knowRackCellProductNameSpans[0].textContent = '';
+                                    knowRackCellProductNameSpans[1].textContent = '';
+
+                                    // 수량
+                                    knowRackCellComponentAmountSpans[0].textContent = '';
+                                    knowRackCellComponentAmountSpans[1].textContent = '';
+
+                                    // 무게
+                                    knowRackCellComponentsWeightSpans[0].textContent = '';
+                                    knowRackCellComponentsWeightSpans[1].textContent = '';
+
+                                    // Plant 번호
+                                    knowRackCellPartPlantNoSpans[0].textContent = '';
+                                    knowRackCellPartPlantNoSpans[1].textContent = '';
+
+                                    // 총무게
+                                    knowRackCellTotalWeightSpans[0].textContent = '';
+                                    knowRackCellTotalWeightSpans[1].textContent = '';
+
+
+                                    // 입고일
+                                    knowRackCellInboundDateSpans[0].textContent = '';
+                                    knowRackCellInboundDateSpans[1].textContent = '';
+                                }
+
+
+
+                                // 같은 innerText를 가진 .rackCell 요소 스타일 변경
+                                const matchingRackCells = document.querySelectorAll('.rackCell');
+                                matchingRackCells.forEach(cell => {
+                                    if (cell.innerText.trim() === siblingSpan.innerText.trim()) {
+                                      cell.closest("td").querySelector('.locationCoordinates').classList.add('active');
+                                      cell.classList.add('active');
+                                    }
+                                });
+                            }
+                        });
+                        }
+                    });
+                });
+            }
+
+            // rackDetailNo에 해당하는 rackId 찾기
+            function getRackIdByDetailNo(detailNo) {
+                const matchedDetail = rackDetailInfoListJson.find(detail => detail.rackDetailNo === detailNo);
+                return matchedDetail ? matchedDetail.rackId : '';
+            }
+
+            // categoryNo에 해당하는 categoryName 찾기
+            function getCategoryNameByNo(categoryNo) {
+                const matchedCategory = categoryListJson.find(category => category.categoryNo === categoryNo);
+                return matchedCategory ? matchedCategory.categoryName : '';
+            }
+
+            // 초기 검색 결과 테이블 렌더링
+            renderTable(searchTable, iOBoundListJson);
+        });
+
+
+
+    </script>
+
+
+
+
+
+<!-- 제목 부분 공통 버튼 -->
+<script>
+    // 메인 페이지로 버튼
+    document.addEventListener('DOMContentLoaded', function () {
+        const goToHomeButton = document.getElementById('goToHomeButton');
+
+        goToHomeButton.addEventListener('click', goToHome);
+
+        function goToHome() {
+            window.location.href = '/hdsmf/totaldetaildashboard'; // 지정한 경로로 이동
+        }
+    });
+
+
+
+    // 새로고침 버튼
+    const reloadButton = document.getElementById('reloadButton');
+
+    reloadButton.addEventListener('click', reloadPage);
+
+    function reloadPage() {
+        location.reload();
+    }
+
+</script>
+
+
+
+
+<script>
+    let rackStatusPanelTabTableBG = true;
+    let rackCategoryPanelTabBG = true;
+
+
+    let rackCells = document.querySelectorAll('.rackCell');
+
+    function transformRackId(rackId) {
+        const parts = rackId.split("-");
+        if (parts.length !== 3) {
+            throw new Error("Invalid rackId format");
+        }
+
+        const xx = parts[0].substring(1);
+        const y = parts[1];
+        const z = parts[2];
+
+        let zz;
+        if (z.length === 2) {
+            zz = z;
+        } else {
+            zz = '0' + z;
+        }
+
+        return `R${xx.padStart(2, '0')}F${zz.toString().padStart(2, '0')}N${y.padStart(2, '0')}`;
+    }
+
+    //  RGBA 형식으로 변환
+    function hexToRgba(hex, alpha) {
+        // hex에서 R, G, B 값을 추출
+        const [r, g, b] = [1, 3, 5].map(offset => parseInt(hex.slice(offset, offset + 2), 16));
+        return `rgba(${r}, ${g}, ${b}, ${alpha})`;
+    }
+
+
+    function drawTableBG() {
+        const rackCellsLayout01 = document.querySelectorAll('#hrdWarehouserackeditSystemtableFormBox .rackTableLayout01 td');
+        const rackCellsLayout02 = document.querySelectorAll('#hrdWarehouserackeditSystemtableFormBox .rackTableLayout02 td');
+
+        applyStatusBackground(rackCellsLayout01);
+        applyCategoryBackground(rackCellsLayout02);
+
+    }
+
+    function applyCategoryBackground(rackCells) {
+        // rack정보랑 category 정보랑 매칭해서 배경색 넣음
+        rackDetailInfoListJson.forEach(rackDetail => {
+            const rackId = transformRackId(rackDetail.rackId);
+            const matchingRackCell = Array.from(rackCells).find(r => r.innerText === rackId);
+
+            if (matchingRackCell) {
+                const matchingCategory = categoryListJson.find(c => c.categoryNo === rackDetail.categoryNo);
+                if (matchingCategory) {
+                    const rgbaColor = hexToRgba(matchingCategory.categoryColor, 0.7);
+                    matchingRackCell.style.backgroundColor = rgbaColor;
+                }
+            }
+        });
+    }
+
+    function applyStatusBackground(rackCells) {
+        // rack 정보와 iOBound 정보를 매칭하여 배경색을 설정
+        rackDetailInfoListJson.forEach(rackDetail => {
+            const rackId = transformRackId(rackDetail.rackId);
+            const matchingRackCell = Array.from(rackCells).find(r => r.innerText === rackId);
+
+            if (matchingRackCell) {
+                const matchingRackDetail = iOBoundListJson.find(i => i.rackDetailNo === rackDetail.rackDetailNo);
+                if (matchingRackDetail) {
+                    const rgbaColor = `rgba(255, 0, 0, 0.0)`;
+                    matchingRackCell.style.backgroundColor = rgbaColor;
+                    const matchingIndex = iOBoundListJson.indexOf(matchingRackDetail);
+                    const locationCoordinatesElement = matchingRackCell.querySelector('.locationCoordinates');
+                    if (locationCoordinatesElement) {
+                        locationCoordinatesElement.innerText = (matchingIndex + 1).toString();
+                        locationCoordinatesElement.style.border = '0px solid rgb(0, 255, 0)';
+                        locationCoordinatesElement.style.backgroundColor = 'rgba(0, 0, 0, 0.4)';
+                        locationCoordinatesElement.style.textShadow = '1px 1px 1px #555555';
+                        locationCoordinatesElement.closest("td").querySelector('.rackCell').style.cursor = 'pointer';
+                    }
+                } else {
+                    matchingRackCell.style.backgroundColor = `rgba(0, 0, 255, 0.0)`;
+                }
+            } else {
+                console.warn(`rackId: ${rackId}에 대한 매칭 셀이 없습니다.`);
+            }
+        });
+    }
+
+    drawTableBG();
+
+</script>
+
+
+
+<!-- RackInfo 리스트-->
+<script>
+    // 1단계: rackInfoListJson에 있는 rackNo들의 목록 생성
+    const rackInfoRackNos = rackInfoListJson.map(item => item.rackNo);
+
+    // 2단계: iOBoundListJson에 있는 rackDetailNo들의 목록 생성
+    const iOBoundRackDetailNos = iOBoundListJson.map(item => item.rackDetailNo);
+
+    // 3단계: rackDetailInfoListJson을 순회하면서 일치하는 rackDetailNo가 있으면 카운트 증가
+    const categoryDetailNoCounts = rackDetailInfoListJson.reduce(function (acc, item) {
+        // 해당 항목의 rackDetailNo가 iOBoundRackDetailNos에 있을 경우만 카운트
+        if (iOBoundRackDetailNos.includes(item.rackDetailNo)) {
+            if (!acc[item.categoryNo]) {
+                acc[item.categoryNo] = 0;
+            }
+            acc[item.categoryNo]++;
+        }
+        return acc;
+    }, {});
+
+    // 4단계: rackDetailInfoListJson을 순회하면서 일치하는 rackDetailNo가 있으면 rackDetailNo 카운트 증가
+    const rackInfoDetailNoCounts = rackDetailInfoListJson.reduce(function (acc, item) {
+        // 해당 항목의 rackDetailNo가 iOBoundRackDetailNos에 있을 경우만 카운트
+        if (iOBoundRackDetailNos.includes(item.rackDetailNo)) {
+            if (!acc[item.rackNo]) {
+                acc[item.rackNo] = 0;
+            }
+            acc[item.rackNo]++;
+        }
+        return acc;
+    }, {});
+</script>
+
+<!-- IO 리스트-->
+<script>
+    // Rack별 공간 갯수 객체 배열로
+    const rackInfoCounts = rackDetailInfoListJson.reduce(function (acc, item) {
+        if (!acc[item.rackNo]) {
+            acc[item.rackNo] = 0;
+        }
+        acc[item.rackNo]++;
+        return acc;
+    }, {});
+</script>
+
+
+<!-- 분류별 그래프  -->
+<script>
+    // 카테고리별 갯수 객체 배열로
+    const categoryCounts = rackDetailInfoListJson.reduce(function (acc, item) {
+        if (!acc[item.categoryNo]) {
+            acc[item.categoryNo] = 0;
+        }
+        acc[item.categoryNo]++;
+        return acc;
+    }, {});
+
+
+    // 우선, categoryListJson에서 categoryNo를 key로 하는 객체를 만듭니다.
+    let categoryMap = categoryListJson.reduce((acc, category) => {
+        acc[category.categoryNo] = category.categoryName;
+        return acc;
+    }, {});
+
+
+    // 이제 원하는 2차원 배열을 만듭니다.
+    const resultArrayCategories = [];
+    const resultArrayCategoriesColors = [];
+
+    resultArrayCategories.push(['카테고리 이름', '용량']);
+
+    if (Object.keys(categoryMap).length > 0) {
+        for (let key in categoryMap) {
+            if (categoryMap[key]) {
+                const count = categoryCounts[key] || 0;  // 해당 카테고리의 count 값이 있으면 가져오고, 없으면 0을 할당합니다.
+
+                if (count > 0) {
+                    resultArrayCategories.push([categoryMap[key], count]);
+                } else {
+                    resultArrayCategories.push(['카테고리 이름', 0]);
+                }
+
+                // 해당 categoryNo를 가진 항목을 categoryListJson에서 찾아서 categoryColor를 가져옵니다.
+                const matchedCategory = categoryListJson.find(category => category.categoryNo == key);
+                if (matchedCategory && matchedCategory.categoryColor) {
+                    resultArrayCategoriesColors.push(matchedCategory.categoryColor);
+                } else {
+                    resultArrayCategoriesColors.push('#dddddd'); // 해당 카테고리의 색상이 없는 경우 기본 색상 값을 넣을 수 있습니다.
+                }
+            }
+        }
+    } else {
+        resultArrayCategories.push(['카테고리를 생성하세요', 100]);
+        resultArrayCategoriesColors.push('#dddddd');
+    }
+</script>
+
+
+
+<!-- rgb를 rgba로 변경 -->
+<script>
+    function convertRgbToRgba(rgb, alpha) {
+        return rgb.replace(')', ', ' + alpha + ')').replace('rgb', 'rgba');
+    }
+</script>
+
+<!-- rackCells 색상입히기 및 검색 셀 정보 파싱 -->
+<script type="text/javascript">
+
+        // 선택한 셀의 rackDetailInfo 저장 배열
+        let racks = [];
+
+        document.addEventListener('DOMContentLoaded', function () {
+            const knowRackCellProductNameH1s = document.querySelectorAll('.knowRackCellProductNameH1');
+            const knowRackCellLocationSpans = document.querySelectorAll('.knowRackCellLocationSpan');
+            const knowRackCellComponentIdSpans = document.querySelectorAll('.knowRackCellComponentIdSpan');
+            const knowRackCellComponentfWeightSpans = document.querySelectorAll('.knowRackCellComponentfWeightSpan');
+            const knowRackCellComponentStatusSpans = document.querySelectorAll('.knowRackCellComponentStatusSpan');
+            const knowRackCellCompanySpans = document.querySelectorAll('.knowRackCellCompanySpan');
+            const knowRackCellSteelMakerSpans = document.querySelectorAll('.knowRackCellSteelMakerSpan');
+            const knowRackCellProductNoSpans = document.querySelectorAll('.knowRackCellProductNoSpan');
+            const knowRackCellProductNameSpans = document.querySelectorAll('.knowRackCellProductNameSpan');
+            const knowRackCellComponentAmountSpans = document.querySelectorAll('.knowRackCellComponentAmountSpan');
+            const knowRackCellComponentsWeightSpans = document.querySelectorAll('.knowRackCellComponentsWeightSpan');
+            const knowRackCellPartPlantNoSpans = document.querySelectorAll('.knowRackCellPartPlantNoSpan');
+            const knowRackCellTotalWeightSpans = document.querySelectorAll('.knowRackCellTotalWeightSpan');
+            const knowRackCellInboundDateSpans = document.querySelectorAll('.knowRackCellInboundDateSpan');
+            const knowRackCellInboundNoSpans = document.querySelectorAll('.knowRackCellInboundNoSpan');
+
+            rackCells.forEach(rackCell => {
+                rackCell.addEventListener('click', function () {
+                    const rackId = rackCell.textContent.trim();
+
+                      document.querySelectorAll('.rackCell').forEach(cell => {
+                          cell.closest("td").querySelector('.locationCoordinates').classList.remove('active');
+                          cell.classList.remove('active');
+                      });
+
+                    // R06F04N15 형식의 문자열에서 정보 추출
+                    const [rack, row, column] = rackId.match(/R(\d+)F(\d+)N(\d+)/).slice(1);
+
+                    const jsonData = {
+                        rackId: 'R' + rack + '-' + column + '-' + parseInt(row),
+                    };
+
+
+                    const matchedDetail = rackDetailInfoListJson.find(detail => detail.rackId === jsonData.rackId);
+
+                    // 클릭된 요소에 스타일 적용
+                    if (matchedDetail) {
+
+
+                      // 같은 innerText를 가진 .rackCell 요소 스타일 변경
+                      const matchingRackCells = document.querySelectorAll('.rackCell');
+                      matchingRackCells.forEach(cell => {
+                          if (cell.innerText.trim() === rackCell.innerText.trim()) {
+                              cell.closest("td").querySelector('.locationCoordinates').classList.add('active');
+                              cell.classList.add('active');
+                          }
+                      });
+                    }
+
+
+                    // 미니맵 위치 표시
+                    let lacationMiniMapCells = document.querySelectorAll('.lacationMiniMapCell');
+
+                    // .lacationMiniMapCell의 상위 td 요소의 배경색을 초기화합니다.
+                    lacationMiniMapCells.forEach(cell => {
+                        let parentTd = cell.closest('td');
+                        if (parentTd) {
+                            parentTd.style.backgroundColor = ''; // 초기 배경색으로 설정
+                        }
+                    });
+
+                    lacationMiniMapCells.forEach(cell => {
+                        if (cell.innerText === jsonData.rackId) {
+                            // 이 cell의 가장 가까운 상위 td 요소를 찾습니다.
+                            let closestTd = cell.closest('td');
+                            if (closestTd) {
+                                // 배경색을 파란색으로 변경합니다.
+                                closestTd.style.backgroundColor = 'blue';
+                            }
+                        }
+                    });
+
+
+
+                    if (matchedDetail) {
+                        const matchedIOBoundRackDetailNo = iOBoundListJson.find(detail => detail.rackDetailNo === matchedDetail.rackDetailNo);
+
+                        if (matchedIOBoundRackDetailNo) {
+                            const matchedComponentsComponentNo = componentsListJson.find(detail => detail.componentNo === matchedIOBoundRackDetailNo.componentNo);
+
+                            if (matchedComponentsComponentNo) {
+                                // 부품명 제목
+                                knowRackCellProductNameH1s[0].textContent = matchedComponentsComponentNo.product || '';
+                                knowRackCellProductNameH1s[1].textContent = matchedComponentsComponentNo.product || '';
+
+                                knowRackCellProductNameH1s[0].style = 'color: #44d344;';
+                                knowRackCellProductNameH1s[1].style = 'color: #44d344;';
+
+                                // 파레트 위치 정보
+                                knowRackCellLocationSpans[0].textContent = jsonData.rackId;
+                                knowRackCellLocationSpans[1].textContent = jsonData.rackId;
+
+                                // 소재번호
+                                knowRackCellComponentIdSpans[0].textContent = matchedComponentsComponentNo.sno || '';
+                                knowRackCellComponentIdSpans[1].textContent = matchedComponentsComponentNo.sno || '';
+
+                                // 소재무게
+                                knowRackCellComponentfWeightSpans[0].textContent = matchedComponentsComponentNo.fweight + 'kg' || '';
+                                knowRackCellComponentfWeightSpans[1].textContent = matchedComponentsComponentNo.fweight + 'kg' || '';
+
+                                // console.log(knowRackCellComponentfWeightSpans[0].textContent);
+                                // console.log("0");
+                                // console.log(knowRackCellComponentfWeightSpans[1].textContent);
+                                // console.log("1");
+
+
+                                // 공정번호
+                                switch(matchedComponentsComponentNo.componentState) {
+                                    case '0' :
+                                        knowRackCellComponentStatusSpans[0].textContent = '완제품';
+                                        knowRackCellComponentStatusSpans[1].textContent = '완제품';
+                                        break;
+                                    case '1' :
+                                        knowRackCellComponentStatusSpans[0].textContent = '소재';
+                                        knowRackCellComponentStatusSpans[1].textContent = '소재';
+                                        break;
+                                    case '2' :
+                                        knowRackCellComponentStatusSpans[0].textContent = 'CNC 1차';
+                                        knowRackCellComponentStatusSpans[1].textContent = 'CNC 1차';
+                                        break;
+                                    case '3' :
+                                        knowRackCellComponentStatusSpans[0].textContent = 'CNC 2차';
+                                        knowRackCellComponentStatusSpans[1].textContent = 'CNC 2차';
+                                        break;
+                                    case '4' :
+                                        knowRackCellComponentStatusSpans[0].textContent = 'MCT 1차';
+                                        knowRackCellComponentStatusSpans[1].textContent = 'MCT 1차';
+                                        break;
+                                    default:
+                                        knowRackCellComponentStatusSpans[0].textContent = '';
+                                        knowRackCellComponentStatusSpans[1].textContent = '';
+                                }
+
+
+
+                                // 부품번호
+                                if (matchedIOBoundRackDetailNo.componentNo) {
+                                    // '-' 기호를 기준으로 문자열을 분할하여 배열로 저장
+                                    const productNoParts = matchedIOBoundRackDetailNo.componentNo.split('-');
+
+                                    // '-' 기호 이전의 내용을 선택
+                                    knowRackCellProductNoSpans[0].textContent = productNoParts[0] || '';
+                                    knowRackCellProductNoSpans[1].textContent = productNoParts[0] || '';
+                                } else {
+                                    knowRackCellProductNoSpans[0].textContent = '';
+                                    knowRackCellProductNoSpans[1].textContent = '';
+                                }
+
+                                // 부품명
+                                knowRackCellProductNameSpans[0].textContent = matchedComponentsComponentNo.model || '';
+                                knowRackCellProductNameSpans[1].textContent = matchedComponentsComponentNo.model || '';
+
+                                // 수량
+                                knowRackCellComponentAmountSpans[0].textContent = matchedIOBoundRackDetailNo.componentAmount + 'EA' || '';
+                                knowRackCellComponentAmountSpans[1].textContent = matchedIOBoundRackDetailNo.componentAmount + 'EA' || '';
+
+                                // 무게
+                                knowRackCellComponentsWeightSpans[0].textContent = matchedComponentsComponentNo.sweight + 'kg' || '';
+                                knowRackCellComponentsWeightSpans[1].textContent = matchedComponentsComponentNo.sweight + 'kg' || '';
+
+                                // Plant 번호
+                                knowRackCellPartPlantNoSpans[0].textContent = matchedComponentsComponentNo.plantNo || '';
+                                knowRackCellPartPlantNoSpans[1].textContent = matchedComponentsComponentNo.plantNo || '';
+
+                                // 총무게
+                                knowRackCellTotalWeightSpans[0].textContent = matchedIOBoundRackDetailNo.totalWeight + 'kg' || '';
+                                knowRackCellTotalWeightSpans[1].textContent = matchedIOBoundRackDetailNo.totalWeight + 'kg' || '';
+
+                                // 입고일
+                                const inboundDate = new Date(matchedIOBoundRackDetailNo.inboundDate);
+
+                                // 날짜와 시간을 원하는 형식으로 변환 (예: yyyy-mm-dd HH:MM:SS)
+                                const formattedInboundDateS = `${inboundDate.getFullYear()}-${(inboundDate.getMonth() + 1).toString().padStart(2, '0')}-${inboundDate.getDate().toString().padStart(2, '0')}`;
+                                const formattedInboundDateB = `${inboundDate.getFullYear()}-${(inboundDate.getMonth() + 1).toString().padStart(2, '0')}-${inboundDate.getDate().toString().padStart(2, '0')} T${inboundDate.getHours().toString().padStart(2, '0')}:${inboundDate.getMinutes().toString().padStart(2, '0')}:${inboundDate.getSeconds().toString().padStart(2, '0')}`;
+
+                                knowRackCellInboundDateSpans[0].textContent = formattedInboundDateS || '';
+                                knowRackCellInboundDateSpans[1].textContent = formattedInboundDateB || '';
+                            } else {
+                                console.log('componentNo에 해당하는 정보를 찾을 수 없습니다.');
+
+                                // 부품명 제목
+                                knowRackCellProductNameH1s[0].textContent = '사용가능';
+                                knowRackCellProductNameH1s[1].textContent = '사용가능';
+
+                                knowRackCellProductNameH1s[0].style = 'color: blue;';
+                                knowRackCellProductNameH1s[1].style = 'color: blue;';
+
+                                // 파레트 위치 정보
+                                knowRackCellLocationSpans[0].textContent = jsonData.rackId;
+                                knowRackCellLocationSpans[1].textContent = jsonData.rackId;
+
+                                // 소재번호
+                                knowRackCellComponentIdSpans[0].textContent = '';
+                                knowRackCellComponentIdSpans[1].textContent = '';
+
+                                // 소재무게
+                                knowRackCellComponentfWeightSpans[0].textContent = '';
+                                knowRackCellComponentfWeightSpans[1].textContent = '';
+
+                                // 공정번호
+                                knowRackCellComponentStatusSpans[0].textContent = '';
+                                knowRackCellComponentStatusSpans[1].textContent = '';
+
+
+                                // 부품번호
+
+                                knowRackCellProductNoSpans[0].textContent = '';
+                                knowRackCellProductNoSpans[1].textContent = '';
+
+
+                                // 부품명
+                                knowRackCellProductNameSpans[0].textContent = '';
+                                knowRackCellProductNameSpans[1].textContent = '';
+
+                                // 수량
+                                knowRackCellComponentAmountSpans[0].textContent = '';
+                                knowRackCellComponentAmountSpans[1].textContent = '';
+
+                                // 무게
+                                knowRackCellComponentsWeightSpans[0].textContent = '';
+                                knowRackCellComponentsWeightSpans[1].textContent = '';
+
+                                // Plant 번호
+                                knowRackCellPartPlantNoSpans[0].textContent = '';
+                                knowRackCellPartPlantNoSpans[1].textContent = '';
+
+                                // 총무게
+                                knowRackCellTotalWeightSpans[0].textContent = '';
+                                knowRackCellTotalWeightSpans[1].textContent = '';
+
+                                // 입고일
+                                knowRackCellInboundDateSpans[0].textContent = '';
+                                knowRackCellInboundDateSpans[1].textContent = '';
+                            }
+                        } else {
+                            console.log('rackDetailNo에 해당하는 정보를 찾을 수 없습니다.');
+
+                            // 부품명 제목
+                            knowRackCellProductNameH1s[0].textContent = '사용가능';
+                            knowRackCellProductNameH1s[1].textContent = '사용가능';
+
+                            knowRackCellProductNameH1s[0].style = 'color: blue;';
+                            knowRackCellProductNameH1s[1].style = 'color: blue;';
+
+                            // 파레트 위치 정보
+                            knowRackCellLocationSpans[0].textContent = jsonData.rackId;
+                            knowRackCellLocationSpans[1].textContent = jsonData.rackId;
+
+                            // 소재번호
+                            knowRackCellComponentIdSpans[0].textContent = '';
+                            knowRackCellComponentIdSpans[1].textContent = '';
+
+                            // 소재무게
+                            knowRackCellComponentfWeightSpans[0].textContent = '';
+                            knowRackCellComponentfWeightSpans[1].textContent = '';
+
+                            // 공정번호
+                            knowRackCellComponentStatusSpans[0].textContent = '';
+                            knowRackCellComponentStatusSpans[1].textContent = '';
+
+
+                            // 부품번호
+                            knowRackCellProductNoSpans[0].textContent = '';
+                            knowRackCellProductNoSpans[1].textContent = '';
+
+
+                            // 부품명
+                            knowRackCellProductNameSpans[0].textContent = '';
+                            knowRackCellProductNameSpans[1].textContent = '';
+
+                            // 수량
+                            knowRackCellComponentAmountSpans[0].textContent = '';
+                            knowRackCellComponentAmountSpans[1].textContent = '';
+
+                            // 무게
+                            knowRackCellComponentsWeightSpans[0].textContent = '';
+                            knowRackCellComponentsWeightSpans[1].textContent = '';
+
+                            // Plant 번호
+                            knowRackCellPartPlantNoSpans[0].textContent = '';
+                            knowRackCellPartPlantNoSpans[1].textContent = '';
+
+                            // 총무게
+                            knowRackCellTotalWeightSpans[0].textContent = '';
+                            knowRackCellTotalWeightSpans[1].textContent = '';
+
+                            // 입고일
+                            knowRackCellInboundDateSpans[0].textContent = '';
+                            knowRackCellInboundDateSpans[1].textContent = '';
+                        }
+                    } else {
+                        console.log('rackId에 해당하는 정보를 찾을 수 없습니다.');
+
+                        // 부품명 제목
+                        knowRackCellProductNameH1s[0].textContent = '사용가능';
+                        knowRackCellProductNameH1s[1].textContent = '사용가능';
+
+                        knowRackCellProductNameH1s[0].style = 'color: blue;';
+                        knowRackCellProductNameH1s[1].style = 'color: blue;';
+
+                        // 파레트 위치 정보
+                        knowRackCellLocationSpans[0].textContent = jsonData.rackId;
+                        knowRackCellLocationSpans[1].textContent = jsonData.rackId;
+
+                        // 소재번호
+                        knowRackCellComponentIdSpans[0].textContent = '';
+                        knowRackCellComponentIdSpans[1].textContent = '';
+
+                        // 소재무게
+                        knowRackCellComponentfWeightSpans[0].textContent = '';
+                        knowRackCellComponentfWeightSpans[1].textContent = '';
+
+                        // 공정번호
+                        knowRackCellComponentStatusSpans[0].textContent = '';
+                        knowRackCellComponentStatusSpans[1].textContent = '';
+
+                        // 부품번호
+                        knowRackCellProductNoSpans[0].textContent = '';
+                        knowRackCellProductNoSpans[1].textContent = '';
+
+
+                        // 부품명
+                        knowRackCellProductNameSpans[0].textContent = '';
+                        knowRackCellProductNameSpans[1].textContent = '';
+
+                        // 수량
+                        knowRackCellComponentAmountSpans[0].textContent = '';
+                        knowRackCellComponentAmountSpans[1].textContent = '';
+
+                        // 무게
+                        knowRackCellComponentsWeightSpans[0].textContent = '';
+                        knowRackCellComponentsWeightSpans[1].textContent = '';
+
+                        // Plant 번호
+                        knowRackCellPartPlantNoSpans[0].textContent = '';
+                        knowRackCellPartPlantNoSpans[1].textContent = '';
+
+                        // 총무게
+                        knowRackCellTotalWeightSpans[0].textContent = '';
+                        knowRackCellTotalWeightSpans[1].textContent = '';
+
+                        // 입고일
+                        knowRackCellInboundDateSpans[0].textContent = '';
+                        knowRackCellInboundDateSpans[1].textContent = '';
+                    }
+
+                });
+            });
+        });
+    </script>
+
+
+<!-- ===============================================-->
+<!--    JavaScripts-->
+<!-- ===============================================-->
+<script src="/vendors/popper/popper.min.js"></script>
+<script src="/vendors/bootstrap/bootstrap.min.js"></script>
+<script src="/vendors/anchorjs/anchor.min.js"></script>
+<script src="/vendors/is/is.min.js"></script>
+<script src="/vendors/fontawesome/all.min.js"></script>
+<script src="/vendors/lodash/lodash.min.js"></script>
+<script src="https://polyfill.io/v3/polyfill.min.js?features=window.scroll"></script>
+<script src="/vendors/list.js/list.min.js"></script>
+<script src="/vendors/feather-icons/feather.min.js"></script>
+<script src="/vendors/dayjs/dayjs.min.js"></script>
+<script src="/vendors/prism/prism.js"></script>
+<script src="/assets/js/phoenix.js"></script>
+<script src="/vendors/list.js/list.min.js"></script>
+
+
+<!-- 테이블 출력 -->
+<script>
+    const rackPrintTabBtn = document.getElementById('rackPrintTabBtn');
+
+    rackPrintTabBtn.addEventListener('click', function () {
+        // "전체 보기" 링크를 찾아 클릭
+        let listViewLink = document.querySelector('a[data-list-view="*"]');
+        if (listViewLink) {
+            listViewLink.click();
+        }
+
+        let listView1 = document.getElementById("hrdWarehouserackeditSystemtableFormPrintBox");
+        let printContent1 = listView1.outerHTML;
+
+        let listView2 = document.getElementById("tableExample");
+        let printContent2 = listView2.outerHTML;
+
+        // 두 번째 팝업 창을 열지 않음
+        let printWindow2 = null;
+
+        // 첫 번째 팝업 창 열기
+        let printWindow1 = window.open('', '_blank', 'width=1080,height=960');
+        printWindow1.document.open();
+        printWindow1.document.write('<html><head><title>인쇄 1</title>');
+
+        // 현재 페이지의 모든 스타일시트를 첫 번째 팝업에 추가
+        let styles = document.querySelectorAll('link[rel="stylesheet"], style');
+        for (let style of styles) {
+            printWindow1.document.write(style.outerHTML);
+        }
+
+        printWindow1.document.write('</head><body>');
+        printWindow1.document.write(printContent1);
+        printWindow1.document.write('</body></html>');
+        printWindow1.document.close();
+
+        // 첫 번째 팝업 창의 스타일 설정
+        printWindow1.document.body.style.backgroundColor = "#FFFFFF";
+        printWindow1.document.body.style.padding = "10px"; // 패딩
+        printWindow1.document.body.style.margin = "0";  // 마진 제거
+
+        // 첫 번째 팝업 창이 완전히 로드된 후 인쇄
+        printWindow1.onload = function() {
+            printWindow1.print();
+
+            // 두 번째 팝업 창 열기
+            if (printWindow2 === null) {
+                printWindow2 = window.open('', '_blank', 'width=1080,height=960');
+                printWindow2.document.open();
+                printWindow2.document.write('<html><head><title>인쇄 2</title>');
+
+                // 현재 페이지의 모든 스타일시트를 두 번째 팝업에 추가
+                for (let style of styles) {
+                    printWindow2.document.write(style.outerHTML);
+                }
+
+                printWindow2.document.write('</head><body>');
+                printWindow2.document.write(printContent2);
+                printWindow2.document.write('</body></html>');
+                printWindow2.document.close();
+
+                // 두 번째 팝업 창의 스타일 설정
+                printWindow2.document.body.style.backgroundColor = "#FFFFFF";
+                printWindow2.document.body.style.padding = "10px"; // 패딩
+                printWindow2.document.body.style.margin = "0";  // 마진 제거
+
+                // 두 번째 팝업 창이 완전히 로드된 후 인쇄
+                printWindow2.onload = function() {
+                    printWindow2.print();
+                }
+            }
+        }
+    });
+</script>
+
+
+
+<!-- 위치만 출력 -->
+<script>
+    const locationPrintBtn = document.getElementById('locationPrintBtn');
+
+    locationPrintBtn.addEventListener('click', function () {
+        let listView = document.getElementById("lacationMiniMap");
+        let printContent = listView.outerHTML;
+
+        // 팝업 창을 열고 내용과 스타일을 설정한 후 인쇄합니다.
+        let printWindow = window.open('', '_blank', 'width=530,height=600');
+        printWindow.document.open();
+        printWindow.document.write('<html><head><title>인쇄</title>');
+
+        // 현재 페이지의 모든 스타일시트를 팝업에 추가
+        let styles = document.querySelectorAll('link[rel="stylesheet"], style');
+        for (let style of styles) {
+            printWindow.document.write(style.outerHTML);
+        }
+
+        printWindow.document.write('</head><body>');
+        printWindow.document.write(printContent);
+        printWindow.document.write('</body></html>');
+        printWindow.document.close();
+
+        // 팝업 창의 배경 및 전체 크기 설정
+        printWindow.document.body.style.backgroundColor = "#FFFFFF";
+        printWindow.document.body.style.padding = "10px"; // 패딩
+        printWindow.document.body.style.margin = "0";  // 마진 제거
+
+        // #lacationMiniMap의 크기 설정
+        let popupListView = printWindow.document.getElementById("lacationMiniMap");
+        popupListView.style.width = "100vw";
+        popupListView.style.height = "90vh";
+
+        let popupListViewTitle = printWindow.document.querySelector("#lacationMiniMap h4");
+        popupListViewTitle.classList.add('fs-5');
+        popupListViewTitle.classList.add('mb-3');
+
+
+        let lacationMiniMapTop = printWindow.document.getElementById("lacationMiniMapTop");
+        lacationMiniMapTop.style.width = "100%";
+        lacationMiniMapTop.style.height = "40%";
+        lacationMiniMapTop.style.overflow = "visible";
+
+        lacationMiniMapTop.classList.add("mb-5");
+
+
+        let tableCapsN = printWindow.document.querySelectorAll("#lacationMiniMapTop .tableCap");
+        for (let tableCap of tableCapsN) {
+            tableCap.classList.add("fs-6");
+            tableCap.style.zIndex = "-1";
+        }
+
+        let lacationMiniMapBottom = printWindow.document.getElementById("lacationMiniMapBottom");
+        lacationMiniMapBottom.style.width = "100%";
+        lacationMiniMapBottom.style.height = "40%";
+        lacationMiniMapBottom.style.overflow = "visible";
+
+        let tableCapsS = printWindow.document.querySelectorAll("#lacationMiniMapBottom .tableCap");
+        for (let tableCap of tableCapsS) {
+            tableCap.classList.add("fs-6");
+            tableCap.style.zIndex = "-1";
+        }
+
+
+        // 팝업 창이 완전히 로드된 후 인쇄
+        printWindow.onload = function() {
+            printWindow.print();
+        }
+    });
+</script>
+
+
+
+<!-- 위치 및 상세 정보 출력 -->
+<script>
+    // 출력 버튼
+    const locationDetailPrintBtn = document.getElementById('locationDetailPrintBtn');
+
+    locationDetailPrintBtn.addEventListener('click', function () {
+        let listView = document.getElementById("lacationMiniMapBox");
+        let printContent = listView.outerHTML;
+
+        // 팝업 창을 열고 내용과 스타일을 설정한 후 인쇄합니다.
+        let printWindow = window.open('', '_blank', 'width=510,height=600');
+        printWindow.document.open();
+        printWindow.document.write('<html><head><title>인쇄</title>');
+
+        // 현재 페이지의 모든 스타일시트를 팝업에 추가
+        let styles = document.querySelectorAll('link[rel="stylesheet"], style');
+        for (let style of styles) {
+            printWindow.document.write(style.outerHTML);
+        }
+
+        printWindow.document.write('</head><body>');
+        printWindow.document.write(printContent);
+        printWindow.document.write('</body></html>');
+        printWindow.document.close();
+
+        printWindow.document.body.style.backgroundColor = "#FFFFFF";
+        printWindow.document.body.style.padding = "10px"; // 패딩
+        printWindow.document.body.style.margin = "0";  // 마진 제거
+
+        printWindow.onload = function() {
+            let popupListView = printWindow.document.getElementById("lacationMiniMapBox");
+            popupListView.style.width = "97vw";
+            popupListView.style.minWidth = "475px";
+            popupListView.style.height = "90vh";
+            popupListView.style.minHeight = "500px";
+
+
+            let printSpotModalLabel = printWindow.document.getElementById("printSpotModalLabel");
+            if (printSpotModalLabel) {
+                printSpotModalLabel.style.display = "none";
+            }
+
+            let RegButton = printWindow.document.querySelector(".RegButton");
+            if (RegButton) {
+                RegButton.style.display = "none";
+            }
+
+            let lacationMiniMapTop = printWindow.document.getElementById("lacationMiniMapTop");
+            lacationMiniMapTop.style.width = "100%";
+            lacationMiniMapTop.style.height = "40%";
+            lacationMiniMapTop.style.overflow = "visible";
+
+            lacationMiniMapTop.classList.add("mb-2");
+
+
+            let tableCapsN = printWindow.document.querySelectorAll("#lacationMiniMapTop .tableCap");
+            for (let tableCap of tableCapsN) {
+                tableCap.classList.add("fs-3");
+                tableCap.style.zIndex = "-1";
+            }
+
+            let lacationMiniMapBottom = printWindow.document.getElementById("lacationMiniMapBottom");
+            lacationMiniMapBottom.style.width = "100%";
+            lacationMiniMapBottom.style.height = "40%";
+            lacationMiniMapBottom.style.overflow = "visible";
+
+            let tableCapsS = printWindow.document.querySelectorAll("#lacationMiniMapBottom .tableCap");
+            for (let tableCap of tableCapsS) {
+                tableCap.classList.add("fs-3");
+                tableCap.style.zIndex = "-1";
+            }
+
+
+            printWindow.print();
+        }
+    });
+</script>
+
+<!-- 폰트 사이즈 조절 리모컨 -->
+<script>
+    // 화면 확대/축소 레벨 배열 및 현재 인덱스를 설정
+    const zoomLevels = [0.9, 1, 1.1, 1.2, 1.3];
+    let currentZoomIndex = zoomLevels.indexOf(1);  // '1'의 인덱스를 기본값으로 설정
+
+    function adjustZoom() {
+        // 화면 확대/축소 적용 및 로컬 스토리지 저장
+        document.body.style.zoom = `${zoomLevels[currentZoomIndex]}`;
+        localStorage.setItem('userZoomLevel', zoomLevels[currentZoomIndex]);
+
+        // 인덱스 업데이트
+        currentZoomIndex++;
+        if (currentZoomIndex >= zoomLevels.length) {
+            currentZoomIndex = 0;  // 배열의 시작으로 되돌아갑니다.
+        }
+    }
+
+    document.getElementById('btn-adjust-font').addEventListener('click', adjustZoom);
+
+    window.addEventListener('DOMContentLoaded', function () {
+        let storedZoomLevel = localStorage.getItem('userZoomLevel');
+        if (storedZoomLevel) {
+            document.body.style.zoom = `${storedZoomLevel}`;
+            // 현재 저장된 확대/축소 레벨의 인덱스를 로컬 스토리지에서 불러옵니다.
+            currentZoomIndex = zoomLevels.indexOf(parseFloat(storedZoomLevel));
+        }
+    });
+</script>
+
+</body>
+
+
+</html>

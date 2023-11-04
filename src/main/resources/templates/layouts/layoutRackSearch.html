@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="HDM Warehouse system 페이지입니다.">
+
+    <!-- ===============================================-->
+    <!--    Document Title-->
+    <!-- ===============================================-->
+    <title>현대정밀 자재창고 관리 시스템 - 부품별 상세 조회</title>
+
+
+    <!-- ===============================================-->
+    <!--    Favicons-->
+    <!-- ===============================================-->
+    <script src="/assets/js/config.js"></script>
+
+
+    <!-- ===============================================-->
+    <!--    Stylesheets-->
+    <!-- ===============================================-->
+    <link href="/vendors/choices/choices.min.css" rel="stylesheet">
+    <link href="/vendors/dhtmlx-gantt/dhtmlxgantt.css" rel="stylesheet">
+    <link href="/vendors/flatpickr/flatpickr.min.css" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+    <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;400;600;700;800;900&amp;display=swap" rel="stylesheet">
+    <link href="/vendors/simplebar/simplebar.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.8/css/line.css">
+    <link href="/assets/css/theme-rtl.min.css" type="text/css" rel="stylesheet" id="style-rtl">
+    <link href="/assets/css/theme.min.css" type="text/css" rel="stylesheet" id="style-default">
+    <link href="/assets/css/user-rtl.min.css" type="text/css" rel="stylesheet" id="user-style-rtl">
+    <link href="/assets/css/user.min.css" type="text/css" rel="stylesheet" id="user-style-default">
+    <script>
+      var phoenixIsRTL = window.config.config.phoenixIsRTL;
+      if (phoenixIsRTL) {
+        var linkDefault = document.getElementById('style-default');
+        var userLinkDefault = document.getElementById('user-style-default');
+        linkDefault.setAttribute('disabled', true);
+        userLinkDefault.setAttribute('disabled', true);
+        document.querySelector('html').setAttribute('dir', 'rtl');
+      } else {
+        var linkRTL = document.getElementById('style-rtl');
+        var userLinkRTL = document.getElementById('user-style-rtl');
+        linkRTL.setAttribute('disabled', true);
+        userLinkRTL.setAttribute('disabled', true);
+      }
+    </script>
+
+    <style>
+        #fontSizeControllBtnBox {
+            position: fixed;
+            bottom: 50px;
+            right: 50px;
+        }
+    </style>
+</head>
+
+<body>
+
+<main class="main" id="top">
+    <th:block th:replace="fragments/asidenav::asidenav"></th:block>
+    <th:block th:replace="fragments/topnav::topnav"></th:block>
+
+    <th:block layout:fragment="content"></th:block>
+
+</main>
+
+<th:block th:replace="fragments/fontSizeControllBtnBox::fontSizeControllBtnBox"></th:block>
+
+<th:block layout:fragment="script"></th:block>
+
+<!-- 다크모드 -->
+<script>
+  var navbarTopStyle = window.config.config.phoenixNavbarTopStyle;
+  var navbarTop = document.querySelector('.navbar-top');
+  if (navbarTopStyle === 'darker') {
+    navbarTop.classList.add('navbar-darker');
+  }
+
+  var navbarVerticalStyle = window.config.config.phoenixNavbarVerticalStyle;
+  var navbarVertical = document.querySelector('.navbar-vertical');
+  if (navbarVertical && navbarVerticalStyle === 'darker') {
+    navbarVertical.classList.add('navbar-darker');
+  }
+</script>
+
+
+<!-- 제목 부분 공통 버튼 -->
+<script>
+    // 메인 페이지로 버튼
+    document.addEventListener('DOMContentLoaded', function () {
+        const goToHomeButton = document.getElementById('goToHomeButton');
+
+        goToHomeButton.addEventListener('click', goToHome);
+
+        function goToHome() {
+            window.location.href = '/hdsmf/totaldetaildashboard'; // 지정한 경로로 이동
+        }
+    });
+
+    // 새로고침 버튼
+    const reloadButton = document.getElementById('reloadButton');
+
+    reloadButton.addEventListener('click', reloadPage);
+
+    function reloadPage() {
+        window.location.href = '/hdsmf/racksearch';
+    }
+
+    // 출력 버튼
+    const rackPrintTabBtn = document.getElementById('rackPrintTabBtn');
+
+    rackPrintTabBtn.addEventListener('click', function () {
+        //기존 배경 색상 저장
+        const originalBackgroundColor = document.body.style.backgroundColor;
+        //기존 페이지 저장
+        const originalPage = document.body.innerHTML;
+
+        let listView = document.getElementById("tableExample");
+
+        document.body.innerHTML = listView.innerHTML;
+        document.body.style.backgroundColor="#FFFFFF";
+
+        window.print();
+
+        document.body.innerHTML=originalPage;
+        document.body.style.backgroundColor=originalBackgroundColor;
+
+        reRunScript();
+    });
+
+    function reRunScript(){
+        // 메인 페이지로 버튼
+        document.addEventListener('DOMContentLoaded', function () {
+            const goToHomeButton = document.getElementById('goToHomeButton');
+
+            goToHomeButton.addEventListener('click', goToHome);
+
+            function goToHome() {
+                window.location.href = '/hdsmf/totaldetaildashboard'; // 지정한 경로로 이동
+            }
+        });
+
+        // 새로고침 버튼
+        const reloadButton = document.getElementById('reloadButton');
+
+        reloadButton.addEventListener('click', reloadPage);
+
+        function reloadPage() {
+            location.reload();
+        }
+
+        // 출력 버튼
+        const rackPrintTabBtn = document.getElementById('rackPrintTabBtn');
+
+        rackPrintTabBtn.addEventListener('click', function () {
+            //기존 배경 색상 저장
+            const originalBackgroundColor = document.body.style.backgroundColor;
+            //기존 페이지 저장
+            const originalPage = document.body.innerHTML;
+
+            let listView = document.getElementById("tableExample");
+
+            document.body.innerHTML = listView.innerHTML;
+            document.body.style.backgroundColor="#FFFFFF";
+
+            window.print();
+
+            document.body.innerHTML=originalPage;
+            document.body.style.backgroundColor=originalBackgroundColor;
+
+            reRunScript();
+        });
+    }
+
+</script>
+
+
+
+<!-- ===============================================-->
+<!--    JavaScripts-->
+<!-- ===============================================-->
+<script src="/vendors/popper/popper.min.js"></script>
+<script src="/vendors/bootstrap/bootstrap.min.js"></script>
+<script src="/vendors/anchorjs/anchor.min.js"></script>
+<script src="/vendors/is/is.min.js"></script>
+<script src="/vendors/fontawesome/all.min.js"></script>
+<script src="/vendors/lodash/lodash.min.js"></script>
+<script src="https://polyfill.io/v3/polyfill.min.js?features=window.scroll"></script>
+<script src="/vendors/list.js/list.min.js"></script>
+<script src="/vendors/feather-icons/feather.min.js"></script>
+<script src="/vendors/dayjs/dayjs.min.js"></script>
+<script src="/vendors/prism/prism.js"></script>
+<script src="/assets/js/phoenix.js"></script>
+<script src="/vendors/list.js/list.min.js"></script>
+
+
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.14.3/xlsx.full.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/1.3.8/FileSaver.min.js"></script>
+
+
+
+<!-- ===============================================-->
+<!--    Rack 조회 js   -->
+<!-- ===============================================-->
+<script src="/racksearch/js/racksearch.js"></script>
+
+<!-- 폰트 사이즈 조절 리모컨 -->
+<script>
+    // 화면 확대/축소 레벨 배열 및 현재 인덱스를 설정
+    const zoomLevels = [0.9, 1, 1.1, 1.2, 1.3];
+    let currentZoomIndex = zoomLevels.indexOf(1);  // '1'의 인덱스를 기본값으로 설정
+
+    function adjustZoom() {
+        // 화면 확대/축소 적용 및 로컬 스토리지 저장
+        document.body.style.zoom = `${zoomLevels[currentZoomIndex]}`;
+        localStorage.setItem('userZoomLevel', zoomLevels[currentZoomIndex]);
+
+        // 인덱스 업데이트
+        currentZoomIndex++;
+        if (currentZoomIndex >= zoomLevels.length) {
+            currentZoomIndex = 0;  // 배열의 시작으로 되돌아갑니다.
+        }
+    }
+
+    document.getElementById('btn-adjust-font').addEventListener('click', adjustZoom);
+
+    window.addEventListener('DOMContentLoaded', function () {
+        let storedZoomLevel = localStorage.getItem('userZoomLevel');
+        if (storedZoomLevel) {
+            document.body.style.zoom = `${storedZoomLevel}`;
+            // 현재 저장된 확대/축소 레벨의 인덱스를 로컬 스토리지에서 불러옵니다.
+            currentZoomIndex = zoomLevels.indexOf(parseFloat(storedZoomLevel));
+        }
+    });
+</script>
+
+</body>
+</html>

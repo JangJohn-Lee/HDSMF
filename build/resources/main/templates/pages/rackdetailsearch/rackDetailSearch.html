@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/layoutRackDetailSearch}">
+<!-- 사용자 CSS 추가 -->
+<th:block layout:fragment="css">
+    <style>
+
+    </style>
+</th:block>
+
+<div layout:fragment="content" class="content">
+    <div class="mt-0" id="releaseArea">
+        <div class="row px-2 mb-1 g-3 justify-content-between align-items-center">
+            <div class="d-flex justify-content-end">
+                <button id="goToHomeButton" class="btn p-0" type="button" data-bs-toggle="tooltip" data-bs-placement="top"
+                        title="메인">
+                    <span class="fas fa-home" style="width: 17px;height: 17px;"></span>
+                </button>
+                <button id="reloadButton" class="btn p-0 mx-3" type="button" data-bs-toggle="tooltip"
+                        data-bs-placement="top" title="새로고침">
+                    <span class="fas fa-undo" style="width: 16px;height: 16px;"></span>
+                </button>
+                <button id="rackPrintTabBtn" class="btn p-0" type="button" data-bs-toggle="tooltip"
+                        data-bs-placement="top" title="화면출력">
+                    <span class="fas fa-print" style="width: 16px;height: 16px;"></span>
+                </button>
+            </div>
+        </div>
+
+        <div class="row g-4" >
+            <!-- 테이블 영역 -->
+            <div class="col-12 order-1 order-xl-0">
+                <div>
+                    <!-- 테이블 영역 -->
+                    <div class="card shadow-none border border-300">
+
+                        <div class="card-body p-0">
+                            <!-- Rack 영역 -->
+                            <div class="p-5">
+                                <div class="h-100" >
+                                    <div id="containerContentBox" class="containerContentBox">
+                                        <div class="content-wrapper" id="tableTest" style="width: 100%; box-sizing: border-box;">
+                                        </div>
+                                        <script
+                                                src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+                                        <script>
+                                            let clickedButtonId = null; // 클릭한 버튼의 아이디를 저장할 전역 변수
+
+                                            $(function () {
+                                                sendRequest(1, 'button1');
+                                            })
+
+                                            function sendRequest(data, buttonId) {
+                                                $.ajax({
+                                                    url: '/hdsmf/rackdetailsearch/sendData?data=' + data,
+                                                    type: 'GET',
+                                                    dataType: 'html',
+                                                    success: function (data) {
+                                                        var tableTest = $('#tableTest');
+                                                        function removeAllchildren(tableTest) {
+                                                            while (tableTest.firstChild) {
+                                                                tableTest.removeChild(tableTest.firstChild);
+                                                            }
+                                                        }
+                                                        if (tableTest.children().length > 0) {
+                                                            removeAllchildren(tableTest[0]);
+                                                        }
+                                                        tableTest.append(data);
+
+                                                        // 클릭한 버튼에 .activeBtn 클래스 추가
+                                                        if (clickedButtonId) {
+                                                            const clickedButton = document.getElementById(clickedButtonId);
+                                                            $(clickedButton).addClass('activeBtn');
+                                                        }
+
+                                                        //클릭시 시간 업데이트
+                                                        updateCurrentTime();
+                                                    },
+                                                    error: function (error) {
+                                                        // AJAX 요청이 실패한 경우에 대한 처리
+                                                        console.log('Error:', error);
+                                                    }
+                                                });
+
+                                                // 클릭한 버튼의 아이디를 저장하는 함수 호출
+                                                saveClickedButtonId(buttonId);
+                                            }
+
+                                            // 클릭한 버튼의 아이디를 저장하는 함수
+                                            function saveClickedButtonId(buttonId) {
+                                                clickedButtonId = buttonId;
+                                            }
+
+                                            function updateCurrentTime() {
+                                                const now = new Date();
+                                                const formattedTime = now.toLocaleString();//현재 시간을 원하는 형식으로 포맷팅
+
+                                                // 'up-to-date' 요소를 찾아서 텍스트를 설정합니다.
+                                                const upToDateElem = document.querySelector('#up-to-date');
+                                                if (upToDateElem) {
+                                                    upToDateElem.textContent = "최종 조회시간 : " + formattedTime;
+                                                } else {
+                                                    console.error("'up-to-date' 요소를 찾을 수 없습니다.");
+                                                }
+                                            }
+                                        </script>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+</div>
+
+</html>

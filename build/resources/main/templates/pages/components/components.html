@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/layoutComponents}">
+
+<!-- 사용자 CSS 추가 -->
+<th:block layout:fragment="css">
+    <style>
+
+    </style>
+</th:block>
+<div layout:fragment="content" class="content">
+
+    <h2 class="mb-2 lh-sm" data-anchor="data-anchor">부품 정보 관리</h2>
+    <p class="text-700 lead mb-2">부품 리스트를 등록, 수정, 삭제 관리하는 페이지 입니다.</p>
+    <div class="mt-4">
+        <div class="row g-4">
+            <div class="col-12 col-xl-10 order-1 order-xl-0">
+                <div class="mb-9">
+                    <div class="card shadow-none border border-300 my-4">
+
+                        <div class="card-header px-4 py-3 border-bottom border-300 bg-soft">
+                            <div class="row g-3 justify-content-between align-items-center">
+                                <div class="col-12 col-md">
+                                    <h4 class="text-900 mb-0" data-anchor="data-anchor">검색</h4>
+                                </div>
+                                <div class="col col-md-auto">
+                                    <nav class="nav nav-underline justify-content-end doc-tab-nav align-items-center" role="tablist">
+                                        <button class="btn btn-link px-2 text-900 excel-file-export-btn" type="button" onclick="downloadExcelFile();">
+                                            <span class="fa fa-file-export me-1"></span>엑셀 다운로드
+                                        </button>
+
+                                        <button class="btn btn-link px-2 text-900 excel-form-file-btn" type="button" onclick="downloadExcel();">
+                                            <span class="fas fa-copy me-1"></span>양식 다운로드
+                                        </button>
+                                    </nav>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-body p-0">
+                            <div class="collapse code-collapse" id="docs-code">
+                            </div>
+
+                            <form action="/hdsmf/components/" method="post" class="row g-3 needs-validation" novalidate>
+                                <div class="p-3 code-to-copy">
+                                    <div class="border border-100 rounded-2 px-3 g-2 bg-primary-100">
+                                        <div class="row g-2 d-flex justify-content-between align-items-top mt-2 mb-3 gap-x-1 gap-y-1">
+
+                                            <!-- Select 요소 -->
+                                            <div class="col-12 col-sm-2" style="min-width: 100px;">
+                                                <select id="searchComponent" name="searchField" class="form-select form-select-lg mb-0 fs--1 text-700 form-floating" aria-label=".form-select-lg example" style="height: 50px;">
+                                                    <option value="품번" selected>품번</option>
+                                                    <option value="품명">제품명</option>
+                                                </select>
+                                            </div>
+
+                                            <!-- Input 요소 -->
+                                            <div class="col-12 col-sm-8 mb-0">
+                                                <input class="form-control form-control-lg form-floating" id="sizingInputLg" name="searchValue" type="text" required autocomplete="off" style="height: 50px;" />
+                                                <div class="invalid-feedback">품번 입력은 필수입니다</div>
+                                            </div>
+
+                                            <!-- Button 요소 -->
+                                            <div class="col-12 col-sm-2">
+                                                <button class="mb-0 btn btn-lg btn-primary w-100" type="submit" style="height: 50px;">검색</button>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+
+                    <div class="card shadow-none border border-300 mb-3">
+                        <div class="card-body p-0">
+                            <div class="text-900 mb-0" data-anchor="data-anchor" style="height: 0; overflow: hidden;">테이블</div>
+                            <div class="p-4 code-to-copy">
+                                <div class="d-flex align-items-center justify-content-end mb-3">
+                                    <div id="bulk-select-replace-element">
+                                        <div class="d-flex justify-content-center align-items-center">
+                                            <button id="stockRegBtn" class="buttonsReg btn btn-phoenix-success btn-sm d-flex align-items-center" type="button" data-bs-toggle="modal" data-bs-target="#stockRegModal">
+                                                <span class="fas fa-plus" data-fa-transform="shrink-3 down-2"></span>
+                                                <span class="ms-2 pt-1">등록</span>
+                                            </button>
+                                            <button class="btn btn-phoenix-success ms-2 btn-sm d-flex align-items-center" type="button" data-bs-toggle="modal" data-bs-target="#excelModal">
+                                                <span class="far fa-file-alt" data-fa-transform="shrink-3 down-2"></span>
+                                                <span class="ms-2 pt-1">엑셀등록</span>
+                                            </button>
+
+                                            <button class="btn btn-phoenix-success ms-2 btn-sm d-flex align-items-center buttonsCor" type="button" onclick="selectedComponentss();">
+                                                <span class="fa fa-pen-to-square" data-fa-transform="shrink-3 down-2"></span>
+                                                <span class="ms-2 pt-1">수정</span>
+                                            </button>
+
+                                            <button id="stockCorBtn" class="btn btn-phoenix-success ms-2 btn-sm d-flex align-items-center buttonsCor d-none" type="submit" data-bs-toggle="modal"
+                                                    data-bs-target="#stockCorModal">
+                                                <span class="fa fa-pen-to-square" data-fa-transform="shrink-3 down-2"></span>
+                                                <span class="ms-2 pt-1">수정</span>
+                                            </button>
+
+                                            <button class="buttonsChe btn btn-phoenix-danger ms-2 btn-sm d-flex align-items-center" type="submit" id="deleteButton" onclick="deleteSelectedComponents();">
+                                                <span class="fa fa-trash" data-fa-transform="shrink-3 down-2"></span>
+                                                <span class="ms-2 pt-1">삭제</span>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div id="componentsListBox">
+                                    <div class="componentsListTableBox table-responsive scrollbar">
+                                        <table class="table table-sm border-top border-200 fs--1 mb-0 table-hover componentsListTable" id="component_table_info">
+                                            <thead class="bg-primary-100">
+                                            <tr>
+                                                <th class="fs--1 p-0 align-middle" style="width: 50px;">
+                                                    <div class="form-check mb-0 fs-0 d-flex justify-content-center">
+                                                        <input type="checkbox" class="form-check-input" value = "1" id = "selectAllCheckBox" onclick="selectAll();" style="cursor: pointer">
+                                                    </div>
+                                                </th>
+                                                </th>
+                                                <th class="align-middle text-center px-2" style="width: 100px;">플랜트 <br> 번호</th>
+                                                <th class="align-middle text-center px-2" style="width: 130px;">품번</th>
+                                                <th class="align-middle text-center px-2" style="width: 130px;">카테고리명</th>
+                                                <th class="align-middle text-center px-2" style="width: 130px;">모델명</th>
+                                                <th class="align-middle text-center px-2" style="width: 130px;">완제품명</th>
+                                                <th class="align-middle text-center px-2" style="width: 160px;">소재품번</th>
+                                                <th class="align-middle text-center px-2" style="width: 120px;">소재무게</th>
+                                                <th class="align-middle text-center px-2" style="width: 120px;">완제품<br>무게</th>
+                                                <th class="align-middle text-center px-2" style="width: 120px;">공정상태</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            <tr th:each="component : ${componentsList}" >
+                                                <td class="fs--1 p-0 align-middle text-center">
+                                                    <div class="form-check mb-0 fs-0 d-flex justify-content-center">
+                                                        <input type="checkbox" class="form-check-input" name="checkbox" th:checked="false" th:value="${component.componentNo}"/>
+                                                    </div>
+                                                </td>
+                                                <td class="align-middle text-center px-3" th:text="${component.plantNo}"></td>
+                                                <td class="align-middle text-center px-3" th:text="${component.componentNo}"></td>
+                                                <td class="align-middle text-center px-3" th:text="${component.categoryName}"></td>
+                                                <td class="align-middle text-center px-3" th:text="${component.model}">
+<!--                                                    <span th:if="${component.model != ''}" th:text="${component.model}"></span>-->
+<!--                                                    <span th:unless="${component.model != ''}">-</span>-->
+                                                </td>
+                                                <td class="align-middle text-center px-3" th:text="${component.product}">
+<!--                                                    <span th:if="${component.product != ''}" th:text="${component.product}"></span>-->
+<!--                                                    <span th:unless="${component.product != ''}">-</span>-->
+                                                </td>
+                                                <td class="align-middle text-center px-3" th:text="${component.sNo}">
+<!--                                                    <span th:if="${component.sNo != ''}" th:text="${component.sNo}"></span>-->
+<!--                                                    <span th:unless="${component.sNo != ''}">-</span>-->
+                                                </td>
+                                                <td class="align-middle text-center px-3" th:text="${component.sWeight}"></td>
+                                                <td class="align-middle text-center px-3" th:text="${component.fWeight}">
+<!--                                                    <span th:if="${component.fWeight != 0.0 || component.fWeight != 0}" th:text="${component.fWeight}"></span>-->
+<!--                                                    <span th:unless="${component.fWeight != 0.0 || component.fWeight != 0 }">-</span>-->
+                                                </td>
+                                                <div th:switch="${component.componentState}">
+                                                    <td class="align-middle text-center px-3" th:case="''">0</td> <!--기업 데이터 새로 들어오면 삭제-->
+                                                    <td class="align-middle text-center px-3" th:case="0">완제품</td><!--기업 데이터 새로 들어오면 삭제-->
+                                                    <td class="align-middle text-center px-3" th:case="1">소재</td>
+                                                    <td class="align-middle text-center px-3" th:case="2">cnc1</td>
+                                                    <td class="align-middle text-center px-3" th:case="3">cnc2</td>
+                                                    <td class="align-middle text-center px-3" th:case="4">mct1</td>
+                                                </div>
+                                            </tr>
+                                            </tbody>
+
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+
+            <!-- 페이지 네비게이션 바 -->
+            <div class="col-12 col-xl-2">
+                <div class="position-sticky mt-xl-4" style="top: 80px;">
+                    <div class="mb-6">
+                        <div class="d-flex justify-content-end">
+                            <button id="goToHomeButton" class="btn p-0" type="button" data-bs-toggle="tooltip" data-bs-placement="top"
+                                    title="메인">
+                                <span class="fas fa-home" style="width: 17px;height: 17px;"></span>
+                            </button>
+                            <button id="reloadButton" class="btn p-0 mx-3" type="button" data-bs-toggle="tooltip"
+                                    data-bs-placement="top" title="새로고침">
+                                <span class="fas fa-undo" style="width: 16px;height: 16px;"></span>
+                            </button>
+                            <button id="rackPrintTabBtn" class="btn p-0" type="button" data-bs-toggle="tooltip"
+                                    data-bs-placement="top" title="화면출력">
+                                <span class="fas fa-print" style="width: 16px;height: 16px;"></span>
+                            </button>
+                        </div>
+                        <hr class="text-300" />
+                        <ul class="nav nav-vertical flex-column doc-nav" data-doc-nav="data-doc-nav">
+                            <li class="nav-item"> <a class="nav-link" href="#">부품 정보 관리</a>
+                            </li>
+                            <li class="nav-item"> <a class="nav-link" href="#검색">검색</a>
+                            </li>
+                            <li class="nav-item"> <a class="nav-link" href="#테이블">테이블</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 다운로드 되었습니다 toast -->
+    <div class="position-fixed bottom-0 end-0 p-3" style="z-index: 5">
+        <div class="toast align-items-center text-white bg-dark border-0 light" id="excel-file-export-toast" role="alert" aria-live="assertive" aria-atomic="true">
+            <div class="d-flex">
+                <div class="toast-body p-3 d-flex align-items-center">
+                    <span class="fas fa-check-circle text-success fs-3 me-3"></span><p class="mb-0 flex-1">파일 다운로드 시작</p>
+                </div>
+                <button class="btn-close btn-close-white me-2 m-auto" type="button" data-bs-dismiss="toast" aria-label="Close"></button>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- 모달창  -->
+    <!-- 등록 모달 -->
+    <div class="modal fade" id="stockRegModal" tabindex="-1" aria-labelledby="stockRegModalLabel" aria-hidden="true">
+        <button type="button" class="btn-close btn-close-white position-fixed top-0 end-0 p-5 fs-3" data-bs-dismiss="modal" aria-label="Close"></button>
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content px-3 py-2 border rounded-4">
+                <div class="modal-header">
+                    <h5 class="modal-title fs-2" id="stockRegModalLabel">품목등록</h5>
+                </div>
+                <div class="modal-body">
+                    <!-- regSearchbar -->
+                    <form action="/hdsmf/components/register" method="post" class="needs-validation" novalidate>
+                        <div class="regSearchbar">
+                            <table class="table table-borderless" id="itemDataTable1" width="100%" cellspacing="0">
+                                <tr class="RegSearchbarTr1">
+                                    <td class="RegSearchbarDateTd">
+                                        <label for="plantNo">플랜트번호</label>
+                                    </td>
+                                    <td class="DateContent">
+                                        <input type="text" id="plantNo" name="plantNo" class="form-control" style="width: 100%; height: 100%; text-align: center;" required autocomplete="off">
+                                        <div class="invalid-feedback">플랜트 번호 입력은 필수입니다</div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="stockRegSearchbarDateTd">
+                                        <label for="componentNo">품번</label>
+                                    </td>
+                                    <td class="stockRegSearchbarDateContent">
+                                        <input type="text" id="componentNo" name="componentNo" class="form-control" style="width: 100%; height: 100%; text-align: center;" required autocomplete="off" onkeyup="componentKey(this);">
+                                        <div class="invalid-feedback">품번 입력은 필수입니다</div>
+                                        <div id="componentNo-valid" style="display: none; margin-top: 0.25rem; font-size: 12px; color: rgb(255,255,255);"> 이미 사용중인 품번입니다.</div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="stockRegSearchbarDateTd">
+                                        <label for="categoryName">카테고리명</label>
+                                    </td>
+                                    <td class="stockRegSearchbarDateContent">
+                                        <input type="text" id="categoryName" name="categoryName" class="form-control" style="width: 100%; height: 100%; text-align: center;" required autocomplete="off">
+                                        <div class="invalid-feedback">카테고리명 입력은 필수입니다</div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="stockRegSearchbarDateTd">
+                                        <label for="model">모델명</label>
+                                    </td>
+                                    <td class="stockRegSearchbarDateContent">
+                                        <input type="text" id="model" name="model" class="form-control" style="width: 100%; height: 100%; text-align: center;" autocomplete="off">
+
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="stockRegSearchbarDateTd">
+                                        <label for="componentState">공정상태</label>
+                                    </td>
+                                    <td class="stockRegSearchbarDateContent">
+                                        <input type="text" id="componentState" name="componentState" class="form-control" style="width: 100%; height: 100%; text-align: center;" required autocomplete="off">
+                                        <div class="invalid-feedback">공정상태 입력은 필수입니다</div>
+                                    </td>
+                                </tr>
+                                <tr class="stockRegSearchbarTr2">
+                                    <td class="stockRegSearchbarDateTd">
+                                        <label for="product">완제품명</label>
+                                    </td>
+                                    <td class="stockRegSearchbarDateContent">
+                                        <input type="text" id="product" name="product" class="form-control" style="width: 100%; height: 100%; text-align: center;" autocomplete="off">
+                                        </td>
+                                </tr>
+                                <tr>
+                                    <td class="stockRegSearchbarDateTd">
+                                        <label for="sNo">소재품번</label>
+                                    </td>
+                                    <td class="stockRegSearchbarDateContent">
+                                        <input type="text" id="sNo" name="sNo" class="form-control" style="width: 100%; height: 100%; text-align: center;" autocomplete="off">
+                                        </td>
+                                </tr>
+                                <tr>
+                                    <td class="stockRegSearchbarDateTd">
+                                        <label for="sWeight">소재무게</label>
+                                    </td>
+                                    <td class="stockRegSearchbarDateContent">
+                                        <input type="text" id="sWeight" name="sWeight" class="form-control" style="width: 100%; height: 100%; text-align: center;" required autocomplete="off">
+                                        <div class="invalid-feedback">소재무게 입력은 필수입니다</div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="stockRegSearchbarDateTd">
+                                        <label for="fWeight">완제품무게</label>
+                                    </td>
+                                    <td class="stockRegSearchbarDateContent">
+                                        <input type="text" id="fWeight" name="fWeight" class="form-control" style="width: 100%; height: 100%; text-align: center;" autocomplete="off">
+                                        </td>
+                                </tr>
+                            </table>
+
+                            <div class="modal-footer">
+                                <div class="stockRegButton">
+                                    <button type="submit" id="sButton" class="stockRegReg btn btn-primary px-5 px-sm-5">저장</button>
+                                    <input type="reset" class="excelClose02 btn btn-primary px-5 px-sm-5" data-bs-dismiss="modal" value="취소"></input>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                    <!-- regSearchbar 끝 -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 수정 모달 -->
+    <div class="modal fade" id="stockCorModal" tabindex="-1" aria-labelledby="stockCorModalLabel" aria-hidden="true">
+        <button type="button" class="btn-close btn-close-white position-fixed top-0 end-0 p-5 fs-3" data-bs-dismiss="modal"
+                aria-label="Close"></button>
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content px-3 py-2 border rounded-4">
+                <div class="modal-header">
+                    <h5 class="modal-title fs-2" id="stockCorModalLabel">품목수정</h5>
+                </div>
+                <div class="modal-body">
+                    <form action=""  class="needs-validation" novalidate>
+                        <div class="regSearchbar">
+                            <table class="table table-borderless" id="itemDataTable2" width="100%" cellspacing="0">
+                                <tr class="RegSearchbarTr1" style="height: 30px;">
+                                    <td class="RegSearchbarDateTd">
+                                        <label for="plantNo1">플랜트번호</label>
+                                    </td>
+                                    <td class="stockRegSearchbarDateContent">
+                                        <input type="text" id="plantNo1" name="plantNo1" class="form-control"
+                                               style="width: 100%; height: 100%; text-align: center;" required autocomplete="off">
+                                        <div class="invalid-feedback">플랜트 입력은 필수입니다</div>
+                                    </td>
+                                </tr>
+                                <tr style="height: 30px;">
+                                    <td class="stockRegSearchbarDateTd">
+                                        <label for="componentNo1">품번</label>
+                                    </td>
+                                    <td class="stockRegSearchbarDateContent">
+                                        <input type="text" id="componentNo1" name="componentNo1" class="form-control"
+                                               style="width: 100%; height: 100%; text-align: center;" disabled required autocomplete="off">
+                                        <div class="invalid-feedback">품번 입력은 필수입니다</div>
+                                    </td>
+                                </tr>
+                                <tr style="height: 30px;">
+                                    <td class="stockRegSearchbarDateTd">
+                                        <label for="categoryName1">카테고리명</label>
+                                    </td>
+                                    <td class="stockRegSearchbarDateContent">
+                                        <input type="text" id="categoryName1" name="categoryName1" class="form-control"
+                                               style="width: 100%; height: 100%; text-align: center;" required autocomplete="off">
+                                        <div class="invalid-feedback">카테고리명 입력은 필수입니다</div>
+                                    </td>
+                                </tr>
+                                <tr style="height: 30px;">
+                                    <td class="stockRegSearchbarDateTd">
+                                        <label for="model1">모델명</label>
+                                    </td>
+                                    <td class="stockRegSearchbarDateContent">
+                                        <input type="text" id="model1" name="model1" class="form-control"
+                                               style="width: 100%; height: 100%; text-align: center;" autocomplete="off">
+                                        <div class="invalid-feedback">모델명 입력은 필수입니다</div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="stockRegSearchbarDateTd">
+                                        <label for="componentState1">공정상태</label>
+                                    </td>
+                                    <td class="stockRegSearchbarDateContent">
+                                        <input type="text" id="componentState1" name="componentState1" class="form-control" style="width: 100%; height: 100%; text-align: center;" required autocomplete="off">
+                                        <div class="invalid-feedback">공정상태 입력은 필수입니다</div>
+                                    </td>
+                                </tr>
+                                <tr class="stockRegSearchbarTr2" style="height: 30px;">
+                                    <td class="stockRegSearchbarDateTd">
+                                        <label for="product1">완제품명</label>
+                                    </td>
+                                    <td class="stockRegSearchbarDateContent">
+                                        <input type="text" id="product1" name="product1" class="form-control"
+                                               style="width: 100%; height: 100%; text-align: center;" autocomplete="off">
+                                    </td>
+                                </tr>
+                                <tr style="height: 30px;">
+                                    <td class="stockRegSearchbarDateTd">
+                                        <label for="sNo1">소재품번</label>
+                                    </td>
+                                    <td class="stockRegSearchbarDateContent">
+                                        <input type="text" id="sNo1" name="sNo1" class="form-control"
+                                               style="width: 100%; height: 100%; text-align: center;" autocomplete="off">
+                                    </td>
+                                </tr>
+                                <tr style="height: 30px;">
+                                    <td class="stockRegSearchbarDateTd">
+                                        <label for="sWeight1">소재무게</label>
+                                    </td>
+                                    <td class="stockRegSearchbarDateContent">
+                                        <input type="text" id="sWeight1" name="sWeight1" class="form-control"
+                                               style="width: 100%; height: 100%; text-align: center;" required autocomplete="off">
+                                        <div class="invalid-feedback">무게 입력은 필수입니다</div>
+                                    </td>
+                                </tr>
+                                <tr style="height: 30px;">
+                                    <td class="stockRegSearchbarDateTd">
+                                        <label for="fWeight1">완제품무게</label>
+                                    </td>
+                                    <td class="stockRegSearchbarDateContent">
+                                        <input type="text" id="fWeight1" name="fWeight1" class="form-control"
+                                               style="width: 100%; height: 100%; text-align: center;" autocomplete="off">
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+
+                        <button id="editComponentModalBtn" type="submit" class="stockCorReg btn btn-primary px-5 px-sm-5 d-none"
+                                onclick="updatedComponents()">저장</button>
+                    </form>
+                    <!-- regSearchbar 끝 -->
+                </div>
+                <div class="modal-footer">
+                    <div class="RegButton">
+                        <label for="editComponentModalBtn" class="stockCorReg btn btn-primary px-5 px-sm-5">저장</label>
+                        <input type="button" class="excelClose02 btn btn-primary px-5 px-sm-5" data-bs-dismiss="modal"
+                               value="취소"></input>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 엑셀 일괄 모달 -->
+    <div class="modal fade" id="excelModal" tabindex="-1" aria-labelledby="excelModalLabel" aria-hidden="true">
+        <button type="button" class="btn-close btn-close-white position-fixed top-0 end-0 p-5 fs-3" data-bs-dismiss="modal" aria-label="Close"></button>
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content px-3 py-2 border rounded-4">
+                <div class="modal-header">
+                    <h5 class="modal-title fs-2" id="excelModalLabel">엑셀등록</h5>
+                </div>
+                <div class="modal-body">
+                    <p><strong>STEP 1 : </strong> <input class="btn btn-outline-primary mx-3 px-6 px-sm-6" type="button" onclick="downloadExcel();" value="양식 다운로드"> 을 다운로드 한다.</p>
+
+                    <div class="d-flex align-items-center justify-content-center mt-3">
+                        <p class="pt-3" style="width: 110px;"><strong>STEP 2 :</strong></p>
+                        <input class="form-control mx-3" style="width: 100%;" id="uploadFile" type="file" />
+                        <p class="pt-3" style="width: 120px;">을 한다.</p>
+                    </div>
+                    <p class="selectFileNotice ps-11" style="color: red; display: none;">파일을 선택해주세요</p>
+
+                    <p class="mt-3"><strong>STEP 3 : </strong> <input class="stockRegSearchbarDateContentBtn btn btn-primary mx-3 px-6 px-sm-6" type="button" onclick="uploadFileSave()" value="파일 업로드"> 를 누른다.</p>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-primary modalDismissBtn" type="button" data-bs-dismiss="modal"  style="width: 100px;">취소</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</html>

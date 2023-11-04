@@ -1,0 +1,2693 @@
+@charset "UTF-8";
+
+#container {
+    /*border: 1px solid red;*/
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: calc(100vw - 180px);
+    height: 100vh;
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    /* background-image: url("../images/main_visual_01.jpg"); */
+    /* background-repeat: no-repeat;
+background-size: cover; */
+    overflow: hidden;
+    opacity: 1;
+    transform-origin: left top;
+}
+
+#container.active01 {
+    position: absolute;
+    top: 0vh;
+    left: 100vw;
+    width: 100vh;
+    /* 화면 높이에 맞게 너비 설정 */
+    height: 100vw;
+    /* 화면 너비에 맞게 높이 설정 */
+    transform: translate(0, 50vw);
+    transition: transform 0.5s;
+    /*transform-origin: center;*/
+    /*border: 1px solid red;*/
+    overflow: hidden;
+    background-size: contain;
+}
+
+#container.active02 {
+    position: absolute;
+    top: 100vh;
+    left: 100vw;
+    width: 100vw;
+    /* 화면 높이에 맞게 너비 설정 */
+    height: 100vh;
+    /* 화면 너비에 맞게 높이 설정 */
+    transform: translate(0, 50vw);
+    transition: transform 0.5s;
+    /*transform-origin: center;*/
+    /*border: 1px solid red;*/
+    overflow: hidden;
+    background-size: contain;
+}
+
+#container.active03 {
+    position: absolute;
+    top: 100vh;
+    left: 0vw;
+    width: 100vh;
+    /* 화면 높이에 맞게 너비 설정 */
+    height: 100vw;
+    /* 화면 너비에 맞게 높이 설정 */
+    transform: translate(0, 50vw);
+    transition: transform 0.5s;
+    /*transform-origin: center;*/
+    /*border: 1px solid red;*/
+    overflow: hidden;
+    background-size: contain;
+}
+
+#container.active04 {
+    position: absolute;
+    top: 0vh;
+    left: 0vw;
+    width: 100vw;
+    /* 화면 높이에 맞게 너비 설정 */
+    height: 100vh;
+    /* 화면 너비에 맞게 높이 설정 */
+    transform: translate(0, 50vw);
+    transition: transform 0.5s;
+    /*transform-origin: center;*/
+    /*border: 1px solid red;*/
+    overflow: hidden;
+    background-size: contain;
+}
+
+
+
+
+#container::after {
+    position: fixed;
+    top: -30px;
+    left: -40px;
+    /* border: 1px solid red; */
+    width: 110vw;
+    height: 110vh;
+    /* box-sizing: border-box; */
+    display: flex;
+    align-items: center;
+    background-image: url("../images/main_visual_01.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    overflow: hidden;
+    filter: blur(10px);
+    content: "";
+    animation: containerBG 1s alternate;
+    animation-timing-function: ease;
+}
+
+
+#containerContent {
+    flex: 1;
+    padding: 5vh 3vw;
+    /* overflow-y: auto; */
+    /*overflow: hidden;*/
+    box-sizing: border-box;
+    background-color: #ffffff;
+    width: 100%;
+    height: 100vh;
+    z-index: 7000;
+    /*border: 2px solid blue;*/
+}
+
+#containerContent.active {
+    transform: translate(0, 0vh);
+    height: 100vw;
+    transition: transform 0.5s;
+}
+
+
+#containerContent #containerContentTitleBox {
+    /* display: flex;
+justify-content: space-between; */
+    /* align-items: center; */
+    /*margin-bottom: 15px;*/
+    /*border: 5px solid green;*/
+    height: 8.5vh;
+}
+
+#containerContent #containerContentTitleBox .containerContentBoxTitle{
+    display: flex;
+    justify-content: space-between;
+    /*align-items: center;*/
+    height: 100%;
+}
+
+#containerContent #containerContentTitleBox .containerContentBoxTitle h1{
+    width: 320px;
+    height: 100%;
+}
+
+#containerContent #containerContentTitleBox .containerContentBoxTitle input{
+    width: 20px;
+    height: 20px;
+    display: none;
+}
+
+#containerContent #containerContentTitleBox .containerContentBoxTitle label img{
+    width: 25px;
+    height: 25px;
+    cursor: pointer;
+}
+
+#containerContent #containerContentTitleBox .containerContentBoxTitle label img:hover{
+    width: 30px;
+    height: 30px;
+    cursor: pointer;
+}
+
+#containerContentTitleBox .containerContentBoxTitleAlertBox{
+    /*border: 5px solid green;*/
+    display: flex;
+    justify-content: space-between;
+    width: calc(100vw - 350px - 320px - 50px);
+    height: 40px;
+}
+
+#containerContentTitleBox .containerContentBoxTitleAlertBox .containerContentBoxTitleAlertBoxKnowBox {
+    /*border: 1px solid red;*/
+    background-color: #888888;
+    border-radius: 10px;
+    width: 49%;
+    display: flex;
+    justify-content: space-between;
+}
+
+#containerContentTitleBox .containerContentBoxTitleAlertBox .containerContentBoxTitleAlertBoxKnow {
+    /*border: 1px solid red;*/
+    border-radius: 10px;
+    width: 15%;
+    text-align: center;
+}
+
+#containerContentTitleBox .containerContentBoxTitleAlertBox .containerContentBoxTitleAlertBoxKnowBox .containerContentBoxTitleAlertBoxKnow {
+    /*border: 1px solid red;*/
+    width: 70px;
+    background-color: #555555;
+    color: #ffffff;
+    font-size: 15px;
+    line-height: 40px;
+}
+
+#containerContentTitleBox .containerContentBoxTitleAlertBox .containerContentBoxTitleAlertBoxKnowBox .containerContentBoxTitleAlertBoxKnowUnits {
+    width: 85%;
+    height: 40px;
+    overflow: hidden;
+}
+
+#containerContentTitleBox .containerContentBoxTitleAlertBox .containerContentBoxTitleAlertBoxKnowBox .containerContentBoxTitleAlertBoxKnowUnits .containerContentBoxTitleAlertBoxKnowUnitsSlider {
+    animation-name: noticeSlider;
+    animation-duration: 8s;
+    animation-iteration-count: infinite;
+}
+
+@keyframes noticeSlider {
+    0% {
+        transform: translateY(0);
+    }
+    14.29% {
+        transform: translateY(0);
+    }
+    28.57% {
+        transform: translateY(-40px);
+    }
+    42.86% {
+        transform: translateY(-40px);
+    }
+    57.14% {
+        transform: translateY(-80px);
+    }
+    71.43% {
+        transform: translateY(-80px);
+    }
+    85.71% {
+        transform: translateY(-120px);
+    }
+    92.86% {
+        transform: translateY(-120px);
+    }
+    100% {
+        transform: translateY(0);
+    }
+}
+
+
+#containerContentTitleBox .containerContentBoxTitleAlertBox .containerContentBoxTitleAlertBoxKnowBox .containerContentBoxTitleAlertBoxKnowUnits .containerContentBoxTitleAlertBoxKnowUnit {
+    height: 40px;
+    color: #ffffff;
+    padding: 5px;
+}
+
+#containerContentTitleBox .containerContentBoxTitleAlertBox .containerContentBoxTitleAlertBoxKnowBox .containerContentBoxTitleAlertBoxKnowUnits .containerContentBoxTitleAlertBoxKnowUnit a{
+    line-height: 30px;
+    height: 30px;
+    display: block;
+    color: #ffffff;
+    padding-left: 15px;
+}
+
+#containerContentTitleBox .containerContentBoxTitleAlertBox .containerContentBoxTitleAlertBoxKnowBox .containerContentBoxTitleAlertBoxKnowUnits .containerContentBoxTitleAlertBoxKnowUnit a:hover {
+    background-color: #555555;
+    border-radius: 10px;
+}
+
+
+
+
+
+
+#containerContentTitleBox .containerContentBoxTitleAlertBox .containerContentBoxTitleAlertBoxAlertBox {
+    /*border: 1px solid red;*/
+    background-color: #888888;
+    border-radius: 10px;
+    width: 49%;
+    display: flex;
+    justify-content: space-between;
+}
+
+#containerContentTitleBox .containerContentBoxTitleAlertBox .containerContentBoxTitleAlertBoxAlert {
+    /*border: 1px solid red;*/
+    width: 70px;
+    border-radius: 10px;
+    width: 15%;
+    text-align: center;
+}
+
+#containerContentTitleBox .containerContentBoxTitleAlertBox .containerContentBoxTitleAlertBoxAlertBox .containerContentBoxTitleAlertBoxAlert {
+    /*border: 1px solid red;*/
+    background-color: #555555;
+    color: #ffffff;
+    font-size: 15px;
+    line-height: 40px;
+}
+
+#containerContentTitleBox .containerContentBoxTitleAlertBox .containerContentBoxTitleAlertBoxAlertBox .containerContentBoxTitleAlertBoxAlertUnits {
+    width: 85%;
+    height: 40px;
+    overflow: hidden;
+}
+
+#containerContentTitleBox .containerContentBoxTitleAlertBox .containerContentBoxTitleAlertBoxAlertBox .containerContentBoxTitleAlertBoxAlertUnits .containerContentBoxTitleAlertBoxAlertUnitsSlider {
+    animation-name: alertSlider;
+    animation-duration: 8s;
+    animation-iteration-count: infinite;
+}
+
+@keyframes alertSlider {
+    0% {
+        transform: translateY(0);
+    }
+    14.29% {
+        transform: translateY(0);
+    }
+    28.57% {
+        transform: translateY(-40px);
+    }
+    42.86% {
+        transform: translateY(-40px);
+    }
+    57.14% {
+        transform: translateY(-80px);
+    }
+    71.43% {
+        transform: translateY(-80px);
+    }
+    85.71% {
+        transform: translateY(-120px);
+    }
+    92.86% {
+        transform: translateY(-120px);
+    }
+    100% {
+        transform: translateY(0);
+    }
+}
+
+#containerContentTitleBox .containerContentBoxTitleAlertBox .containerContentBoxTitleAlertBoxAlertBox .containerContentBoxTitleAlertBoxAlertUnits .containerContentBoxTitleAlertBoxAlertUnit {
+    height: 40px;
+    color: #ffffff;
+    padding: 5px;
+}
+
+#containerContentTitleBox .containerContentBoxTitleAlertBox .containerContentBoxTitleAlertBoxAlertBox .containerContentBoxTitleAlertBoxAlertUnits .containerContentBoxTitleAlertBoxAlertUnit a{
+    line-height: 30px;
+    height: 30px;
+    display: block;
+    color: #ffffff;
+    padding-left: 15px;
+}
+
+#containerContentTitleBox .containerContentBoxTitleAlertBox .containerContentBoxTitleAlertBoxAlertBox .containerContentBoxTitleAlertBoxAlertUnits .containerContentBoxTitleAlertBoxAlertUnit a:hover {
+    background-color: #555555;
+    border-radius: 10px;
+}
+
+
+
+.containerContentBoxTitleBtnsBox{
+    width: 350px;
+    height: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: space-between;
+}
+
+
+#containerContentBoxTitleBtns{
+    /*border: 1px solid red;*/
+    display: flex;
+    justify-content: right;
+    align-items: center;
+    width: 100%;
+    height: calc(100% - 40px);
+}
+
+
+#goToHomeButton{
+    width: 50px;
+    height: 30px;
+    background-color: transparent;
+    /*border: 1px solid red;*/
+    position: relative; /* position이 relative로 설정되어 있어야 :after의 위치를 제어할 수 있습니다. */
+}
+
+#goToHomeButton:hover:after {
+    content: '메인';
+    position: absolute;
+    top: 32px;
+    left: -25px;
+    /* border: 1px solid red; */
+    width: 100px;
+    height: 20px;
+    background-color: aqua;
+    font-size: 15px;
+}
+
+#goToHomeButton:hover:before {
+    content: '';
+    position: absolute;
+    top: 28px;
+    left: 19px;
+    /* border: 1px solid red; */
+    width: 10px;
+    height: 10px;
+    background-color: aqua;
+    font-size: 15px;
+    transform: rotate(45deg);
+}
+
+#goToHomeButton img{
+    width: 25px;
+    height: 25px;
+    /*border: 1px solid red;*/
+}
+
+#goToHomeButton img:hover{
+   width: 33px;
+   height: 33px;
+     transition: 0.1s;
+   /*border: 1px solid red;*/
+}
+
+#fullScreenButton{
+    width: 50px;
+    height: 30px;
+    background-color: transparent;
+    /*border: 1px solid red;*/
+    display: none;
+}
+
+#fullScreenButton img{
+    width: 27px;
+    height: 27px;
+    /*border: 1px solid red;*/
+}
+
+#fullScreenButton img:hover{
+   width: 33px;
+   height: 33px;
+     transition: 0.1s;
+   /*border: 1px solid red;*/
+}
+
+
+#reloadButton{
+    width: 50px;
+    height: 30px;
+    background-color: transparent;
+    /*border: 1px solid red;*/
+    position: relative; /* position이 relative로 설정되어 있어야 :after의 위치를 제어할 수 있습니다. */
+}
+
+#reloadButton:hover:after {
+    content: '새로고침';
+    position: absolute;
+    top: 32px;
+    left: -25px;
+    /* border: 1px solid red; */
+    width: 100px;
+    height: 20px;
+    background-color: aqua;
+    font-size: 15px;
+}
+
+#reloadButton:hover:before {
+    content: '';
+    position: absolute;
+    top: 28px;
+    left: 19px;
+    /* border: 1px solid red; */
+    width: 10px;
+    height: 10px;
+    background-color: aqua;
+    font-size: 15px;
+    transform: rotate(45deg);
+}
+
+
+#reloadButton img{
+    width: 27px;
+    height: 27px;
+    /*border: 1px solid red;*/
+}
+
+#reloadButton img:hover{
+   width: 33px;
+   height: 33px;
+     transition: 0.1s;
+   /*border: 1px solid red;*/
+}
+
+#rotateButton{
+    width: 50px;
+    height: 30px;
+    background-color: transparent;
+    /*border: 1px solid red;*/
+    display: none;
+}
+
+#rotateButton img{
+    width: 27px;
+    height: 27px;
+    /*border: 1px solid red;*/
+}
+
+#rotateButton img:hover{
+     width: 33px;
+     height: 33px;
+     transition: 0.1s;
+     /*border: 1px solid red;*/
+ }
+
+
+#rackPrintTabBtn{
+    width: 50px;
+    height: 27px;
+    background-color: transparent;
+    /*border: 1px solid red;*/
+    position: relative; /* position이 relative로 설정되어 있어야 :after의 위치를 제어할 수 있습니다. */
+}
+
+#rackPrintTabBtn:hover:after {
+    content: '인쇄';
+    position: absolute;
+    top: 32px;
+    left: -25px;
+    /* border: 1px solid red; */
+    width: 100px;
+    height: 20px;
+    background-color: aqua;
+    font-size: 15px;
+}
+
+#rackPrintTabBtn:hover:before {
+    content: '';
+    position: absolute;
+    top: 28px;
+    left: 19px;
+    /* border: 1px solid red; */
+    width: 10px;
+    height: 10px;
+    background-color: aqua;
+    font-size: 15px;
+    transform: rotate(45deg);
+}
+
+#rackPrintTabBtn img{
+    width: 25px;
+    height: 25px;
+    /*border: 1px solid red;*/
+}
+
+
+#rackTabsBtn {
+    /*border: 5px solid red;*/
+    width: 100%;
+    height: 40px;
+    text-align: right;
+    display: none;
+}
+
+#rackPrintTabBtn img:hover{
+    width: 30px;
+    height: 30px;
+     transition: 0.1s;
+    /*border: 1px solid red;*/
+}
+
+#rackTabsBtn button{
+    width: 100px;
+    height: 40px;
+    font-size: 18px;
+    /*box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);*/
+    border-radius: 10px 0 0 0;
+    /* cursor: pointer; */
+    border: 0px solid blue;
+    /*background-color: #ddd;*/
+}
+
+#rackStatusTabBtn{
+    /*background-color: #eee;*/
+    background-color: #eee;
+}
+
+#rackSearchTabBtn{
+    /*background-color: #ddd;*/
+    background-color: #ddd;
+}
+
+#rackEditTabBtn{
+    background-color: #ddd;
+}
+
+input[type="text"] {
+    width: 275px;
+    height: 45px;
+    text-align: center;
+    font-size: 24px;
+    /*border: 5px solid red;*/
+}
+
+input[type="submit"] {
+    width: 100px;
+    height: 30px;
+    font-size: 18px;
+    /*box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);*/
+    /* cursor: pointer; */
+    border: 0px solid blue;
+    background-color: #ddd;
+}
+
+button{
+    width: 100px;
+    height: 30px;
+    font-size: 18px;
+    /*box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);*/
+    /* cursor: pointer; */
+    border: 0px solid blue;
+    background-color: #ddd;
+}
+
+button:hover {
+    background-color: #ddd;
+    z-index: 6000;
+}
+
+
+
+#containerContentBox{
+    /*border: 5px solid pink;*/
+    height: calc(100vh - 10vh - 8.5vh);
+    overflow: hidden;
+}
+
+
+#containerContentBox.active{
+    height: 100vw;
+}
+
+
+#hrdWarehouserackeditSystemtableForm {
+    /* border: 1px solid #B9B9B9; */
+    display: flex;
+    justify-content: space-between;
+    /*border: 10px solid blue;*/
+    height: calc(100vh - 10vh - 8.5vh);
+    box-sizing: border-box;
+}
+
+
+#hrdWarehouserackeditSystemtableForm.active {
+    /* border: 1px solid #B9B9B9; */
+    display: block;
+    justify-content: space-between;
+    /*border: 10px solid blue;*/
+    height: 47vw;
+    box-sizing: border-box;
+}
+
+
+
+
+
+#hrdWarehouserackeditSystemtableForm #hrdWarehouserackeditSystemtableFormBox {
+    /* border: 1px solid #B9B9B9; */
+    /* margin-top: 20px; */
+    width: calc(100% - 455px);
+    height: calc(100vh - 10vh - 8.5vh);
+    /* border: 1px solid red; */
+    box-sizing: border-box;
+    /* background-color: #f7f8ff; */
+    position: relative;
+}
+
+#hrdWarehouserackeditSystemtableForm #hrdWarehouserackeditSystemtableFormBox.active {
+    /* border: 1px solid #B9B9B9; */
+    margin-top: 50px;
+    margin-left: 25px;
+    width: 100%;
+    height: 47vw;
+    /*border: 1px solid red;*/
+    box-sizing: border-box;
+    /*background-color: #f7f8ff;*/
+}
+
+
+#hrdWarehouserackeditSystemtableForm #hrdWarehouserackeditSystemtableFormBox .rackTableLayout01{
+    overflow-y: auto;
+    height: calc((100vh - 10vh - 8.5vh));
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+}
+
+#hrdWarehouserackeditSystemtableForm #hrdWarehouserackeditSystemtableFormBox .rackTableLayout02{
+    overflow-y: auto;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+}
+
+
+#hrdWarehouserackeditSystemtableForm #hrdWarehouserackeditSystemtableFormBox .rackTableLayout01.active{
+    overflow-y: auto;
+    height: 47vw;
+}
+
+#hrdWarehouserackeditSystemtableForm #hrdWarehouserackeditSystemtableFormBox .rackTableLayout02.active{
+    overflow-y: auto;
+    height: 0%;
+}
+
+
+
+
+
+
+#hrdWarehouserackeditSystemtableForm #hrdWarehouserackeditSystemtableFormBoxControl.active {
+    width: 95%;
+    height: 46vw;
+    margin: 0 auto;
+    /*height: 40vw;*/
+}
+
+
+
+
+#hrdWarehouserackeditSystemtableFormBox .hrdWarehouserackeditSystemtableFormBox01 {
+    width: 100%;
+    height: calc(((100vh - 10vh - 8.5vh) / 2) - 2vh);
+    /*border: 5px solid green;*/
+    margin-bottom: 4vh;
+    overflow: hidden;
+    display: flex;
+    justify-content: left;
+}
+
+#hrdWarehouserackeditSystemtableFormBox .hrdWarehouserackeditSystemtableFormBox02 {
+    width: 100%;
+    height: calc(((100vh - 10vh - 8.5vh ) /2) - 2vh);
+    /*border: 5px solid green;*/
+    margin-bottom: 0px;
+    overflow: hidden;
+    display: flex;
+    justify-content: left;
+}
+
+
+#hrdWarehouserackeditSystemtableFormBox .hrdWarehouserackeditSystemtableFormBox01.active {
+    width: 100%;
+    height: 22.5vw;
+    margin-bottom: 1vw;
+}
+
+#hrdWarehouserackeditSystemtableFormBox .hrdWarehouserackeditSystemtableFormBox02.active {
+    width: 100%;
+    height: 22.5vw;
+    margin-bottom: 1vw;
+}
+
+
+
+
+
+
+
+
+
+#hrdWarehouserackeditSystemtableFormBox .tableBox {
+    position: relative;
+    width: 17%;
+    overflow: hidden;
+    border: 3px solid pink;
+}
+
+#hrdWarehouserackeditSystemtableFormBox .table-caption {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    font-size: 50px;
+    font-weight: bold;
+    color: #999;
+}
+
+#hrdWarehouserackeditSystemtableFormBox table {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    min-width: 50px;
+    max-width: 400px;
+    height: 100%;
+    border-collapse: collapse;
+    /*border: 2px solid aqua;*/
+    table-layout: fixed;
+}
+
+
+
+
+#hrdWarehouserackeditSystemtableForm table.rack td .locationCoordinates{
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    font-size: 13px;
+    /* font-weight: bold; */
+    color: #eeeeee;
+    z-index: 8800;
+}
+
+
+
+
+#hrdWarehouserackeditSystemtableForm table.rack td .rackCell {
+    font-size: 1px;
+    opacity: 1;
+    color: transparent;
+    width: 100%;
+    height: 100%;
+    /*display: block;*/
+    position: absolute;
+    top: 0;
+    left: 0;
+    /* cursor: pointer; */
+    z-index: 8900;
+}
+
+#hrdWarehouserackeditSystemtableForm table.rack td .rackCell:hover {
+    background-color: rgba(221, 221, 221, 0.7);
+}
+
+
+#hrdWarehouserackeditSystemtableForm table.rack td {
+    border: 0.5px solid rgb(255 255 255);
+    text-align: center;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    position: relative;
+}
+
+#hrdWarehouserackeditSystemtableForm table.rack td:hover {
+    background-color: rgba(153, 153, 153, 0.5);
+}
+
+#hrdWarehouserackeditSystemtableForm .tableBox6 {
+    margin-right: 7%;
+}
+
+#hrdWarehouserackeditSystemtableForm .tableBox7 {
+    margin-right: 2%;
+}
+
+#hrdWarehouserackeditSystemtableForm .tableBox8 {
+    margin-right: 7%;
+}
+
+#hrdWarehouserackeditSystemtableForm .tableBox9 {
+    margin-right: 2%;
+}
+
+#hrdWarehouserackeditSystemtableForm .tableBox10 {
+    margin-right: 5%;
+}
+
+
+#hrdWarehouserackeditSystemtableForm .tableBox1 {
+    margin-right: 7%;
+}
+
+#hrdWarehouserackeditSystemtableForm .tableBox2 {
+    margin-right: 2%;
+}
+
+#hrdWarehouserackeditSystemtableForm .tableBox3 {
+    margin-right: 7%;
+}
+
+#hrdWarehouserackeditSystemtableForm .tableBox4 {
+    margin-right: 2%;
+}
+
+#hrdWarehouserackeditSystemtableForm .tableBox5 {
+    margin-right: 5%;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* Rack 수정 컨트롤 패널 */
+#hrdWarehouserackeditSystemtableFormBoxControl {
+    padding: 10px 10px 0px 10px;
+    /* border: 1px solid #dddddd; */
+    /* width: 230px; */
+    width: 455px;
+    min-width: 455px;
+    height: calc((100vh - 10vh - 8.5vh));
+    box-sizing: border-box;
+    overflow-y: auto;
+    background-color: #eee;
+    /* box-shadow: 5px 5px 10px #555;
+}
+
+#hrdWarehouserackeditSystemtableFormBoxControl h2 {
+    /*border: 1px solid red;*/
+    margin-bottom: 15px;
+}
+
+#hrdWarehouserackeditSystemtableFormBoxControl h3 {
+    padding: 2px 5px;
+    /*border: 1px solid red;*/
+    display: flex;
+    align-items: center;
+    /*margin-bottom: 15px;*/
+}
+
+#hrdWarehouserackeditSystemtableFormBoxControl h3 input {
+    border: 1px solid #dbdbdb;
+    align-items: center;
+    margin-left: 15px;
+    width: 65%;
+    height: 30px;
+}
+
+#hrdWarehouserackeditSystemtableFormBoxControl h3 img {
+    cursor: pointer;
+}
+
+
+#hrdWarehouserackeditSystemtableFormBoxControl table {
+    border-collapse: collapse;
+    width: 100%;
+    /*border: 1px solid red;*/
+}
+
+#hrdWarehouserackeditSystemtableFormBoxControl table caption {
+    border: 1px solid red;
+}
+
+#hrdWarehouserackeditSystemtableFormBoxControl table caption button {
+    width: 100px;
+    height: 20px;
+    font-size: 15px;
+    border: 1px solid red;
+}
+
+#hrdWarehouserackeditSystemtableFormBoxControl table thead {
+    background-color: #dddddd;
+}
+
+#hrdWarehouserackeditSystemtableFormBoxControl table thead tr{
+    height: 30px;
+}
+
+#hrdWarehouserackeditSystemtableFormBoxControl table tbody tr {
+    height: 30px;
+}
+
+#hrdWarehouserackeditSystemtableFormBoxControl table tbody tr:hover {
+    border: 1px solid red;
+    background-color: #B9B9B9;
+    /* cursor: pointer; */
+    z-index: 6000;
+}
+
+#hrdWarehouserackeditSystemtableFormBoxControl table td {
+    border: 1px solid #b9b9b9;
+    text-align: center;
+    position: relative;
+}
+
+
+
+/* 카테고리 테이블 */
+#hrdWarehouserackeditSystemtableFormBoxControl table .categoryColorBox {
+    /* background-color: red; */
+    padding: 5px;
+}
+
+#hrdWarehouserackeditSystemtableFormBoxControl table .categoryColorBox .categoryColor {
+    border: 1px solid rgba(0, 128, 0);
+    width: 100%;
+    height: 12px;
+}
+
+
+/* 현황 모니터링 패널 */
+#rackStatusPanel {
+    /*border: 1px solid red; */
+    display: block;
+    /* background-color: #ffffff; */
+    height: calc((100vh - 10vh - 8.5vh) - 31vh - 4.5vh);
+    overflow: hidden;
+}
+
+#rackStatusPanel .rackStatusPanelTitle {
+    /*border: 1px solid green;*/
+    /*margin-top: 3px;*/
+    background-color: #f9f9f9;
+    display: flex;
+    justify-content: space-between;
+    height: 50px;
+}
+
+#rackStatusPanel .rackStatusPanelTitle div {
+    display: none;
+}
+
+
+#rackStatusPanel .rackStatusPanelTitle h3 {
+    font-size: 25px;
+    margin-bottom: 3px;
+}
+
+#rackStatusPanel .rackStatusPanelTitle button {
+    height: 100%;
+    font-size: 12px;
+    box-shadow: 0 0 0 0;
+}
+
+#rackStatusPanelTab {
+    height: calc(20vh);
+    /* overflow-y: auto; */
+    /* border: 1px solid red; */
+    background-color: #ffffff;
+    padding: 7px 0;
+    margin-top: 15px;
+    overflow-y: auto;
+}
+
+#rackStatusPanelTab .rackStatusPanelTitle h3 {
+     font-size: 15px;
+     margin-bottom: 10px;
+     /*border: 1px solid red;*/
+ }
+
+
+
+
+/* 현황 그래프 박스 */
+#rackStatusPanelChartsBox{
+    height: calc(41vh);
+    /* border: 1px solid red; */
+    overflow-y: auto;
+}
+
+
+
+/* 막대 그래프 그리기 */
+#rackCategoryPanelTab {
+    height: calc(20vh);
+    /* border: 1px solid red; */
+    background-color: #ffffff;
+    padding: 7px 0;
+    display: block;
+    margin-top: 15px;
+    overflow-y: auto;
+}
+}
+
+#rackStatusPanel .rackInfoPanelTitle {
+    /*border: 1px solid green;*/
+    margin-top: 3px;
+    display: flex;
+    justify-content: space-between;
+}
+
+#rackStatusPanel .rackInfoPanelTitle h3 {
+    font-size: 15px;
+    margin-bottom: 10px;
+}
+
+#rackStatusPanel .rackInfoPanelTitle button {
+    height: 100%;
+    font-size: 12px;
+    box-shadow: 0 0 0 0;
+}
+
+
+#rackCategoryPanelTab .rackCategoryPanelTitle {
+    /*border: 1px solid green;*/
+    margin-top: 3px;
+    display: flex;
+    justify-content: space-between;
+}
+
+#rackCategoryPanelTab .rackCategoryPanelTitle h3 {
+     font-size: 15px;
+     margin-bottom: 10px;
+     /*border: 1px solid red;*/
+ }
+
+
+
+#rackStatusPanel .inventoryUseRateRackPercent{
+    border: 5xp solid red;
+    width: 100%;
+    background-color: #ffffff;
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+}
+
+#rackStatusPanel .inventoryUseRateRackPercent p{
+    /*border: 1px solid red;*/
+    background-color: #ddd;
+}
+
+#rackStatusPanel .inventoryUseRateRackPercent p:nth-of-type(1){
+    /*border: 1px solid green;*/
+    background-color: #ffffff;
+    width: 75%;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: space-between;
+}
+
+#rackStatusPanel .inventoryUseRateRackPercent p:nth-of-type(1) span{
+    /*border: 1px solid green;*/
+    display: inline-block;
+    margin: 0 1px 0 0;
+    width: 100%;
+    height: 100%;
+    background-color: #dddddd;
+}
+
+#rackStatusPanel .inventoryUseRateRackPercent p:nth-of-type(1) span.active{
+}
+
+#rackStatusPanel .inventoryUseRateRackPercent p:nth-of-type(1) span:nth-last-of-type(1){
+    margin: 0 0 0 0;
+    height: 100%;
+}
+
+#rackStatusPanel .inventoryUseRateRackPercent p:nth-of-type(2){
+    /*border: 1px solid blue;*/
+    background-color: #333;
+    width: 20%;
+    color: #ffffff;
+    text-align: center;
+}
+
+
+
+
+
+
+
+/* 현황 차트 박스 */
+#donutchartsBox{
+    position: relative;
+    width: 100%;
+    min-width: 415px;
+    height: 0px;
+    /*height: 380px;*/
+    /*border: 5px solid red;*/
+    overflow: hidden;
+    margin-bottom: 10px;
+    display: block;
+}
+
+/* IO 현황 도넛 차트 */
+#donutchart4Box{
+    position:absolute;
+    top: 0;
+    left: 0;
+    margin: 0 auto;
+    /*border: 1px solid red;*/
+    width: 500px;
+    height: 380px;
+    box-sizing: border-box;
+    overflow: hidden;
+    display: block;
+}
+
+#donutchart4{
+    overflow: hidden;
+}
+
+#donutchart4Title{
+    /*border: 1px solid red;*/
+    /*width: ;*/
+    text-align: center;
+    position: absolute;
+    top: 138px;
+    left: 167px;
+    font-size: 25px;
+}
+
+/* 카테고리 현황 도넛 차트 */
+#donutchart5Box{
+    position: absolute;
+    top: 0;
+    left: 0;
+    margin: 0 auto;
+    /*border: 1px solid red;*/
+    width: 500px;
+    height: 380px;
+    box-sizing: border-box;
+    overflow: hidden;
+    display: block;
+    opacity: 1;
+}
+
+#donutchart5{
+    overflow: hidden;
+}
+
+#donutchart5Title{
+    /*border: 1px solid red;*/
+    /*width: ;*/
+    text-align: center;
+    position: absolute;
+    top: 138px;
+    left: 160px;
+    font-size: 25px;
+}
+
+#donutchart5{
+    overflow: hidden;
+}
+
+
+
+
+
+
+
+
+
+
+#rackTotalStatusPanelTables {
+    display: flex;
+    justify-content: space-between;
+    font-size: 12px;
+}
+
+#rackTotalStatusPanelTables table {
+    width: 49%;
+}
+
+
+#rackStatusPanelTabBtn{
+    background-color: #f0f8ff;
+}
+
+#rackCategoryPanelTabBtn{
+    background-color: #dddddd;
+}
+
+
+
+#rackTotalStatusPanel .rackStatusPanelTitle p {
+    width: 70px;
+    /*border: 1px solid red;*/
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+}
+
+#rackTotalStatusPanel .rackStatusPanelTitle .iographImgP .iographImg {
+    width: 30px;
+    height: 30px;
+    margin-right: 5px;
+}
+
+#rackTotalStatusPanel .rackStatusPanelTitle .categorygraphP .categorygraphImg {
+    width: 30px;
+    height: 30px;
+    margin-right: 5px;
+}
+
+
+
+#donutchartsBox, #donutchart4Box, #donutchart5Box {
+    transition: height 0.3s ease;  /* 애니메이션 효과를 부드럽게 만들어줍니다 */
+}
+
+#donutchart5Box {
+    height: 0px;  /* 초기 상태 */
+}
+
+
+
+
+
+
+
+
+.rackDetailInfoButton{
+    height: 100%;
+    font-size: 12px;
+    box-shadow: 0 0 0 0;
+    background-color: #bbbbbb;
+    display: none;
+}
+
+.rackDetailInfoButton:hover{
+    background-color: #dddddd;
+}
+
+
+
+
+
+
+
+/* 검색 패널 */
+#searchPanel {
+    /*border: 1px solid red;*/
+    display: block;
+    /* background-color: #ffffff; */
+    height: calc(33.5vh);
+    overflow: hidden;
+}
+
+#knowRackCell {
+    padding: 10px;
+    position: relative;
+    /*border: 1px solid red;*/
+    background-color: #ffffff;
+    margin-bottom: 15px;
+    display: none;
+    justify-content: space-between;
+    width: 100%;
+    height: 335px;
+    z-index: 1;
+}
+
+/* 가상 요소를 원래 요소 뒤로 보냄. */
+#knowRackCell::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url("../images/myImageBG.png");
+    background-position: 0px 55%;
+    background-size: contain;
+    background-repeat: no-repeat;
+    opacity: 0.1;
+    z-index: -1;
+}
+
+
+#knowRackCell div {
+    /*border: 1px solid green;*/
+    width: 50%;
+}
+
+#knowRackCell div h1 {
+    /*border: 1px solid green;*/
+    height: 50px;
+}
+
+#knowRackCell div .knowRackCellImgBox {
+    /*border: 1px solid green;*/
+    width: 100%;
+    height: 99px;
+    overflow: hidden;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#knowRackCell div .knowRackCellImgBox a{
+    display: block;
+    height: 88px;
+    background-color: #f7f7f7;
+    width: 190px;
+    text-align: center;
+    padding: 5px;
+}
+
+
+#knowRackCell div .knowRackCellImgBox img {
+    /*border: 1px solid green;*/
+    height: 75px;
+    /*transform:translateX(-50%);*/
+}
+
+
+#knowRackCell div .knowRackCellLocationBox {
+    /*padding: 5px 10px;*/
+    width: 100%;
+    height: 50px;
+    text-align: right;
+    font-size: 15px;
+    /*border: 1px solid red;*/
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#knowRackCell div .knowRackCellLocation {
+    padding: 0px 0px;
+    width: 170px;
+    text-align: left;
+    font-size: 15px;
+    border: 1px solid #efefef;
+    background-color: #f7f7f7;
+    padding: 4px;
+}
+
+#knowRackCell div .knowRackCellLocationBox button {
+    width: 30px;
+    height: 30px;
+    font-size: 15px;
+    padding: 2px;
+    box-shadow: 0 0 0 0;
+}
+
+#knowRackCell div .knowRackCellLocationBox button img {
+    width: 22px;
+    height: 22px;
+}
+
+
+
+#knowRackCell div p {
+    padding: 5px 5px;
+    height: 33px;
+    font-size: 15px;
+    /*border: 1px solid red;*/
+    display: flex;
+    justify-content: left;
+}
+
+#knowRackCell div p span:nth-of-type(1) {
+    display: block;
+    width: 70px;
+    font-size: 15px;
+    /*border: 1px solid blue;*/
+}
+
+#knowRackCell div p span:nth-of-type(2) {
+    display: block;
+    font-size: 15px;
+    text-align: center;
+    width: 5px;
+    /*border: 1px solid blue;*/
+}
+
+#knowRackCell div span:nth-of-type(3) {
+    display: block;
+    width: 55%;
+    margin-left: 5%;
+    font-size: 15px;
+    border: 1px solid #dbdbdb;
+    padding-left: 8px;
+}
+
+
+
+#searchPanelSearchBox{
+    /*border: 1px solid red;*/
+    /*background-color: #ffffff;*/
+    height: calc((100vh - 10vh - 8.5vh) - 20px - 350px);
+    overflow: hidden;
+}
+
+#searchPanelSearchBox .searchPanelSearchBox {
+    background-color: #ffffff;
+    /*border: 1px solid #b3b3b3;*/
+    height: 50px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#searchPanelSearchBox h3{
+    background-color: #ffffff;
+    /*border: 1px solid #b3b3b3;*/
+    height: 50px;
+}
+
+#searchPanelSearchBox #searchField {
+    background-color: #ffffff;
+    border: 1px solid #cccccc;
+    border-radius: 7px;
+    width: 265px;
+    height: 30px;
+}
+
+#searchPanelSearchBox .searchFieldDetailP {
+    background-color: #ffffff;
+    /* border: 1px solid #b3b3b3; */
+    height: 30px;
+    display: flex;
+    align-items: center;
+    width: 90px;
+    cursor: pointer;
+}
+
+
+.searchFieldDetailImg {
+    width: 30px;
+    height: 30px;
+    cursor: pointer;
+}
+
+#rackStatusPanel, #searchPanel, #knowRackCell {
+    transition: height 0.3s ease; /* 애니메이션 효과를 부드럽게 만들어준다 */
+}
+
+
+#searchPanelSearchTableBox{
+    background-color: #ffffff;
+    /*border: 1px solid #b3b3b3;*/
+    overflow-y: auto;
+    height: calc(29.5vh);
+}
+
+
+
+
+
+/* 검색 모달 창 이미지 자세히 보기 */
+.knowRackCellImgModal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100vw;
+    height: 100vh;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.9);
+    z-index: 8500;
+    /*border: 1px solid greenyellow;*/
+}
+
+
+.knowRackCellImgModal.active {
+    left: -230px;
+    width: 100vh;
+    height: 100vw;
+}
+
+
+
+.knowRackCellImgModal .modal-content {
+    margin: auto;
+    padding: 36px;
+    display: block;
+    width: 60%;
+    max-width: 1200px;
+    height: 95vh;
+    max-height: 825px;
+    /* border: 1px solid red; */
+    background-color: #ffffff;
+    display: flex;
+    justify-content: center;
+    transform: translateY(calc(50vh - 47.5vh));
+}
+
+
+.knowRackCellImgModal .modal-content.active {
+    max-width: 1000px;
+    overflow: hidden;
+}
+
+
+
+.knowRackCellImgModal .modal-content #img01Box {
+    width: 48%;
+    height: 100%;
+    max-height: 815px;
+    background-color: #f7f7f7;
+    display: flex;
+    justify-content: center;
+}
+
+
+
+.knowRackCellImgModal .modal-content #img01 {
+    margin: auto;
+    display: block;
+    width: 90%;
+    max-width: 700px;
+    /*border: 1px solid red;*/
+    background-color: #ffffff;
+}
+
+.knowRackCellImgModal .modal-content #img01.active {
+    max-width: 400px;
+}
+
+.knowRackCellImgModal .modal-content div {
+    margin: auto;
+    display: block;
+    width: 50%;
+    max-width: 500px;
+    height: 100%;
+    /* border: 1px solid red; */
+    background-color: #ffffff;
+    overflow-y: auto;
+}
+
+.knowRackCellImgModal .modal-content div h1 {
+    font-size: 50px;
+    margin-bottom: 10px;
+    padding-left: 10px;
+    /*border: 1px solid red;*/
+}
+
+/*
+.modal-content div .knowRackCellLocationBox{
+padding: 5px 10px;
+text-align: right;
+font-size: 30px;
+border: 1px solid red;
+}
+
+.modal-content div .knowRackCellLocation{
+padding: 5px 10px;
+text-align: right;
+font-size: 30px;
+border: 1px solid red;
+}
+*/
+
+
+.knowRackCellImgModal .modal-content div .knowRackCellLocationBox {
+    margin-bottom: 10px;
+    padding: 5px 10px;
+    width: 100%;
+    height: 52px;
+    text-align: right;
+    font-size: 30px;
+    /*border: 1px solid red;*/
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.knowRackCellImgModal .modal-content div .knowRackCellLocation {
+    padding-left: 9px;
+    width: 400px;
+    text-align: left;
+    font-size: 30px;
+    border: 1px solid #efefef;
+    background-color: #f7f7f7;
+    /*border: 1px solid red;*/
+}
+
+.knowRackCellImgModal .modal-content div .knowRackCellLocation .knowRackCellLocationSpan {
+    display: inline;
+    text-align: center;
+    font-size: 30px;
+    /*border: 1px solid green;*/
+}
+
+.knowRackCellImgModal .modal-content div .knowRackCellLocationBox button {
+    width: 40px;
+    height: 40px;
+    padding: 5px;
+    font-size: 15px;
+    box-shadow: 0 0 0 0;
+}
+
+.knowRackCellImgModal .modal-content div .knowRackCellLocationBox button img {
+    width: 25px;
+    height: 25px;
+}
+
+
+
+
+.knowRackCellImgModal .modal-content div p {
+    margin-bottom: 7px;
+    padding: 5px 10px;
+    font-size: 25px;
+    /*border: 1px solid red;*/
+    display: flex;
+    justify-content: left;
+    height: 40px;
+    line-height: 26px;
+}
+
+.knowRackCellImgModal .modal-content div span:nth-of-type(1) {
+    padding-left: 9px;
+    display: block;
+    width: 150px;
+    font-size: 22px;
+    /*border: 1px solid blue;*/
+}
+
+.knowRackCellImgModal .modal-content div p span:nth-of-type(2) {
+    display: block;
+    font-size: 17px;
+    text-align: center;
+    width: 20px;
+    /*border: 1px solid blue;*/
+}
+
+.knowRackCellImgModal .modal-content div span:nth-of-type(3) {
+    display: block;
+    width: 300px;
+    font-size: 21px;
+    padding-left: 8px;
+    border: 1px solid #dbdbdb;
+}
+
+
+
+.knowRackCellImgModal .close {
+    position: absolute;
+    top: 15px;
+    right: 35px;
+    color: #f1f1f1;
+    font-size: 40px;
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+.knowRackCellImgModal .close:hover,
+.knowRackCellImgModal .close:focus {
+    color: #bbb;
+    text-decoration: none;
+    /* cursor: pointer; */
+}
+
+#img01 {
+    width: 100%;
+    display: block;
+}
+
+
+
+
+
+
+#controlPanel {
+    display: none;
+    height: 30px;
+    /*border: 2px solid green;*/
+    margin-top: 10px;
+    margin-bottom: 20px;
+}
+
+#controlPanel .controlPanelBtnBox{
+    display: flex;
+    justify-content: space-between;
+}
+
+#controlPanel button{
+    width: 95px;
+    font-size: 15px;
+}
+
+#controlPanel button:hover{
+    background-color: #CCCCCC;
+}
+
+#categoryPanel {
+    display: none;
+    width: 100%;
+    height: calc((100vh - 10vh - 8.5vh) - 85px);
+    overflow: auto;
+    /*border: 2px solid green;*/
+    background-color: #ffffff;
+}
+
+#categoryPanel table {
+    border-top: 1px solid #cccccc;
+}
+
+
+#categoryPanel table thead tr th {
+    border-left: 1px solid #ffffff;
+    border-right: 1px solid #ffffff;
+    height: 40px;
+    text-align: center;
+    position: relative;
+}
+
+#categoryPanel table thead tr th:nth-of-type(1) {
+    border-left: 1px solid #cccccc;
+}
+
+#categoryPanel table thead tr th:nth-of-type(5) {
+    border-right: 1px solid #cccccc;
+}
+
+
+#categoryPanel table td {
+    border: 1px solid #CCCCCC;
+    height: 50px;
+    text-align: center;
+    position: relative;
+}
+
+#categoryPanel .categoryNo{
+    display:none;
+}
+
+
+
+
+
+#hrdWarehouserackeditSystemtableFormBoxControl table .stockstatusColorBox {
+    /* background-color: red; */
+    padding: 5px;
+}
+
+#hrdWarehouserackeditSystemtableFormBoxControl table .stockstatusColorBox .stockstatusColor {
+    /* border: 1px solid green; */
+    width: 100%;
+    height: 12px;
+}
+
+#hrdWarehouserackeditSystemtableFormBoxControl table .stockstatusColorBox .stockstatusColor01 {
+    /* border: 1px solid green; */
+    background-color: rgb(0, 64, 0);
+}
+
+#hrdWarehouserackeditSystemtableFormBoxControl table .stockstatusColorBox .stockstatusColor02 {
+    /* border: 1px solid green; */
+    background-color: green;
+}
+
+#hrdWarehouserackeditSystemtableFormBoxControl table .stockstatusColorBox .stockstatusColor03 {
+    /* border: 1px solid green; */
+    background-color: greenyellow;
+}
+
+#hrdWarehouserackeditSystemtableFormBoxControl table .stockstatusColorBox .stockstatusColor04 {
+    /* border: 1px solid green; */
+    background-color: orange;
+}
+
+#hrdWarehouserackeditSystemtableFormBoxControl table .stockstatusColorBox .stockstatusColor05 {
+    /* border: 1px solid green; */
+    background-color: #dddddd;
+}
+
+#hrdWarehouserackeditSystemtableFormBoxControl table .stockstatusColorBox .stockstatusColor06 {
+    /* border: 1px solid green; */
+    background-color: red;
+}
+
+
+
+
+
+#hrdWarehouserackeditSystemtableFormBoxControl table td input[type='radio'] {
+    border: 1px solid red;
+    text-align: center;
+    /* cursor: pointer; */
+}
+
+#hrdWarehouserackeditSystemtableFormBoxControl table td input[type='checkbox'] {
+    border: 1px solid red;
+    text-align: center;
+    /* cursor: pointer; */
+}
+
+/* #hrdWarehouserackeditSystemtableFormBoxControl table tbody td::after {
+border: 1px solid red;
+text-align: center;
+background-color: red;
+display: block;
+position: absolute;
+top: 0;
+left: 0;
+width: 500px;
+height: 500px;
+z-index: 10000;
+} */
+
+/* 체크박스 버그 때문에 after로 td 앞에 가림막을 만들어 줬다. */
+#hrdWarehouserackeditSystemtableFormBoxControl table tbody td::after {
+    background-color: rgba(255, 255, 255, .0);
+    content: "";
+    display: inline-block;
+    height: 10px;
+    width: 10px;
+    /* margin: 0 3px 0 8px; */
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 7000;
+    /* background-size: 42%; */
+}
+
+
+
+
+
+
+
+/* 컨틀로 패널 - 환경설정버튼 모달 */
+#rackeditPreferences {
+    position: fixed;
+    top: 0;
+    left: 0px;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: none;
+    /* visibility: hidden; */
+    justify-content: center;
+    align-items: center;
+    z-index: 8000;
+}
+
+
+#rackeditPreferencesContentBox {
+    width: 800px;
+    /* height: 500px; */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(0, 78, 162, 0.9);
+    /*border: 1px solid red;*/
+    padding: 20px;
+}
+
+#rackeditPreferencesContent {
+    width: 100%;
+    height: 100%;
+    background-color: #ffffff;
+    text-align: center;
+    /*border: 1px solid red;*/
+    padding: 20px;
+}
+
+#rackeditPreferencesContent h2 {
+    /* width: 400px; */
+    text-align: center;
+    margin-bottom: 25px;
+}
+
+#rackeditPreferencesContent .rackeditPreferencesContentUnit {
+    margin-bottom: 25px;
+    text-align: center;
+    /* border: 1px solid red; */
+}
+
+#rackeditPreferencesContent .rackeditPreferencesContentUnit .rackeditPreferencesContentUnitOptionBox {
+    /* border: 1px solid green; */
+    display: flex;
+    justify-content: center;
+}
+
+
+#rackeditPreferencesContent .rackeditPreferencesContentUnit label {
+    display: block;
+    /* border: 1px solid red; */
+    display: flex;
+    align-items: center;
+    /* cursor: pointer; */
+    padding: 0 5px;
+    font-weight: normal;
+}
+
+#rackeditPreferencesContent .rackeditPreferencesContentUnit label:hover {
+    font-weight: bold;
+}
+
+#rackeditPreferencesContent .rackeditPreferencesContentUnit input {
+    display: block;
+    /* border: 1px solid blue; */
+    margin: 0 5px;
+    /* cursor: pointer; */
+}
+
+#rackeditPreferencesContent .rackeditPreferencesContentUnit input[type='radio'] {
+    /* border: 1px solid blue; */
+}
+
+#rackeditPreferencesContent .rackeditPreferencesContentUnit input[type='color'] {
+    /* border: 1px solid blue; */
+}
+
+#rackeditPreferencesContent .rackeditPreferencesContentUnit h3 {
+    /* width: 400px; */
+    text-align: left;
+    margin-bottom: 15px;
+    /* border: 1px solid red; */
+}
+
+#rackeditPreferencesContent .rackeditPreferencesContentUnit span {
+    width: 40px;
+    display: block;
+    /* border: 1px solid red; */
+    transition: 0.1s;
+}
+
+#rackeditPreferencesContent .rackeditPreferencesContentUnit span:hover {
+    border: 2px solid #dddddd;
+}
+
+/* 렉바깥라인색상 */
+#rackeditPreferencesContent .rackeditPreferencesContentUnit .rackOutLineColor01 {
+    display: inline-block;
+    margin: 0;
+    padding: 0;
+    width: 40px;
+    height: 20px;
+    content: '';
+    background-color: red;
+    /* border: 1px solid red; */
+}
+
+#rackeditPreferencesContent .rackeditPreferencesContentUnit .rackOutLineColor02 {
+    display: inline-block;
+    margin: 0;
+    padding: 0;
+    width: 40px;
+    height: 20px;
+    content: '';
+    background-color: blue;
+    /* border: 1px solid red; */
+}
+
+#rackeditPreferencesContent .rackeditPreferencesContentUnit .rackOutLineColor03 {
+    display: inline-block;
+    margin: 0;
+    padding: 0;
+    width: 40px;
+    height: 20px;
+    content: '';
+    background-color: #B9B9B9;
+    /* border: 1px solid red; */
+}
+
+#rackeditPreferencesContent .rackeditPreferencesContentUnit .rackOutLineColor04 {
+    display: inline-block;
+    margin: 0;
+    padding: 0;
+    width: 40px;
+    height: 20px;
+    content: '';
+    background-color: orange;
+    /* border: 1px solid red; */
+}
+
+#rackeditPreferencesContent .rackeditPreferencesContentUnit .rackOutLineColor05 {
+    display: inline-block;
+    margin: 0;
+    padding: 0;
+    width: 40px;
+    height: 20px;
+    content: '';
+    background-color: green;
+    /* border: 1px solid red; */
+}
+
+#rackeditPreferencesContent .rackeditPreferencesContentUnit .rackOutLineColor06 {
+    display: inline-block;
+    margin: 0;
+    padding: 0;
+    width: 40px;
+    height: 20px;
+    content: '';
+    background-color: blueviolet;
+    /* border: 1px solid red; */
+}
+
+#rackeditPreferencesContent .rackeditPreferencesContentUnit .rackOutLineColor07 {
+    display: inline-block;
+    margin: 0;
+    padding: 0;
+    width: 0px;
+    height: 20px;
+    content: '';
+    background-color: blueviolet;
+    /* border: 1px solid red; */
+}
+
+
+
+/* 렉안에라인색상 */
+#rackeditPreferencesContent .rackeditPreferencesContentUnit .rackInLineColor01 {
+    display: inline-block;
+    margin: 0;
+    padding: 0;
+    width: 40px;
+    height: 20px;
+    content: '';
+    background-color: red;
+    /* border: 1px solid red; */
+}
+
+#rackeditPreferencesContent .rackeditPreferencesContentUnit .rackInLineColor02 {
+    display: inline-block;
+    margin: 0;
+    padding: 0;
+    width: 40px;
+    height: 20px;
+    content: '';
+    background-color: blue;
+    /* border: 1px solid red; */
+}
+
+#rackeditPreferencesContent .rackeditPreferencesContentUnit .rackInLineColor03 {
+    display: inline-block;
+    margin: 0;
+    padding: 0;
+    width: 40px;
+    height: 20px;
+    content: '';
+    background-color: #B9B9B9;
+    /* border: 1px solid red; */
+}
+
+#rackeditPreferencesContent .rackeditPreferencesContentUnit .rackInLineColor04 {
+    display: inline-block;
+    margin: 0;
+    padding: 0;
+    width: 40px;
+    height: 20px;
+    content: '';
+    background-color: orange;
+    /* border: 1px solid red; */
+}
+
+#rackeditPreferencesContent .rackeditPreferencesContentUnit .rackInLineColor05 {
+    display: inline-block;
+    margin: 0;
+    padding: 0;
+    width: 40px;
+    height: 20px;
+    content: '';
+    background-color: green;
+    /* border: 1px solid red; */
+}
+
+#rackeditPreferencesContent .rackeditPreferencesContentUnit .rackInLineColor06 {
+    display: inline-block;
+    margin: 0;
+    padding: 0;
+    width: 40px;
+    height: 20px;
+    content: '';
+    background-color: blueviolet;
+    /* border: 1px solid red; */
+}
+
+#rackeditPreferencesContent .rackeditPreferencesContentUnit .rackInLineColor07 {
+    display: inline-block;
+    margin: 0;
+    padding: 0;
+    width: 0px;
+    height: 20px;
+    content: '';
+    background-color: blueviolet;
+    /* border: 1px solid red; */
+}
+
+
+
+/* 분류 수정 완료 모달  */
+.rackEditConfirmOverlay {
+    display: none;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    top:0;
+    left:0;
+    width:100vw;
+    height:100vh;
+    background-color:rgba(0,0,0,0.5);
+    z-index:8200;
+}
+
+/* Rack 수정 확인 모달 디자인 */
+.rackEditConfirmModal {
+    width: 300px;
+    height: 250px;
+    padding: 20px;
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.2);
+    z-index:8500;
+}
+
+.rackModalHeader {
+    align-items: center;
+    padding: 17px 40px 10px 20px;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+.rackModalTitle {
+    font-weight: bold;
+    margin: 0;
+}
+
+.rackModalCloseBtn {
+    position: fixed;
+    top: 10px;
+    right: 10px;
+    width: 150px;
+    height: 150px;
+    background: none;
+    border: none;
+    font-size: 50px;
+    cursor: pointer;
+    color: #dddddd;  /* 클로즈 버튼의 색을 약간 흐리게 만듭니다. */
+    z-index: 8500;
+}
+
+.rackModalCloseBtn:hover {
+    background-color: transparent;  /* 배경색을 투명하게 설정 */
+    outline: none;  /* 윤곽선 제거 */
+    color: #eeeeee;
+}
+
+.rackModalBody {
+    padding: 20px 0;
+    text-align: center;
+}
+
+.rackModalFooter {
+    /*border: 1px solid red;*/
+    margin-top: 15px;
+    display: flex;
+    justify-content: center;
+}
+
+.rackModalFooter button {
+    /*border: 1px solid red;*/
+    margin: 0 5px;
+    background-color: #dddddd;
+}
+
+.rackModalFooter button:hover {
+    /*border: 1px solid red;*/
+    background-color: #eeeeee;
+}
+
+
+
+
+
+
+
+
+
+/* 카테고리 수정 모달 */
+#categoryModal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    /*border: 2px solid red;*/
+    display: none;
+    justify-content: center;
+    align-items: center;
+    z-index: 9000;
+}
+
+#categoryModal button:hover{
+    background-color: #eeeeee;
+}
+
+#categoryModal .modal-content {
+    background-color: #fefefe;
+   /* margin: 10% auto;*/
+    padding: 20px;
+    border: 1px solid #888;
+    /*border: 1px solid red;*/
+    width: 80%;
+    max-width: 1000px;
+    height: 600px;
+    display: flex;
+    justify-content: space-between;
+}
+
+#categoryModal .close {
+    position: fixed;
+    top: 0;
+    right: 0;
+    color: #dddddd;
+    float: right;
+    padding: 20px 50px;
+    font-size: 50px;
+    font-weight: bold;
+    cursor: pointer;
+    /*border: 1px solid red;*/
+}
+
+#categoryModal .close:hover {
+    color: #ffffff;
+}
+
+#categoryModal .categoryModal-left-box {
+    width: 49%;
+    /*border: 1px solid red;*/
+}
+
+
+#categoryModal .categoryModalBtnBox{
+    /*border: 1px solid red;*/
+    width: 100%;
+    height: 85px;
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+#categoryModal .categoryModalBtnBox h3{
+    width: 60%;
+    height: 70px;
+    font-size: 44px;
+    /*border: 1px solid red;*/
+}
+
+#categoryModal .categoryModalBtnBox div{
+    width: 40%;
+    height: 70px;
+    text-align: right;
+    padding-top: 55px;
+    /*border: 1px solid red;*/
+}
+
+#categoryModal .categoryModalBtnBox div button{
+    width: 60px;
+    /*border: 1px solid red;*/
+}
+
+
+
+#categoryModal .categoryModalInputBox{
+    width: 100%;
+    height: calc(100% - 20px - 70px);
+    /*border: 1px solid red;*/
+    box-sizing: border-box;
+}
+
+#categoryModal .categoryModalAddInput{
+    width: 100%;
+    height: 100px;
+    /*border: 1px solid red;*/
+    margin-bottom: 35px;
+}
+
+#categoryModal .categoryModalAddInput h3{
+    width: 100%;
+    height: 50px;
+    line-height: 50px;
+    font-size: 25px;
+    margin-bottom: 10px;
+    /*border: 1px solid red;*/
+}
+
+#categoryModal .categoryModalAddInput div{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    /*border: 1px solid red;*/
+    background-color: #e1e1e1c7;
+}
+
+#categoryModal .categoryModalAddInput #categoryColorInput {
+    width: 15%;
+    height: 45px;
+    /*border: 5px solid red;*/
+}
+
+#categoryModal .categoryModalAddInput input[type="text"] {
+    width: 65%;
+    height: 45px;
+    text-align: center;
+    font-size: 24px;
+    border: 1px solid #bfbfbf;
+}
+
+#categoryModal .categoryModalAddInput button {
+    width: 15%;
+    height: 45px;
+    /*border: 5px solid red;*/
+}
+
+
+
+#categoryModal .categoryModalEditInput{
+    width: 100%;
+    height: 100px;
+    /*border: 1px solid red;*/
+    margin-bottom: 55px;
+}
+
+#categoryModal .categoryModalEditInput h3{
+    width: 100%;
+    height: 50px;
+    line-height: 50px;
+    font-size: 25px;
+    margin-bottom: 10px;
+    /*border: 1px solid red;*/
+}
+
+#categoryModal .categoryModalEditInput div{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    /*border: 1px solid red;*/
+    background-color: #e1e1e1c7;
+}
+
+#categoryModal .categoryModalEditInput #categoryColorEditInput {
+    width: 15%;
+    height: 45px;
+    /*border: 5px solid red;*/
+}
+
+#categoryModal .categoryModalEditInput input[type="text"] {
+    width: 65%;
+    height: 45px;
+    text-align: center;
+    font-size: 24px;
+    border: 1px solid #bfbfbf;
+}
+
+#categoryModal .categoryModalEditInput button {
+    width: 15%;
+    height: 45px;
+    /*border: 5px solid red;*/
+}
+
+
+#categoryModal .categoryModalResetInput{
+    width: 100%;
+    height: 100px;
+    /*border: 1px solid red;*/
+}
+
+#categoryModal .categoryModalResetInput button{
+    width: 100%;
+    height: 100px;
+    font-size: 35px;
+    font-weight: bold;
+    /*border: 1px solid red;*/
+    background-color: #dddddd;
+}
+
+#categoryModal .categoryModalResetInput button:hover{
+    background-color: #eeeeee;
+}
+
+
+#categoryModal .categoryModalTableBox{
+    width: 49%;
+    height: 100%;
+    overflow-y: auto;
+    /*border: 1px solid red;*/
+}
+
+#categoryModal .categoryModalTableBox .categoryColor{
+    width: 100%;
+    /*border: 1px solid red;*/
+    font-size: 0.1px;
+    color: rgba(0,0,0,0);
+    overflow: hidden;
+}
+
+
+/* 테이블 스타일링 */
+#categoryModal table {
+    width: 100%;
+    border-collapse: collapse;
+    /*border: 1px solid red;*/
+}
+
+#categoryModal thead td {
+    background-color: #dddddd;
+    border: 1px solid #ffffff;
+    padding: 8px;
+    text-align: center;
+}
+
+#categoryModal tbody tr:hover {
+    background-color: #dddddd;
+    pointer: cursor;
+}
+
+#categoryModal tbody td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: center;
+}
+
+#categoryModal tbody td input[type="checkbox"]{
+    width: 25px;
+    height: 25px;
+    cursor: pointer;
+}
+
+
+#categoryTableBody .categoryNo{
+    display:none;
+}
+
+/*
+#categoryTableBody .categoryCheckBoxCover{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: 1px solid red;
+}
+*/
+
+
+/* 색상 표시 박스 스타일링 */
+#categoryModal .categoryColorBox {
+    padding: 5px;
+}
+
+#categoryModal .categoryColor {
+    width: 20px;
+    height: 20px;
+    border: 1px solid #ccc;
+}
+
+
+
+
+
+
+/* 인쇄 */
+@media print {
+@Page{
+    size: a4
+}
+
+    * {
+        margin: 0;
+        padding: 0;
+        /*-webkit-box-sizing:border-box;*/
+        /*box-sizing: border-box;*/
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+        /* Firefox용 */
+        scrollbar-width: none;
+        /* Internet Explorer용 */
+        -ms-overflow-style: none;
+    }
+
+
+    /* 웹킷 브라우저용 */
+    * ::-webkit-scrollbar {
+        display: none;
+    }
+
+
+
+    .sidebar {
+        display: none;
+    }
+
+    #containerContent {
+        position: fixed;
+        top: 0px;
+        left: 0px;
+        width: 100vw;
+        height: 100vh;
+        display: block;
+    }
+
+    .containerContentBoxTitleBtnsBox {
+        display: none;
+    }
+
+    #donutchartsBox {
+        display: none;
+    }
+
+    #knowRackCell {
+        display: none;
+    }
+
+    #searchPanelSearchBox h3 {
+        display: none;
+    }
+
+    .searchPanelSearchBox {
+        height: 15px;
+    }
+
+    #rackStatusPanel .rackInfoPanelTitle {
+        height: 27px;
+    }
+
+    #rackStatusPanel .inventoryUseRateRackPercent {
+        height: 15px;
+    }
+
+    #rackStatusPanel .rackInfoPanelTitle button {
+        display: none;
+    }
+
+    #rackStatusPanel .inventoryUseRateRackPercent p:nth-of-type(2) {
+        height: 15px;
+        font-size: 12px;
+    }
+
+    #rackStatusPanel .rackInfoPanelTitle h3 {
+        margin-bottom: 5px;
+    }
+
+    #rackStatusPanel .rackStatusPanelTitle {
+        height: 32px;
+    }
+
+    #rackStatusPanel .rackStatusPanelTitle h3 {
+        font-size: 17px;
+    }
+
+    #rackStatusPanelTab {
+        height: calc(100%) !important;
+    }
+
+    #rackStatusPanelChartsBox {
+        height: calc(100%);
+    }
+
+    .rackDetailInfoButton {
+        display: none;
+    }
+
+    #rackCategoryPanelTab {
+        height: calc(100%) !important;
+    }
+
+    #rackCategoryPanelTab .rackCategoryPanelTitle {
+        height: 27px;
+    }
+
+    #rackCategoryPanelTab .rackCategoryPanelTitle h3 {
+        font-size: 15px;
+        margin-bottom: 5px;
+    }
+
+    #hrdWarehouserackeditSystemtableFormBoxControl {
+        padding: 10px 10px 0px 10px;
+        width: 315px;
+        min-width: 315px;
+    }
+
+    #hrdWarehouserackeditSystemtableForm #hrdWarehouserackeditSystemtableFormBox {
+        width: calc(100% - 315px);
+    }
+
+    #rackStatusPanel .rackStatusPanelTitle button {
+        width: 40px;
+    }
+
+    #hrdWarehouserackeditSystemtableFormBox .table-caption {
+        font-size: 15px;
+    }
+
+
+    #hrdWarehouserackeditSystemtableFormBoxControl table td {
+        font-size: 12px;
+    }
+
+    #searchPanelSearchBox {
+        height: calc(100%);
+    }
+
+    #searchPanelSearchTableBox {
+        height: calc(100%);
+    }
+}

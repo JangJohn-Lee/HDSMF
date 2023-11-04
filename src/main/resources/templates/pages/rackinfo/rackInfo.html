@@ -1,0 +1,1500 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/layoutRackInfo}">
+<!-- 사용자 CSS 추가 -->
+<th:block layout:fragment="css">
+    <style>
+
+    </style>
+</th:block>
+
+<div layout:fragment="content" class="content">
+
+    <h2 class="mb-2 lh-sm">Rack 정보 관리</h2>
+    <p class="text-700 lead mb-2">카테고리를 생성, 수정, 삭제 관리하는 페이지 입니다.</p>
+    <div class="mt-4">
+        <div class="row g-4">
+
+            <!-- 테이블 영역 -->
+            <div class="col-12 col-xl-7 col-xxl-9 order-1 order-xl-0">
+                <div class="mb-9 my-4">
+                    <div id="hrdWarehouserackeditSystemtableFormPrintBox" class="card shadow-none border border-300 mb-3">
+                        <div class="card-body p-0">
+                            <div class="p-4 code-to-copy">
+                                <form id="hrdWarehouserackeditSystemtableForm" action="" onsubmit="return false">
+                                    <div id="hrdWarehouserackeditSystemtableFormBox" class="no-select no-scrollbar">
+                                        <div class="rackTableLayout02">
+                                            <div class="hrdWarehouserackeditSystemtableFormBox01 d-flex justify-content-between row mb-7" style="height: 37vh; min-height: 370px; overflow: hidden;">
+                                                <div class="tableBox tableBox6 col-2 position-relative me-4 me-lg-5 me-xxl-7">
+                                                    <div class="table-caption position-absolute top-50 start-50 translate-middle fs-1 fs-sm-3 fs-md-4 fs-xxl-6 fs fw-semi-bold text-300 text-center">RACK 6</div>
+                                                    <table class="rack6 rack table table-sm border-top border-200 fs--1 mb-0 position-absolute top-0 start-0" style="height: 100%;">
+                                                        <tr class="border border-light">
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R06F04N01</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R06F03N01</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R06F02N01</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R06F01N01</span></td>
+                                                        </tr>
+                                                        <tr class="border border-light">
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R06F04N02</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R06F03N02</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R06F02N02</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R06F01N02</span></td>
+                                                        </tr>
+                                                        <tr class="border border-light">
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R06F04N03</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R06F03N03</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R06F02N03</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R06F01N03</span></td>
+                                                        </tr>
+                                                        <tr class="border border-light">
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R06F04N04</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R06F03N04</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R06F02N04</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R06F01N04</span></td>
+                                                        </tr>
+                                                        <tr class="border border-light">
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R06F04N05</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R06F03N05</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R06F02N05</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R06F01N05</span></td>
+                                                        </tr>
+                                                        <tr class="border border-light">
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R06F04N06</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R06F03N06</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R06F02N06</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R06F01N06</span></td>
+                                                        </tr>
+                                                        <tr class="border border-light">
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R06F04N07</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R06F03N07</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R06F02N07</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R06F01N07</span></td>
+                                                        </tr>
+                                                        <tr class="border border-light">
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R06F04N08</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R06F03N08</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R06F02N08</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R06F01N08</span></td>
+                                                        </tr>
+                                                        <tr class="border border-light">
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R06F04N09</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R06F03N09</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R06F02N09</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R06F01N09</span></td>
+                                                        </tr>
+                                                        <tr class="border border-light">
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R06F04N10</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R06F03N10</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R06F02N10</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R06F01N10</span></td>
+                                                        </tr>
+                                                        <tr class="border border-light">
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R06F04N11</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R06F03N11</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R06F02N11</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R06F01N11</span></td>
+                                                        </tr>
+                                                        <tr class="border border-light">
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R06F04N12</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R06F03N12</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R06F02N12</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R06F01N12</span></td>
+                                                        </tr>
+                                                        <tr class="border border-light">
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R06F04N13</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R06F03N13</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R06F02N13</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R06F01N13</span></td>
+                                                        </tr>
+                                                        <tr class="border border-light">
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R06F04N14</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R06F03N14</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R06F02N14</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R06F01N14</span></td>
+                                                        </tr>
+                                                        <tr class="border border-light">
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R06F04N15</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R06F03N15</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R06F02N15</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R06F01N15</span></td>
+                                                        </tr>
+                                                        <tr class="border border-light">
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R06F04N16</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R06F03N16</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R06F02N16</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R06F01N16</span></td>
+                                                        </tr>
+                                                    </table>
+                                                </div>
+                                                <div class="tableBox tableBox7 col-2 position-relative">
+                                                    <div class="table-caption position-absolute top-50 start-50 translate-middle fs-1 fs-sm-3 fs-md-4 fs-xxl-6 fs fw-semi-bold text-300 text-center">RACK 7</div>
+                                                    <table class="rack7 rack table table-sm border-top border-200 fs--1 mb-0 position-absolute top-0 start-0" style="height: 100%;">
+                                                        <tr class="border border-light">
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R07F04N01</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R07F03N01</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R07F02N01</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R07F01N01</span></td>
+                                                        </tr>
+                                                        <tr class="border border-light">
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R07F04N02</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R07F03N02</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R07F02N02</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R07F01N02</span></td>
+                                                        </tr>
+                                                        <tr class="border border-light">
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R07F04N03</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R07F03N03</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R07F02N03</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R07F01N03</span></td>
+                                                        </tr>
+                                                        <tr class="border border-light">
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R07F04N04</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R07F03N04</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R07F02N04</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R07F01N04</span></td>
+                                                        </tr>
+                                                        <tr class="border border-light">
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R07F04N05</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R07F03N05</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R07F02N05</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R07F01N05</span></td>
+                                                        </tr>
+                                                        <tr class="border border-light">
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R07F04N06</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R07F03N06</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R07F02N06</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R07F01N06</span></td>
+                                                        </tr>
+                                                        <tr class="border border-light">
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R07F04N07</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R07F03N07</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R07F02N07</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R07F01N07</span></td>
+                                                        </tr>
+                                                        <tr class="border border-light">
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R07F04N08</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R07F03N08</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R07F02N08</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R07F01N08</span></td>
+                                                        </tr>
+                                                        <tr class="border border-light">
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R07F04N09</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R07F03N09</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R07F02N09</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R07F01N09</span></td>
+                                                        </tr>
+                                                        <tr class="border border-light">
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R07F04N10</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R07F03N10</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R07F02N10</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R07F01N10</span></td>
+                                                        </tr>
+                                                        <tr class="border border-light">
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R07F04N11</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R07F03N11</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R07F02N11</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R07F01N11</span></td>
+                                                        </tr>
+                                                        <tr class="border border-light">
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R07F04N12</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R07F03N12</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R07F02N12</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R07F01N12</span></td>
+                                                        </tr>
+                                                        <tr class="border border-light">
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R07F04N13</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R07F03N13</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R07F02N13</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R07F01N13</span></td>
+                                                        </tr>
+                                                        <tr class="border border-light">
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R07F04N14</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R07F03N14</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R07F02N14</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R07F01N14</span></td>
+                                                        </tr>
+                                                        <tr class="border border-light">
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R07F04N15</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R07F03N15</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R07F02N15</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R07F01N15</span></td>
+                                                        </tr>
+                                                        <tr class="border border-light">
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R07F04N16</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R07F03N16</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R07F02N16</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R07F01N16</span></td>
+                                                        </tr>
+<!--                                                        <tr class="border border-light">-->
+<!--                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs&#45;&#45;2 fw-light">R07F04N17</span></td>-->
+<!--                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs&#45;&#45;2 fw-light">R07F03N17</span></td>-->
+<!--                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs&#45;&#45;2 fw-light">R07F02N17</span></td>-->
+<!--                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs&#45;&#45;2 fw-light">R07F01N17</span></td>-->
+<!--                                                        </tr>-->
+<!--                                                        <tr class="border border-light">-->
+<!--                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs&#45;&#45;2 fw-light">R07F04N18</span></td>-->
+<!--                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs&#45;&#45;2 fw-light">R07F03N18</span></td>-->
+<!--                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs&#45;&#45;2 fw-light">R07F02N18</span></td>-->
+<!--                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs&#45;&#45;2 fw-light">R07F01N18</span></td>-->
+<!--                                                        </tr>-->
+                                                    </table>
+                                                </div>
+                                                <div class="tableBox tableBox8 col-2 position-relative me-4 me-lg-5 me-xxl-7">
+                                                    <div class="table-caption position-absolute top-50 start-50 translate-middle fs-1 fs-sm-3 fs-md-4 fs-xxl-6 fs fw-semi-bold text-300 text-center">RACK 8</div>
+                                                    <table class="rack8 rack table table-sm border-top border-200 fs--1 mb-0 position-absolute top-0 start-0" style="height: 100%;">
+                                                        <tr class="border border-light">
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R08F04N01</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R08F03N01</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R08F02N01</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R08F01N01</span></td>
+                                                        </tr>
+                                                        <tr class="border border-light">
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R08F04N02</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R08F03N02</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R08F02N02</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R08F01N02</span></td>
+                                                        </tr>
+                                                        <tr class="border border-light">
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R08F04N03</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R08F03N03</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R08F02N03</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R08F01N03</span></td>
+                                                        </tr>
+                                                        <tr class="border border-light">
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R08F04N04</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R08F03N04</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R08F02N04</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R08F01N04</span></td>
+                                                        </tr>
+                                                        <tr class="border border-light">
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R08F04N05</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R08F03N05</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R08F02N05</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R08F01N05</span></td>
+                                                        </tr>
+                                                        <tr class="border border-light">
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R08F04N06</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R08F03N06</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R08F02N06</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R08F01N06</span></td>
+                                                        </tr>
+                                                        <tr class="border border-light">
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R08F04N07</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R08F03N07</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R08F02N07</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R08F01N07</span></td>
+                                                        </tr>
+                                                        <tr class="border border-light">
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R08F04N08</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R08F03N08</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R08F02N08</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R08F01N08</span></td>
+                                                        </tr>
+                                                        <tr class="border border-light">
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R08F04N09</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R08F03N09</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R08F02N09</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R08F01N09</span></td>
+                                                        </tr>
+                                                        <tr class="border border-light">
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R08F04N10</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R08F03N10</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R08F02N10</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R08F01N10</span></td>
+                                                        </tr>
+                                                        <tr class="border border-light">
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R08F04N11</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R08F03N11</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R08F02N11</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R08F01N11</span></td>
+                                                        </tr>
+                                                        <tr class="border border-light">
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R08F04N12</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R08F03N12</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R08F02N12</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R08F01N12</span></td>
+                                                        </tr>
+                                                        <tr class="border border-light">
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R08F04N13</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R08F03N13</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R08F02N13</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R08F01N13</span></td>
+                                                        </tr>
+                                                        <tr class="border border-light">
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R08F04N14</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R08F03N14</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R08F02N14</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R08F01N14</span></td>
+                                                        </tr>
+                                                        <tr class="border border-light">
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R08F04N15</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R08F03N15</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R08F02N15</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R08F01N15</span></td>
+                                                        </tr>
+                                                        <tr class="border border-light">
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R08F04N16</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R08F03N16</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R08F02N16</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R08F01N16</span></td>
+                                                        </tr>
+<!--                                                        <tr class="border border-light">-->
+<!--                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs&#45;&#45;2 fw-light">R08F04N17</span></td>-->
+<!--                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs&#45;&#45;2 fw-light">R08F03N17</span></td>-->
+<!--                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs&#45;&#45;2 fw-light">R08F02N17</span></td>-->
+<!--                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs&#45;&#45;2 fw-light">R08F01N17</span></td>-->
+<!--                                                        </tr>-->
+<!--                                                        <tr class="border border-light">-->
+<!--                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs&#45;&#45;2 fw-light">R08F04N18</span></td>-->
+<!--                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs&#45;&#45;2 fw-light">R08F03N18</span></td>-->
+<!--                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs&#45;&#45;2 fw-light">R08F02N18</span></td>-->
+<!--                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs&#45;&#45;2 fw-light">R08F01N18</span></td>-->
+<!--                                                        </tr>-->
+                                                    </table>
+                                                </div>
+                                                <div class="tableBox tableBox9 col-2  position-relative">
+                                                    <div class="table-caption position-absolute top-50 start-50 translate-middle fs-1 fs-sm-3 fs-md-4 fs-xxl-6 fs fw-semi-bold text-300 text-center">RACK 9</div>
+                                                    <table class="rack9 rack table table-sm border-top border-200 fs--1 mb-0 position-absolute top-0 start-0" style="height: 100%;">
+                                                        <tr class="border border-light">
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R09F04N01</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R09F03N01</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R09F02N01</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R09F01N01</span></td>
+                                                        </tr>
+                                                        <tr class="border border-light">
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R09F04N02</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R09F03N02</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R09F02N02</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R09F01N02</span></td>
+                                                        </tr>
+                                                        <tr class="border border-light">
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R09F04N03</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R09F03N03</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R09F02N03</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R09F01N03</span></td>
+                                                        </tr>
+                                                        <tr class="border border-light">
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R09F04N04</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R09F03N04</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R09F02N04</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R09F01N04</span></td>
+                                                        </tr>
+                                                        <tr class="border border-light">
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R09F04N05</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R09F03N05</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R09F02N05</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R09F01N05</span></td>
+                                                        </tr>
+                                                        <tr class="border border-light">
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R09F04N06</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R09F03N06</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R09F02N06</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R09F01N06</span></td>
+                                                        </tr>
+                                                        <tr class="border border-light">
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R09F04N07</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R09F03N07</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R09F02N07</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R09F01N07</span></td>
+                                                        </tr>
+                                                        <tr class="border border-light">
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R09F04N08</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R09F03N08</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R09F02N08</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R09F01N08</span></td>
+                                                        </tr>
+                                                        <tr class="border border-light">
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R09F04N09</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R09F03N09</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R09F02N09</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R09F01N09</span></td>
+                                                        </tr>
+                                                        <tr class="border border-light">
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R09F04N10</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R09F03N10</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R09F02N10</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R09F01N10</span></td>
+                                                        </tr>
+                                                        <tr class="border border-light">
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R09F04N11</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R09F03N11</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R09F02N11</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R09F01N11</span></td>
+                                                        </tr>
+                                                        <tr class="border border-light">
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R09F04N12</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R09F03N12</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R09F02N12</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R09F01N12</span></td>
+                                                        </tr>
+                                                        <tr class="border border-light">
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R09F04N13</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R09F03N13</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R09F02N13</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R09F01N13</span></td>
+                                                        </tr>
+                                                        <tr class="border border-light">
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R09F04N14</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R09F03N14</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R09F02N14</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R09F01N14</span></td>
+                                                        </tr>
+                                                        <tr class="border border-light">
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R09F04N15</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R09F03N15</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R09F02N15</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R09F01N15</span></td>
+                                                        </tr>
+                                                        <tr class="border border-light">
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R09F04N16</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R09F03N16</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R09F02N16</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R09F01N16</span></td>
+                                                        </tr>
+                                                        <tr class="border border-light">
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R09F04N17</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R09F03N17</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R09F02N17</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R09F01N17</span></td>
+                                                        </tr>
+                                                        <tr class="border border-light">
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R09F04N18</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R09F03N18</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R09F02N18</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R09F01N18</span></td>
+                                                        </tr>
+                                                    </table>
+                                                </div>
+                                                <div class="tableBox tableBox10 col-2 position-relative">
+                                                    <div class="table-caption position-absolute top-50 start-50 translate-middle fs-1 fs-sm-3 fs-md-4 fs-xxl-6 fs fw-semi-bold text-300 text-center">RACK 10</div>
+                                                    <table class="rack10 rack table table-sm border-top border-200 fs--1 mb-0 position-absolute top-0 start-0" style="height: 100%;">
+                                                        <tr class="border border-light">
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R10F03N01</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R10F02N01</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R10F01N01</span></td>
+                                                        </tr>
+                                                        <tr class="border border-light">
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R10F03N02</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R10F02N02</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R10F01N02</span></td>
+                                                        </tr>
+                                                        <tr class="border border-light">
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R10F03N03</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R10F02N03</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R10F01N03</span></td>
+                                                        </tr>
+                                                        <tr class="border border-light">
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R10F03N04</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R10F02N04</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R10F01N04</span></td>
+                                                        </tr>
+                                                        <tr class="border border-light">
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R10F03N05</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R10F02N05</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R10F01N05</span></td>
+                                                        </tr>
+                                                        <tr class="border border-light">
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R10F03N06</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R10F02N06</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R10F01N06</span></td>
+                                                        </tr>
+                                                        <tr class="border border-light">
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R10F03N07</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R10F02N07</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R10F01N07</span></td>
+                                                        </tr>
+                                                        <tr class="border border-light">
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R10F03N08</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R10F02N08</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R10F01N08</span></td>
+                                                        </tr>
+                                                        <tr class="border border-light">
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R10F03N09</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R10F02N09</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R10F01N09</span></td>
+                                                        </tr>
+                                                        <tr class="border border-light">
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R10F03N10</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R10F02N10</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R10F01N10</span></td>
+                                                        </tr>
+                                                        <tr class="border border-light">
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R10F03N11</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R10F02N11</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R10F01N11</span></td>
+                                                        </tr>
+                                                        <tr class="border border-light">
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R10F03N12</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R10F02N12</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R10F01N12</span></td>
+                                                        </tr>
+                                                        <tr class="border border-light">
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R10F03N13</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R10F02N13</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R10F01N13</span></td>
+                                                        </tr>
+                                                        <tr class="border border-light">
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R10F03N14</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R10F02N14</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R10F01N14</span></td>
+                                                        </tr>
+                                                    </table>
+                                                </div>
+                                            </div>
+
+                                            <div class="hrdWarehouserackeditSystemtableFormBox02 d-flex justify-content-between row" style="height: 37vh; min-height: 370px; overflow: hidden;">
+                                                <div class="tableBox tableBox1 col-2 position-relative me-4 me-lg-5 me-xxl-7">
+                                                    <div class="table-caption position-absolute top-50 start-50 translate-middle fs-1 fs-sm-3 fs-md-4 fs-xxl-6 fs fw-semi-bold text-300 text-center">RACK 1</div>
+                                                    <table class="rack1 rack table table-sm border-top border-200 fs--1 mb-0 position-absolute top-0 start-0" style="height: 100%;">
+                                                        <tr class="border border-light">
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R01F04N01</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R01F03N01</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R01F02N01</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R01F01N01</span></td>
+                                                        </tr>
+                                                        <tr class="border border-light">
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R01F04N02</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R01F03N02</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R01F02N02</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R01F01N02</span></td>
+                                                        </tr>
+                                                        <tr class="border border-light">
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R01F04N03</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R01F03N03</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R01F02N03</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R01F01N03</span></td>
+                                                        </tr>
+                                                        <tr class="border border-light">
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R01F04N04</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R01F03N04</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R01F02N04</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R01F01N04</span></td>
+                                                        </tr>
+                                                        <tr class="border border-light">
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R01F04N05</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R01F03N05</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R01F02N05</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R01F01N05</span></td>
+                                                        </tr>
+                                                        <tr class="border border-light">
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R01F04N06</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R01F03N06</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R01F02N06</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R01F01N06</span></td>
+                                                        </tr>
+                                                        <tr class="border border-light">
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R01F04N07</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R01F03N07</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R01F02N07</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R01F01N07</span></td>
+                                                        </tr>
+                                                        <tr class="border border-light">
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R01F04N08</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R01F03N08</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R01F02N08</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R01F01N08</span></td>
+                                                        </tr>
+                                                        <tr class="border border-light">
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R01F04N09</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R01F03N09</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R01F02N09</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R01F01N09</span></td>
+                                                        </tr>
+                                                        <tr class="border border-light">
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R01F04N10</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R01F03N10</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R01F02N10</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R01F01N10</span></td>
+                                                        </tr>
+                                                        <tr class="border border-light">
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R01F04N11</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R01F03N11</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R01F02N11</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R01F01N11</span></td>
+                                                        </tr>
+                                                        <tr class="border border-light">
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R01F04N12</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R01F03N12</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R01F02N12</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R01F01N12</span></td>
+                                                        </tr>
+                                                        <tr class="border border-light">
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R01F04N13</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R01F03N13</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R01F02N13</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R01F01N13</span></td>
+                                                        </tr>
+                                                        <tr class="border border-light">
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R01F04N14</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R01F03N14</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R01F02N14</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R01F01N14</span></td>
+                                                        </tr>
+                                                        <tr class="border border-light">
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R01F04N15</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R01F03N15</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R01F02N15</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R01F01N15</span></td>
+                                                        </tr>
+                                                        <tr class="border border-light">
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R01F04N16</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R01F03N16</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R01F02N16</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R01F01N16</span></td>
+                                                        </tr>
+                                                        <tr class="border border-light">
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R01F04N17</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R01F03N17</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R01F02N17</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R01F01N17</span></td>
+                                                        </tr>
+                                                        <tr class="border border-light">
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R01F04N18</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R01F03N18</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R01F02N18</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R01F01N18</span></td>
+                                                        </tr>
+                                                    </table>
+                                                </div>
+                                                <div class="tableBox tableBox2 col-2 position-relative">
+                                                    <div class="table-caption position-absolute top-50 start-50 translate-middle fs-1 fs-sm-3 fs-md-4 fs-xxl-6 fs fw-semi-bold text-300 text-center">RACK 2</div>
+                                                    <table class="rack2 rack table table-sm border-top border-200 fs--1 mb-0 position-absolute top-0 start-0" style="height: 100%;">
+                                                        <tr class="border border-light">
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R02F04N01</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R02F03N01</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R02F02N01</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R02F01N01</span></td>
+                                                        </tr>
+                                                        <tr class="border border-light">
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R02F04N02</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R02F03N02</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R02F02N02</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R02F01N02</span></td>
+                                                        </tr>
+                                                        <tr class="border border-light">
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R02F04N03</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R02F03N03</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R02F02N03</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R02F01N03</span></td>
+                                                        </tr>
+                                                        <tr class="border border-light">
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R02F04N04</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R02F03N04</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R02F02N04</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R02F01N04</span></td>
+                                                        </tr>
+                                                        <tr class="border border-light">
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R02F04N05</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R02F03N05</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R02F02N05</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R02F01N05</span></td>
+                                                        </tr>
+                                                        <tr class="border border-light">
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R02F04N06</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R02F03N06</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R02F02N06</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R02F01N06</span></td>
+                                                        </tr>
+                                                        <tr class="border border-light">
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R02F04N07</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R02F03N07</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R02F02N07</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R02F01N07</span></td>
+                                                        </tr>
+                                                        <tr class="border border-light">
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R02F04N08</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R02F03N08</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R02F02N08</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R02F01N08</span></td>
+                                                        </tr>
+                                                        <tr class="border border-light">
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R02F04N09</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R02F03N09</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R02F02N09</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R02F01N09</span></td>
+                                                        </tr>
+                                                        <tr class="border border-light">
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R02F04N10</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R02F03N10</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R02F02N10</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R02F01N10</span></td>
+                                                        </tr>
+                                                        <tr class="border border-light">
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R02F04N11</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R02F03N11</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R02F02N11</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R02F01N11</span></td>
+                                                        </tr>
+                                                        <tr class="border border-light">
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R02F04N12</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R02F03N12</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R02F02N12</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R02F01N12</span></td>
+                                                        </tr>
+                                                        <tr class="border border-light">
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R02F04N13</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R02F03N13</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R02F02N13</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R02F01N13</span></td>
+                                                        </tr>
+                                                        <tr class="border border-light">
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R02F04N14</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R02F03N14</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R02F02N14</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R02F01N14</span></td>
+                                                        </tr>
+                                                        <tr class="border border-light">
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R02F04N15</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R02F03N15</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R02F02N15</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R02F01N15</span></td>
+                                                        </tr>
+                                                        <tr class="border border-light">
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R02F04N16</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R02F03N16</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R02F02N16</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R02F01N16</span></td>
+                                                        </tr>
+                                                        <tr class="border border-light">
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R02F04N17</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R02F03N17</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R02F02N17</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R02F01N17</span></td>
+                                                        </tr>
+                                                        <tr class="border border-light">
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R02F04N18</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R02F03N18</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R02F02N18</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R02F01N18</span></td>
+                                                        </tr>
+                                                    </table>
+                                                </div>
+                                                <div class="tableBox tableBox3 col-2 position-relative me-4 me-lg-5 me-xxl-7">
+                                                    <div class="table-caption position-absolute top-50 start-50 translate-middle fs-1 fs-sm-3 fs-md-4 fs-xxl-6 fs fw-semi-bold text-300 text-center">RACK 3</div>
+                                                    <table class="rack3 rack table table-sm border-top border-200 fs--1 mb-0 position-absolute top-0 start-0" style="height: 100%;">
+                                                        <tr class="border border-light">
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R03F04N01</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R03F03N01</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R03F02N01</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R03F01N01</span></td>
+                                                        </tr>
+                                                        <tr class="border border-light">
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R03F04N02</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R03F03N02</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R03F02N02</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R03F01N02</span></td>
+                                                        </tr>
+                                                        <tr class="border border-light">
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R03F04N03</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R03F03N03</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R03F02N03</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R03F01N03</span></td>
+                                                        </tr>
+                                                        <tr class="border border-light">
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R03F04N04</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R03F03N04</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R03F02N04</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R03F01N04</span></td>
+                                                        </tr>
+                                                        <tr class="border border-light">
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R03F04N05</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R03F03N05</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R03F02N05</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R03F01N05</span></td>
+                                                        </tr>
+                                                        <tr class="border border-light">
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R03F04N06</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R03F03N06</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R03F02N06</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R03F01N06</span></td>
+                                                        </tr>
+                                                        <tr class="border border-light">
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R03F04N07</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R03F03N07</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R03F02N07</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R03F01N07</span></td>
+                                                        </tr>
+                                                        <tr class="border border-light">
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R03F04N08</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R03F03N08</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R03F02N08</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R03F01N08</span></td>
+                                                        </tr>
+                                                        <tr class="border border-light">
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R03F04N09</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R03F03N09</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R03F02N09</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R03F01N09</span></td>
+                                                        </tr>
+                                                        <tr class="border border-light">
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R03F04N10</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R03F03N10</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R03F02N10</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R03F01N10</span></td>
+                                                        </tr>
+                                                        <tr class="border border-light">
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R03F04N11</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R03F03N11</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R03F02N11</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R03F01N11</span></td>
+                                                        </tr>
+                                                        <tr class="border border-light">
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R03F04N12</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R03F03N12</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R03F02N12</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R03F01N12</span></td>
+                                                        </tr>
+                                                        <tr class="border border-light">
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R03F04N13</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R03F03N13</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R03F02N13</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R03F01N13</span></td>
+                                                        </tr>
+                                                        <tr class="border border-light">
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R03F04N14</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R03F03N14</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R03F02N14</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R03F01N14</span></td>
+                                                        </tr>
+                                                        <tr class="border border-light">
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R03F04N15</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R03F03N15</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R03F02N15</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R03F01N15</span></td>
+                                                        </tr>
+                                                        <tr class="border border-light">
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R03F04N16</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R03F03N16</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R03F02N16</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R03F01N16</span></td>
+                                                        </tr>
+                                                        <tr class="border border-light">
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R03F04N17</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R03F03N17</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R03F02N17</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R03F01N17</span></td>
+                                                        </tr>
+                                                        <tr class="border border-light">
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R03F04N18</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R03F03N18</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R03F02N18</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R03F01N18</span></td>
+                                                        </tr>
+                                                    </table>
+                                                </div>
+                                                <div class="tableBox tableBox4 col-2 position-relative">
+                                                    <div class="table-caption position-absolute top-50 start-50 translate-middle fs-1 fs-sm-3 fs-md-4 fs-xxl-6 fs fw-semi-bold text-300 text-center">RACK 4</div>
+                                                    <table class="rack4 rack table table-sm border-top border-200 fs--1 mb-0 position-absolute top-0 start-0" style="height: 100%;">
+                                                        <tr class="border border-light">
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R04F04N01</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R04F03N01</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R04F02N01</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R04F01N01</span></td>
+                                                        </tr>
+                                                        <tr class="border border-light">
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R04F04N02</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R04F03N02</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R04F02N02</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R04F01N02</span></td>
+                                                        </tr>
+                                                        <tr class="border border-light">
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R04F04N03</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R04F03N03</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R04F02N03</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R04F01N03</span></td>
+                                                        </tr>
+                                                        <tr class="border border-light">
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R04F04N04</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R04F03N04</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R04F02N04</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R04F01N04</span></td>
+                                                        </tr>
+                                                        <tr class="border border-light">
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R04F04N05</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R04F03N05</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R04F02N05</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R04F01N05</span></td>
+                                                        </tr>
+                                                        <tr class="border border-light">
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R04F04N06</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R04F03N06</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R04F02N06</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R04F01N06</span></td>
+                                                        </tr>
+                                                        <tr class="border border-light">
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R04F04N07</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R04F03N07</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R04F02N07</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R04F01N07</span></td>
+                                                        </tr>
+                                                        <tr class="border border-light">
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R04F04N08</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R04F03N08</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R04F02N08</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R04F01N08</span></td>
+                                                        </tr>
+                                                        <tr class="border border-light">
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R04F04N09</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R04F03N09</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R04F02N09</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R04F01N09</span></td>
+                                                        </tr>
+                                                        <tr class="border border-light">
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R04F04N10</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R04F03N10</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R04F02N10</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R04F01N10</span></td>
+                                                        </tr>
+                                                        <tr class="border border-light">
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R04F04N11</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R04F03N11</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R04F02N11</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R04F01N11</span></td>
+                                                        </tr>
+                                                        <tr class="border border-light">
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R04F04N12</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R04F03N12</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R04F02N12</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R04F01N12</span></td>
+                                                        </tr>
+                                                        <tr class="border border-light">
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R04F04N13</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R04F03N13</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R04F02N13</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R04F01N13</span></td>
+                                                        </tr>
+                                                        <tr class="border border-light">
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R04F04N14</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R04F03N14</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R04F02N14</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R04F01N14</span></td>
+                                                        </tr>
+                                                        <tr class="border border-light">
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R04F04N15</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R04F03N15</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R04F02N15</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R04F01N15</span></td>
+                                                        </tr>
+                                                        <tr class="border border-light">
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R04F04N16</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R04F03N16</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R04F02N16</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R04F01N16</span></td>
+                                                        </tr>
+                                                        <tr class="border border-light">
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R04F04N17</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R04F03N17</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R04F02N17</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R04F01N17</span></td>
+                                                        </tr>
+                                                        <tr class="border border-light">
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R04F04N18</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R04F03N18</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R04F02N18</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R04F01N18</span></td>
+                                                        </tr>
+                                                    </table>
+                                                </div>
+                                                <div class="tableBox tableBox5 col-2 position-relative">
+                                                    <div class="table-caption position-absolute top-50 start-50 translate-middle fs-1 fs-sm-3 fs-md-4 fs-xxl-6 fs fw-semi-bold text-300 text-center">RACK 5</div>
+                                                    <table class="rack5 rack table table-sm border-top border-200 fs--1 mb-0 position-absolute top-0 start-0" style="height: 100%;">
+                                                        <tr class="border border-light">
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R05F04N01</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R05F03N01</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R05F02N01</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R05F01N01</span></td>
+                                                        </tr>
+                                                        <tr class="border border-light">
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R05F04N02</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R05F03N02</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R05F02N02</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R05F01N02</span></td>
+                                                        </tr>
+                                                        <tr class="border border-light">
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R05F04N03</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R05F03N03</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R05F02N03</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R05F01N03</span></td>
+                                                        </tr>
+                                                        <tr class="border border-light">
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R05F04N04</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R05F03N04</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R05F02N04</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R05F01N04</span></td>
+                                                        </tr>
+                                                        <tr class="border border-light">
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R05F04N05</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R05F03N05</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R05F02N05</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R05F01N05</span></td>
+                                                        </tr>
+                                                        <tr class="border border-light">
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R05F04N06</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R05F03N06</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R05F02N06</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R05F01N06</span></td>
+                                                        </tr>
+                                                        <tr class="border border-light">
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R05F04N07</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R05F03N07</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R05F02N07</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R05F01N07</span></td>
+                                                        </tr>
+                                                        <tr class="border border-light">
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R05F04N08</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R05F03N08</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R05F02N08</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R05F01N08</span></td>
+                                                        </tr>
+                                                        <tr class="border border-light">
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R05F04N09</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R05F03N09</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R05F02N09</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R05F01N09</span></td>
+                                                        </tr>
+                                                        <tr class="border border-light">
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R05F04N10</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R05F03N10</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R05F02N10</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R05F01N10</span></td>
+                                                        </tr>
+                                                        <tr class="border border-light">
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R05F04N11</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R05F03N11</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R05F02N11</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R05F01N11</span></td>
+                                                        </tr>
+                                                        <tr class="border border-light">
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R05F04N12</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R05F03N12</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R05F02N12</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R05F01N12</span></td>
+                                                        </tr>
+                                                        <tr class="border border-light">
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R05F04N13</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R05F03N13</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R05F02N13</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R05F01N13</span></td>
+                                                        </tr>
+                                                        <tr class="border border-light">
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R05F04N14</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R05F03N14</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R05F02N14</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R05F01N14</span></td>
+                                                        </tr>
+                                                        <tr class="border border-light">
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R05F04N15</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R05F03N15</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R05F02N15</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R05F01N15</span></td>
+                                                        </tr>
+                                                        <tr class="border border-light">
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R05F04N16</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R05F03N16</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R05F02N16</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R05F01N16</span></td>
+                                                        </tr>
+                                                        <tr class="border border-light">
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R05F04N17</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R05F03N17</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R05F02N17</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R05F01N17</span></td>
+                                                        </tr>
+                                                        <tr class="border border-light">
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R05F04N18</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R05F03N18</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R05F02N18</span></td>
+                                                            <td class="border border-light align-middle p-0 w-10 text-center"><span class="rackCell fs--2 fw-light">R05F01N18</span></td>
+                                                        </tr>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 페이지 네비게이션 바 -->
+            <div class="col-12 col-xl-5 col-xxl-3">
+                <div class="position-sticky" style="top: 80px;">
+                    <div class="mb-1">
+                        <div class="d-flex justify-content-end">
+                            <button id="goToHomeButton" class="btn p-0" type="button" data-bs-toggle="tooltip" data-bs-placement="top"
+                                    title="메인">
+                                <span class="fas fa-home" style="width: 17px;height: 17px;"></span>
+                            </button>
+                            <button id="reloadButton" class="btn p-0 mx-3" type="button" data-bs-toggle="tooltip"
+                                    data-bs-placement="top" title="새로고침">
+                                <span class="fas fa-undo" style="width: 16px;height: 16px;"></span>
+                            </button>
+                            <button id="rackPrintTabBtn" class="btn p-0" type="button" data-bs-toggle="tooltip"
+                                    data-bs-placement="top" title="화면출력">
+                                <span class="fas fa-print" style="width: 16px;height: 16px;"></span>
+                            </button>
+                        </div>
+                    </div>
+
+
+                    <!-- 카테고리 테이블 -->
+                    <div class="p-3 bg-white border rounded-2">
+                        <div id="hrdWarehouserackeditSystemtableFormBoxControl" class="no-scrollbar">
+
+                            <!-- 수정 패널 -->
+                            <div id="controlPanel" class="no-select">
+                                <h5>카테고리 <span class="fas fa-palette"></span></h5>
+                                <div class="controlPanelBtnBox text-right mb-2" style="text-align: right;">
+                                    <button class="btn btn-secondary btn-sm my-1" type="button" data-bs-toggle="modal" data-bs-target="#categoryModal">
+                                        <span class="fas fa-edit" data-bs-toggle="tooltip" data-bs-placement="top" title="카테고리 수정"></span>
+                                    </button>
+                                </div>
+                            </div>
+
+                            <div id="categoryPanel" class="no-select d-flex g-2 justify-content-between mb-0">
+                                <table class="table table-sm border border-1 w-100 h-60 table-hover">
+                                    <thead class="bg-primary-100 position-sticky top-0 start-0">
+                                    <tr class="border border-1">
+                                        <th class="fs--1 align-middle text-center">번호</th>
+                                        <th class="fs--1 align-middle text-center">색상</th>
+                                        <th class="fs--1 align-middle text-center">카테고리</th>
+                                        <th class="fs--1 align-middle text-center">용량</th>
+                                        <th class="fs--1 align-middle text-center">선택</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr class="border border-1" th:each="category, iterStat : ${categoryList}">
+                                        <td class="fs--1 align-middle text-center">
+                                            <span th:text="${category.categoryNo}" th:class="categoryNo"></span>
+                                            <span th:text="${iterStat.index + 1}" class="iterStat"></span>
+                                        </td>
+                                        <td class="categoryColorBox fs--1 align-middle text-center">
+                                            <div th:class="'categoryColor categoryColor' + ${category.categoryNo}" th:style="'background-color: ' + ${category.categoryColor}"></div>
+                                        </td>
+                                        <td class="fs--1 align-middle text-center" th:text="${category.categoryName}">지게차 소재</td>
+                                        <td class="categoryCapacity fs--1 align-middle text-center"></td>
+                                        <td class="fs--1 align-middle text-center"><input type="radio" name="categoryColor"></td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="p-3 bg-white border rounded-2">
+                        <button id="rackeditProcessSubmitBtn" class="btn btn-warning" style="width: 100%;" data-bs-toggle="modal"
+                                data-bs-target="#rackEditConfirmModal">분류수정완료</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 모달창  -->
+    <!-- 카테고리 파렛트 수정 모달 -->
+    <div class="modal fade" id="categoryModal" tabindex="-1" aria-labelledby="categoryModalLabel" aria-hidden="true" style="--phoenix-modal-width: 1000px;">
+        <button type="button" class="btn-close btn-close-white position-fixed top-0 end-0 p-5 fs-3" data-bs-dismiss="modal" aria-label="Close"></button>
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content px-3 py-2 border rounded-4">
+                <div class="modal-header">
+                    <h5 class="modal-title fs-2" id="categoryModalLabel">카테고리 수정</h5>
+                </div>
+                <div class="modal-body d-flex justify-content-between" style="height: 550px;">
+
+                    <!-- 수정 input -->
+                    <div class="categoryModalInputBox w-50 me-5">
+                        <div class="categoryModalAddInput mb-5">
+                            <h3 class="mb-3">카테고리 추가</h3>
+                            <div class="d-flex justify-content-between">
+                                <input class="border border-300" type="color" id="categoryColorInput" placeholder="색상 선택" style="width: 70px;height: 30px;">
+                                <input class="border border-300 rounded-1 px-2 mx-2" type="text" id="categoryNameInput" placeholder="카테고리 이름" style="width: 100%;">
+                                <button class="btn btn-sm btn-phoenix-primary" onclick="addCategory()" style="width: 100px;height: 30px;">추가</button>
+                            </div>
+                        </div>
+                        <div class="categoryModalEditInput mb-5">
+                            <h3 class="mb-3">카테고리 수정</h3>
+                            <div class="d-flex justify-content-between">
+                                <input class="border border-300"type="color" id="categoryColorEditInput" placeholder="색상 선택" style="width: 70px;height: 30px;">
+                                <input class="border border-300 rounded-1 px-2 mx-2" type="text" id="categoryNameEditInput" placeholder="카테고리 이름" style="width: 100%;">
+                                <button class="btn btn-sm btn-phoenix-primary" id="categoryEditInputBtn" onclick="editSelectedRows()" style="width: 100px;height: 30px;">수정</button>
+                            </div>
+                        </div>
+
+
+                        <div class="">
+                            <div class="d-flex justify-content-between">
+                                <h3>컬러 팔렛트</h3>
+                                <div>
+                                    <p class="clickColorBox m-0 p-0">&nbsp;</p>
+                                    <p class="clickColorNotice m-0 p-0">#0032B4</p>
+                                </div>
+                            </div>
+                            <div class="d-flex justify-content-between">
+                                <div class="colorPalette" style="background-color: #F7F7F7; width: calc(100% / 13); height: 20px;"></div>
+                                <div class="colorPalette" style="background-color: #ECECEC; width: calc(100% / 13); height: 20px;"></div>
+                                <div class="colorPalette" style="background-color: #DADADA; width: calc(100% / 13); height: 20px;"></div>
+                                <div class="colorPalette" style="background-color: #C1C1C1; width: calc(100% / 13); height: 20px;"></div>
+                                <div class="colorPalette" style="background-color: #AFAFAF; width: calc(100% / 13); height: 20px;"></div>
+                                <div class="colorPalette" style="background-color: #9E9E9E; width: calc(100% / 13); height: 20px;"></div>
+                                <div class="colorPalette" style="background-color: #797979; width: calc(100% / 13); height: 20px;"></div>
+                                <div class="colorPalette" style="background-color: #6B6B6B; width: calc(100% / 13); height: 20px;"></div>
+                                <div class="colorPalette" style="background-color: #5C5C5C; width: calc(100% / 13); height: 20px;"></div>
+                                <div class="colorPalette" style="background-color: #4A4A4A; width: calc(100% / 13); height: 20px;"></div>
+                                <div class="colorPalette" style="background-color: #3A3A3A; width: calc(100% / 13); height: 20px;"></div>
+                                <div class="colorPalette" style="background-color: #2E2E2E; width: calc(100% / 13); height: 20px;"></div>
+                                <div class="colorPalette" style="background-color: #242424; width: calc(100% / 13); height: 20px;"></div>
+                            </div>
+
+                            <div class="d-flex justify-content-between">
+                                <div class="colorPalette" style="background-color: #F6F6F8; width: calc(100% / 13); height: 20px;"></div>
+                                <div class="colorPalette" style="background-color: #E9EAEE; width: calc(100% / 13); height: 20px;"></div>
+                                <div class="colorPalette" style="background-color: #D4D7DF; width: calc(100% / 13); height: 20px;"></div>
+                                <div class="colorPalette" style="background-color: #B8BCCA; width: calc(100% / 13); height: 20px;"></div>
+                                <div class="colorPalette" style="background-color: #A3A8BA; width: calc(100% / 13); height: 20px;"></div>
+                                <div class="colorPalette" style="background-color: #9096AC; width: calc(100% / 13); height: 20px;"></div>
+                                <div class="colorPalette" style="background-color: #666E8C; width: calc(100% / 13); height: 20px;"></div>
+                                <div class="colorPalette" style="background-color: #5A617C; width: calc(100% / 13); height: 20px;"></div>
+                                <div class="colorPalette" style="background-color: #4E546B; width: calc(100% / 13); height: 20px;"></div>
+                                <div class="colorPalette" style="background-color: #3E4355; width: calc(100% / 13); height: 20px;"></div>
+                                <div class="colorPalette" style="background-color: #313543; width: calc(100% / 13); height: 20px;"></div>
+                                <div class="colorPalette" style="background-color: #272A35; width: calc(100% / 13); height: 20px;"></div>
+                                <div class="colorPalette" style="background-color: #1E212A; width: calc(100% / 13); height: 20px;"></div>
+                            </div>
+
+                            <div class="d-flex justify-content-between">
+                                <div class="colorPalette" style="background-color: #F0FCFE; width: calc(100% / 13); height: 20px;"></div>
+                                <div class="colorPalette" style="background-color: #DBF7FB; width: calc(100% / 13); height: 20px;"></div>
+                                <div class="colorPalette" style="background-color: #B9F0F8; width: calc(100% / 13); height: 20px;"></div>
+                                <div class="colorPalette" style="background-color: #8BE6F3; width: calc(100% / 13); height: 20px;"></div>
+                                <div class="colorPalette" style="background-color: #69DEF0; width: calc(100% / 13); height: 20px;"></div>
+                                <div class="colorPalette" style="background-color: #4AD7ED; width: calc(100% / 13); height: 20px;"></div>
+                                <div class="colorPalette" style="background-color: #05C8E6; width: calc(100% / 13); height: 20px;"></div>
+                                <div class="colorPalette" style="background-color: #04B0CB; width: calc(100% / 13); height: 20px;"></div>
+                                <div class="colorPalette" style="background-color: #0498AF; width: calc(100% / 13); height: 20px;"></div>
+                                <div class="colorPalette" style="background-color: #037A8C; width: calc(100% / 13); height: 20px;"></div>
+                                <div class="colorPalette" style="background-color: #02606E; width: calc(100% / 13); height: 20px;"></div>
+                                <div class="colorPalette" style="background-color: #024C57; width: calc(100% / 13); height: 20px;"></div>
+                                <div class="colorPalette" style="background-color: #013C45; width: calc(100% / 13); height: 20px;"></div>
+                            </div>
+
+                            <div class="d-flex justify-content-between">
+                                <div class="colorPalette" style="background-color: #F0FEFC; width: calc(100% / 13); height: 20px;"></div>
+                                <div class="colorPalette" style="background-color: #DAFCF8; width: calc(100% / 13); height: 20px;"></div>
+                                <div class="colorPalette" style="background-color: #B9FAF2; width: calc(100% / 13); height: 20px;"></div>
+                                <div class="colorPalette" style="background-color: #8AF7EA; width: calc(100% / 13); height: 20px;"></div>
+                                <div class="colorPalette" style="background-color: #68F4E4; width: calc(100% / 13); height: 20px;"></div>
+                                <div class="colorPalette" style="background-color: #48F2DE; width: calc(100% / 13); height: 20px;"></div>
+                                <div class="colorPalette" style="background-color: #03EDD2; width: calc(100% / 13); height: 20px;"></div>
+                                <div class="colorPalette" style="background-color: #03D1B9; width: calc(100% / 13); height: 20px;"></div>
+                                <div class="colorPalette" style="background-color: #02B4A0; width: calc(100% / 13); height: 20px;"></div>
+                                <div class="colorPalette" style="background-color: #029080; width: calc(100% / 13); height: 20px;"></div>
+                                <div class="colorPalette" style="background-color: #017164; width: calc(100% / 13); height: 20px;"></div>
+                                <div class="colorPalette" style="background-color: #015A50; width: calc(100% / 13); height: 20px;"></div>
+                                <div class="colorPalette" style="background-color: #01473F; width: calc(100% / 13); height: 20px;"></div>
+                            </div>
+
+                            <div class="d-flex justify-content-between">
+                                <div class="colorPalette" style="background-color: #F0F8FD; width: calc(100% / 13); height: 20px;"></div>
+                                <div class="colorPalette" style="background-color: #DBEFFB; width: calc(100% / 13); height: 20px;"></div>
+                                <div class="colorPalette" style="background-color: #B9E0F7; width: calc(100% / 13); height: 20px;"></div>
+                                <div class="colorPalette" style="background-color: #8BCBF2; width: calc(100% / 13); height: 20px;"></div>
+                                <div class="colorPalette" style="background-color: #69BBEE; width: calc(100% / 13); height: 20px;"></div>
+                                <div class="colorPalette" style="background-color: #4AADEA; width: calc(100% / 13); height: 20px;"></div>
+                                <div class="colorPalette" style="background-color: #058EE2; width: calc(100% / 13); height: 20px;"></div>
+                                <div class="colorPalette" style="background-color: #047DC7; width: calc(100% / 13); height: 20px;"></div>
+                                <div class="colorPalette" style="background-color: #046CAC; width: calc(100% / 13); height: 20px;"></div>
+                                <div class="colorPalette" style="background-color: #035689; width: calc(100% / 13); height: 20px;"></div>
+                                <div class="colorPalette" style="background-color: #02446C; width: calc(100% / 13); height: 20px;"></div>
+                                <div class="colorPalette" style="background-color: #023656; width: calc(100% / 13); height: 20px;"></div>
+                                <div class="colorPalette" style="background-color: #012A43; width: calc(100% / 13); height: 20px;"></div>
+                            </div>
+
+                            <div class="d-flex justify-content-between">
+                                <div class="colorPalette" style="background-color: #F0F3FB; width: calc(100% / 13); height: 20px;"></div>
+                                <div class="colorPalette" style="background-color: #DAE1F4; width: calc(100% / 13); height: 20px;"></div>
+                                <div class="colorPalette" style="background-color: #B8C6EA; width: calc(100% / 13); height: 20px;"></div>
+                                <div class="colorPalette" style="background-color: #89A0DC; width: calc(100% / 13); height: 20px;"></div>
+                                <div class="colorPalette" style="background-color: #6684D2; width: calc(100% / 13); height: 20px;"></div>
+                                <div class="colorPalette" style="background-color: #466AC9; width: calc(100% / 13); height: 20px;"></div>
+                                <div class="colorPalette" style="background-color: #0032B4; width: calc(100% / 13); height: 20px;"></div>
+                                <div class="colorPalette" style="background-color: #002C9F; width: calc(100% / 13); height: 20px;"></div>
+                                <div class="colorPalette" style="background-color: #002689; width: calc(100% / 13); height: 20px;"></div>
+                                <div class="colorPalette" style="background-color: #001E6D; width: calc(100% / 13); height: 20px;"></div>
+                                <div class="colorPalette" style="background-color: #001856; width: calc(100% / 13); height: 20px;"></div>
+                                <div class="colorPalette" style="background-color: #001344; width: calc(100% / 13); height: 20px;"></div>
+                                <div class="colorPalette" style="background-color: #000F36; width: calc(100% / 13); height: 20px;"></div>
+                            </div>
+
+                            <div class="d-flex justify-content-between">
+                                <div class="colorPalette" style="background-color: #F9F3FE; width: calc(100% / 13); height: 20px;"></div>
+                                <div class="colorPalette" style="background-color: #F0E1FC; width: calc(100% / 13); height: 20px;"></div>
+                                <div class="colorPalette" style="background-color: #E2C5F9; width: calc(100% / 13); height: 20px;"></div>
+                                <div class="colorPalette" style="background-color: #CF9EF5; width: calc(100% / 13); height: 20px;"></div>
+                                <div class="colorPalette" style="background-color: #C181F2; width: calc(100% / 13); height: 20px;"></div>
+                                <div class="colorPalette" style="background-color: #B467F0; width: calc(100% / 13); height: 20px;"></div>
+                                <div class="colorPalette" style="background-color: #972DEA; width: calc(100% / 13); height: 20px;"></div>
+                                <div class="colorPalette" style="background-color: #8528CE; width: calc(100% / 13); height: 20px;"></div>
+                                <div class="colorPalette" style="background-color: #7322B2; width: calc(100% / 13); height: 20px;"></div>
+                                <div class="colorPalette" style="background-color: #5C1B8E; width: calc(100% / 13); height: 20px;"></div>
+                                <div class="colorPalette" style="background-color: #481670; width: calc(100% / 13); height: 20px;"></div>
+                                <div class="colorPalette" style="background-color: #391159; width: calc(100% / 13); height: 20px;"></div>
+                                <div class="colorPalette" style="background-color: #2D0D46; width: calc(100% / 13); height: 20px;"></div>
+                            </div>
+
+                            <div class="d-flex justify-content-between">
+                                <div class="colorPalette" style="background-color: #FEF0F6; width: calc(100% / 13); height: 20px;"></div>
+                                <div class="colorPalette" style="background-color: #FBDAEA; width: calc(100% / 13); height: 20px;"></div>
+                                <div class="colorPalette" style="background-color: #F8B8D7; width: calc(100% / 13); height: 20px;"></div>
+                                <div class="colorPalette" style="background-color: #F389BC; width: calc(100% / 13); height: 20px;"></div>
+                                <div class="colorPalette" style="background-color: #F066A8; width: calc(100% / 13); height: 20px;"></div>
+                                <div class="colorPalette" style="background-color: #ED4696; width: calc(100% / 13); height: 20px;"></div>
+                                <div class="colorPalette" style="background-color: #E6006E; width: calc(100% / 13); height: 20px;"></div>
+                                <div class="colorPalette" style="background-color: #CB0061; width: calc(100% / 13); height: 20px;"></div>
+                                <div class="colorPalette" style="background-color: #AF0054; width: calc(100% / 13); height: 20px;"></div>
+                                <div class="colorPalette" style="background-color: #8C0043; width: calc(100% / 13); height: 20px;"></div>
+                                <div class="colorPalette" style="background-color: #6E0035; width: calc(100% / 13); height: 20px;"></div>
+                                <div class="colorPalette" style="background-color: #57002A; width: calc(100% / 13); height: 20px;"></div>
+                                <div class="colorPalette" style="background-color: #450021; width: calc(100% / 13); height: 20px;"></div>
+                            </div>
+
+                            <div class="d-flex justify-content-between">
+                                <div class="colorPalette" style="background-color: #FFF3F5; width: calc(100% / 13); height: 20px;"></div>
+                                <div class="colorPalette" style="background-color: #FFE0E7; width: calc(100% / 13); height: 20px;"></div>
+                                <div class="colorPalette" style="background-color: #FFC4D1; width: calc(100% / 13); height: 20px;"></div>
+                                <div class="colorPalette" style="background-color: #FF9DB3; width: calc(100% / 13); height: 20px;"></div>
+                                <div class="colorPalette" style="background-color: #FF809C; width: calc(100% / 13); height: 20px;"></div>
+                                <div class="colorPalette" style="background-color: #FF6687; width: calc(100% / 13); height: 20px;"></div>
+                                <div class="colorPalette" style="background-color: #FF2C5A; width: calc(100% / 13); height: 20px;"></div>
+                                <div class="colorPalette" style="background-color: #E1274F; width: calc(100% / 13); height: 20px;"></div>
+                                <div class="colorPalette" style="background-color: #C22144; width: calc(100% / 13); height: 20px;"></div>
+                                <div class="colorPalette" style="background-color: #9B1B37; width: calc(100% / 13); height: 20px;"></div>
+                                <div class="colorPalette" style="background-color: #7A152B; width: calc(100% / 13); height: 20px;"></div>
+                                <div class="colorPalette" style="background-color: #611122; width: calc(100% / 13); height: 20px;"></div>
+                                <div class="colorPalette" style="background-color: #4C0D1B; width: calc(100% / 13); height: 20px;"></div>
+                            </div>
+
+                            <div class="d-flex justify-content-between">
+                                <div class="colorPalette" style="background-color: #FFFCF2; width: calc(100% / 13); height: 20px;"></div>
+                                <div class="colorPalette" style="background-color: #FFF7E0; width: calc(100% / 13); height: 20px;"></div>
+                                <div class="colorPalette" style="background-color: #FFF0C3; width: calc(100% / 13); height: 20px;"></div>
+                                <div class="colorPalette" style="background-color: #FFE69C; width: calc(100% / 13); height: 20px;"></div>
+                                <div class="colorPalette" style="background-color: #FFDF7E; width: calc(100% / 13); height: 20px;"></div>
+                                <div class="colorPalette" style="background-color: #FFD963; width: calc(100% / 13); height: 20px;"></div>
+                                <div class="colorPalette" style="background-color: #FFCA28; width: calc(100% / 13); height: 20px;"></div>
+                                <div class="colorPalette" style="background-color: #E1B223; width: calc(100% / 13); height: 20px;"></div>
+                                <div class="colorPalette" style="background-color: #C29A1E; width: calc(100% / 13); height: 20px;"></div>
+                                <div class="colorPalette" style="background-color: #9B7B18; width: calc(100% / 13); height: 20px;"></div>
+                                <div class="colorPalette" style="background-color: #7A6113; width: calc(100% / 13); height: 20px;"></div>
+                                <div class="colorPalette" style="background-color: #614D0F; width: calc(100% / 13); height: 20px;"></div>
+                                <div class="colorPalette" style="background-color: #4C3C0C; width: calc(100% / 13); height: 20px;"></div>
+                            </div>
+
+                            <div class="d-flex justify-content-between">
+                                <div class="colorPalette" style="background-color: #F7FDF0; width: calc(100% / 13); height: 20px;"></div>
+                                <div class="colorPalette" style="background-color: #ECFBDB; width: calc(100% / 13); height: 20px;"></div>
+                                <div class="colorPalette" style="background-color: #DAF7B9; width: calc(100% / 13); height: 20px;"></div>
+                                <div class="colorPalette" style="background-color: #C1F28B; width: calc(100% / 13); height: 20px;"></div>
+                                <div class="colorPalette" style="background-color: #AFEE69; width: calc(100% / 13); height: 20px;"></div>
+                                <div class="colorPalette" style="background-color: #9FEA4A; width: calc(100% / 13); height: 20px;"></div>
+                                <div class="colorPalette" style="background-color: #7AE205; width: calc(100% / 13); height: 20px;"></div>
+                                <div class="colorPalette" style="background-color: #6CC704; width: calc(100% / 13); height: 20px;"></div>
+                                <div class="colorPalette" style="background-color: #5DAC04; width: calc(100% / 13); height: 20px;"></div>
+                                <div class="colorPalette" style="background-color: #4A8903; width: calc(100% / 13); height: 20px;"></div>
+                                <div class="colorPalette" style="background-color: #3A6C02; width: calc(100% / 13); height: 20px;"></div>
+                                <div class="colorPalette" style="background-color: #2E5602; width: calc(100% / 13); height: 20px;"></div>
+                                <div class="colorPalette" style="background-color: #244301; width: calc(100% / 13); height: 20px;"></div>
+                            </div>
+                            <div class="mt-3">
+                                <p id="colorInfo" class="p-0 m-0"><strong>R:</strong> <span></span> <strong>G:</strong> <span></span> <strong>B:</strong> <span></span></p>
+                                <p id="message" class="p-0 m-0">색상이 복사되었습니다!</p>
+                            </div>
+
+
+
+                        </div>
+                    </div>
+
+                    <!-- 카테고리 테이블 리스트 -->
+                    <div class="categoryModalTableBox border border-1 w-60" style="overflow-y: auto;">
+                        <table class="table table-sm table-hover">
+                            <thead class="position-sticky">
+                            <tr class="table-light">
+                                <th class="border border-1 align-middle text-center">번호</th>
+                                <th class="border border-1 align-middle text-center">색상</th>
+                                <th class="border border-1 align-middle text-center">카테고리</th>
+                                <th class="border border-1 align-middle text-center">선택</th>
+                            </tr>
+                            </thead>
+                            <tbody id="categoryTableBody">
+                            <!-- 여기에 동적으로 행이 추가됩니다. -->
+                            <tr th:each="category, iterStat : ${categoryList}">
+                                <td class="border border-1 align-middle text-center">
+                                    <span th:text="${category.categoryNo}" th:class="categoryNo"></span>
+                                    <span th:text="${iterStat.index + 1}" class="iterStat"></span>
+                                </td>
+                                <td class="categoryColorBox border border-1 align-middle text-center">
+                                    <div th:class="'categoryColor categoryColor' + ${category.categoryNo}"
+                                         th:style="'background-color: ' + ${category.categoryColor} + '; color: transparent;'" th:text="${category.categoryColor}"></div>
+                                </td>
+                                <td class="border border-1 align-middle text-center" th:text="${category.categoryName}">지게차 소재</td>
+                                <td class="border border-1 align-middle text-center"><input type="checkbox" name="categoryColor"></td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <div class="categoryModifyBtn">
+                        <button class="categoryModalResetInput btn btn-phoenix-primary" onclick="addCategory()">초기화</button>
+                        <input type="button" id="modifyBtn" onclick="deleteSelectedRows()" class="btn btn-outline-primary" value="삭제">
+                        <input type="button" id="changeBtn" class="btn btn-primary px-6 px-sm-6" value="완료">
+                        <input type="button" class="excelClose02 btn btn-primary px-5 px-sm-5" data-bs-dismiss="modal" value="취소"></input>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Rack 정보 변경 완료 확인 모달 -->
+    <div class="modal fade" id="rackEditConfirmModal" tabindex="-1" aria-labelledby="rackEditConfirmModalLabel" aria-hidden="true">
+        <button type="button" class="btn-close btn-close-white position-fixed top-0 end-0 p-5 fs-3" data-bs-dismiss="modal" aria-label="Close"></button>
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content px-3 py-2 border rounded-4">
+                <div class="modal-header">
+                    <h5 class="modal-title fs-2" id="rackEditConfirmModalLabel">Rack 정보 수정</h5>
+                </div>
+                <div class="modal-body">
+
+                    <p><strong>변경된 영역</strong> 을 저장 하시겠습니까?</p>
+                </div>
+                <div class="modal-footer">
+                    <div class="RegButton">
+                        <input type ="button" id="rackConfirmYes" class="btn btn-primary px-5 px-sm-5" value="확인">
+                        <input type="button" class="excelClose02 btn btn-primary px-5 px-sm-5" data-bs-dismiss="modal" value="취소"></input>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+<!-- 모델로 받은 데이터를 json형태로 파싱 -->
+<th:block layout:fragment="script">
+    <script th:inline="javascript">
+
+    // Thymeleaf 템플릿에서 전달받은 JSON 데이터를 가정
+    /*<![CDATA[*/
+    var rackDetailInfoListJson = /*[[${rackDetailInfoList}]]*/ '[]';
+    var categoryListJson = /*[[${categoryList}]]*/ '[]';
+    /*]]>*/
+
+    </script>
+</th:block>
+
+</html>
