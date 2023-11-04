@@ -11,11 +11,6 @@ java {
 	sourceCompatibility = '11'
 }
 
-//configurations {
-//	compileOnly {
-//		extendsFrom annotationProcessor
-//	}
-//}
 
 repositories {
 	mavenCentral()
