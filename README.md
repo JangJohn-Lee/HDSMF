@@ -26,11 +26,18 @@
     - 기존 적재된 물품을 전산상으로 간단히 이동 가능
   ---
 
-  + 사용언어
+  + 사용 언어
     - JAVA
     - JAVASCRIPT
     - HTML
     - CSS
+   
+  + 사용 프레임 워크
+    - Spring Boot
+    - Bootstrap
+    
+  + 사용 템플릿
+    - Phoenix
 
   + 사용 DB
     - MYSQL
