@@ -33,7 +33,7 @@
     - CSS
    
   + 사용 프레임 워크
-    - Spring Boot
+    - SpringBoot
     - Bootstrap
     
   + 사용 템플릿
