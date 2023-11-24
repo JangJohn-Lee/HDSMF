@@ -215,12 +215,37 @@ public class ComponentsController {
                     components.setFWeight(Double.parseDouble("0.0"));
                 }
 
-                components.setModel(excelRow.get("D"));
-                components.setComponentState(excelRow.get("E").split("\\.")[0]);
+                if(excelRow.get("D") != null){
+                    components.setModel(excelRow.get("D"));
+                }else if(excelRow.get("D") == null) {
+                    components.setModel("");
+                }
+
+                if(excelRow.get("E") != null){
+                    components.setComponentState(excelRow.get("E").split("\\.")[0]);
+                }else if(excelRow.get("E") == null) {
+                    components.setComponentState("");
+                }
+
                 components.setPlantNo(Long.valueOf(excelRow.get("F").split("\\.")[0])); // 문자열 파싱
-                components.setProduct(excelRow.get("G").toUpperCase());
-                components.setSNo(excelRow.get("H"));
-                components.setSWeight(Double.parseDouble(excelRow.get("I")));
+
+                if(excelRow.get("G") != null){
+                    components.setProduct(excelRow.get("G").toUpperCase());
+                }else if(excelRow.get("G") == null) {
+                    components.setProduct("");
+                }
+
+                if(excelRow.get("H") != null){
+                    components.setSNo(excelRow.get("H"));
+                }else if(excelRow.get("H") == null) {
+                    components.setSNo("");
+                }
+
+                if(excelRow.get("I") != null){
+                    components.setSWeight(Double.parseDouble(excelRow.get("I")));
+                }else if(excelRow.get("I") == null) {
+                    components.setFWeight(Double.parseDouble("0.0"));
+                }
 
 
                 Components saved = componentsService.saveComponent(components);
@@ -292,12 +317,37 @@ public class ComponentsController {
             }else if(excelRow.get("C").isEmpty()) {
                 components.setFWeight(Double.parseDouble("0.0"));
             }
-            components.setModel(excelRow.get("D"));
-            components.setComponentState(excelRow.get("E").split("\\.")[0]);
+            if(excelRow.get("D") != null){
+                components.setModel(excelRow.get("D"));
+            }else if(excelRow.get("D") == null) {
+                components.setModel("");
+            }
+
+            if(excelRow.get("E") != null){
+                components.setComponentState(excelRow.get("E").split("\\.")[0]);
+            }else if(excelRow.get("E") == null) {
+                components.setComponentState("");
+            }
+
             components.setPlantNo(Long.valueOf(excelRow.get("F").split("\\.")[0])); // 문자열 파싱
-            components.setProduct(excelRow.get("G").toUpperCase());
-            components.setSNo(excelRow.get("H"));
-            components.setSWeight(Double.parseDouble(excelRow.get("I")));
+
+            if(excelRow.get("G") != null){
+                components.setProduct(excelRow.get("G").toUpperCase());
+            }else if(excelRow.get("G") == null) {
+                components.setProduct("");
+            }
+
+            if(excelRow.get("H") != null){
+                components.setSNo(excelRow.get("H"));
+            }else if(excelRow.get("H") == null) {
+                components.setSNo("");
+            }
+
+            if(excelRow.get("I") != null){
+                components.setSWeight(Double.parseDouble(excelRow.get("I")));
+            }else if(excelRow.get("I") == null) {
+                components.setFWeight(Double.parseDouble("0.0"));
+            }
 
             //component table insert
             Components saved = componentsService.saveComponent(components);
