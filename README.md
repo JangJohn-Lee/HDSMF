@@ -1,6 +1,31 @@
 # HDSMF Project
 ### 00정밀 자재창고 관리 플랫폼
 
+```markdown
+## 🛠 Tech Stack
+
+<div align="center">
+
+  <!-- Languages -->
+  <img src="https://img.shields.io/badge/Java-17-007396?logo=openjdk&logoColor=white" />
+  <img src="https://img.shields.io/badge/JavaScript-ES6+-F7DF1E?logo=javascript&logoColor=black" />
+
+  <!-- Backend -->
+  <img src="https://img.shields.io/badge/Spring%20Boot-3.x-6DB33F?logo=springboot&logoColor=white" />
+  <img src="https://img.shields.io/badge/Spring%20Data%20JPA-ORM-59666C?logo=spring&logoColor=white" />
+
+  <!-- Frontend (SSR) -->
+  <img src="https://img.shields.io/badge/Thymeleaf-SSR-005F0F?logo=thymeleaf&logoColor=white" />
+  <img src="https://img.shields.io/badge/HTML5-Frontend-E34F26?logo=html5&logoColor=white" />
+  <img src="https://img.shields.io/badge/CSS3-Style-1572B6?logo=css3&logoColor=white" />
+
+  <!-- DB & Build & Deploy -->
+  <img src="https://img.shields.io/badge/MySQL-DB-4479A1?logo=mysql&logoColor=white" />
+  <img src="https://img.shields.io/badge/Gradle-Build-02303A?logo=gradle&logoColor=white" />
+  <img src="https://img.shields.io/badge/Linux-Server-FCC624?logo=linux&logoColor=black" />
+
+</div>
+
 ---
 
 #### 3.1.ver
